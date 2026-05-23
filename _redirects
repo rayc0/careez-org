@@ -1,0 +1,14 @@
+# Cloudflare Pages _redirects
+# Static files are served directly — this file only handles SPA fallback
+
+# Explicitly pass through AI/SEO static files (no redirect needed,
+# but listing them ensures they are never caught by a catch-all)
+/robots.txt     /robots.txt     200
+/sitemap.xml    /sitemap.xml    200
+/llms.txt       /llms.txt       200
+/ai.txt         /ai.txt         200
+/agent.json     /agent.json     200
+/og-image.png   /og-image.png   200
+
+# SPA fallback — only for paths that don't match a real file
+/*              /index.html     200
