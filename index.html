@@ -799,6 +799,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#programmes">Programmes</a></li>
         <li><a href="#live-api">Live API</a></li>
+        <li><a href="#try-live">Try Live</a></li>
         <li><a href="#commitment">Our Commitment</a></li>
         <li><a href="#credentials">Credentials</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1000,8 +1001,447 @@
         The demo at <a href="https://demo.careez.org" target="_blank" rel="noopener">demo.careez.org</a>
         demonstrates end-to-end carer-facing UX built on top of this API.
       </p>
+
+      <!-- ─── Try CareEZ Live Widget ─── -->
+      <div id="try-live" style="margin-top:52px;">
+        <div class="section-label" style="margin-bottom:8px;">Try CareEZ Live</div>
+        <p style="font-size:13px;color:var(--gray2);margin-bottom:28px;max-width:600px;">
+          Live API &middot; response in real-time &middot; no PHI stored
+        </p>
+
+        <div class="try-live-grid">
+
+          <!-- Card 1: Text Classifier -->
+          <div class="try-card" id="card-text">
+            <div class="try-card-header">
+              <span class="try-card-num">01</span>
+              <div>
+                <div class="try-card-title">IDDSI Text Classifier</div>
+                <div class="try-card-sub">Describe a food or liquid — get the IDDSI level</div>
+              </div>
+            </div>
+            <textarea id="txt-desc" placeholder="e.g. steamed egg custard, soft, spoonable" rows="3"></textarea>
+            <button class="try-btn" onclick="runTextClassify()">Classify &rarr;</button>
+            <div class="try-spinner" id="spin-text" aria-label="Loading"></div>
+            <div class="try-result" id="res-text"></div>
+          </div>
+
+          <!-- Card 2: Image Classifier -->
+          <div class="try-card" id="card-image">
+            <div class="try-card-header">
+              <span class="try-card-num">02</span>
+              <div>
+                <div class="try-card-title">IDDSI Image Classifier</div>
+                <div class="try-card-sub">Upload or drag a food photo — AI reads the texture</div>
+              </div>
+            </div>
+            <div class="try-dropzone" id="dropzone"
+              ondragover="event.preventDefault();this.classList.add('drag-over')"
+              ondragleave="this.classList.remove('drag-over')"
+              ondrop="handleDrop(event)">
+              <input type="file" id="img-file" accept="image/*" onchange="handleFileSelect(event)" style="display:none">
+              <div id="dz-label" onclick="document.getElementById('img-file').click()">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--cyan2);margin-bottom:8px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <div style="font-size:13px;color:var(--gray);">Click or drag &amp; drop an image</div>
+                <div style="font-size:11px;color:var(--gray2);margin-top:4px;">JPG, PNG, WebP &mdash; max 5 MB</div>
+              </div>
+              <img id="dz-preview" style="display:none;max-width:100%;max-height:160px;border-radius:6px;object-fit:cover;" alt="Preview">
+            </div>
+            <button class="try-btn" id="btn-image" onclick="runImageClassify()" disabled>Classify Image &rarr;</button>
+            <div class="try-spinner" id="spin-image" aria-label="Loading"></div>
+            <div class="try-result" id="res-image"></div>
+          </div>
+
+          <!-- Card 3: Voice Aspiration Screen -->
+          <div class="try-card try-card-wide" id="card-voice">
+            <div class="try-card-header">
+              <span class="try-card-num">03</span>
+              <div>
+                <div class="try-card-title">Voice Aspiration Risk Screen</div>
+                <div class="try-card-sub">Select observed symptoms &mdash; AI screens aspiration risk and recommends action</div>
+              </div>
+            </div>
+            <div class="try-symptoms-grid">
+              <label class="try-chk"><input type="checkbox" value="coughing during meals"> Coughing during meals</label>
+              <label class="try-chk"><input type="checkbox" value="wet or gurgly voice after eating"> Wet / gurgly voice after eating</label>
+              <label class="try-chk"><input type="checkbox" value="throat clearing frequently"> Frequent throat clearing</label>
+              <label class="try-chk"><input type="checkbox" value="prolonged meal time"> Prolonged meal time (&gt;30 min)</label>
+              <label class="try-chk"><input type="checkbox" value="food or liquid residue in mouth"> Food / liquid residue in mouth</label>
+              <label class="try-chk"><input type="checkbox" value="drooling or poor lip seal"> Drooling / poor lip seal</label>
+              <label class="try-chk"><input type="checkbox" value="recurrent chest infections"> Recurrent chest infections</label>
+              <label class="try-chk"><input type="checkbox" value="unexplained weight loss"> Unexplained weight loss</label>
+              <label class="try-chk"><input type="checkbox" value="choking episodes"> Choking episodes</label>
+              <label class="try-chk"><input type="checkbox" value="avoidance of certain food textures"> Avoids certain food textures</label>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+              <label style="font-size:12px;color:var(--gray);display:flex;align-items:center;gap:6px;">
+                Language:
+                <select id="voice-lang" style="background:var(--navy3);border:1px solid rgba(0,229,255,0.2);color:var(--white);border-radius:5px;padding:4px 10px;font-size:12px;">
+                  <option value="en">English</option>
+                  <option value="zh-HK">繁體中文</option>
+                  <option value="tl">Filipino (Tagalog)</option>
+                  <option value="id">Bahasa Indonesia</option>
+                </select>
+              </label>
+              <button class="try-btn" style="margin-top:0;" onclick="runVoiceScreen()">Screen &rarr;</button>
+            </div>
+            <div class="try-spinner" id="spin-voice" aria-label="Loading"></div>
+            <div class="try-result" id="res-voice"></div>
+          </div>
+
+        </div><!-- /try-live-grid -->
+      </div><!-- /try-live -->
+
     </div>
   </section>
+
+  <style>
+    /* ─── Try CareEZ Live Widget Styles ─── */
+    .try-live-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .try-card-wide {
+      grid-column: 1 / -1;
+    }
+    .try-card {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 10px;
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .try-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .try-card-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--cyan2);
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 4px;
+      padding: 3px 8px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .try-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .try-card-sub {
+      font-size: 12px;
+      color: var(--gray2);
+    }
+    .try-card textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 6px;
+      color: var(--white);
+      font-size: 13px;
+      font-family: inherit;
+      padding: 10px 14px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.6;
+    }
+    .try-card textarea:focus {
+      border-color: rgba(0,229,255,0.45);
+    }
+    .try-btn {
+      align-self: flex-start;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--cyan);
+      color: var(--navy);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+    .try-btn:hover:not(:disabled) {
+      background: var(--cyan2);
+      transform: translateY(-1px);
+    }
+    .try-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .try-spinner {
+      display: none;
+      width: 22px; height: 22px;
+      border: 3px solid rgba(0,229,255,0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .try-result {
+      display: none;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+    .try-result.visible { display: block; }
+    .try-result.error {
+      border-color: rgba(255,100,100,0.3);
+      color: #EF9A9A;
+    }
+    .try-result .res-level {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .try-result .res-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .try-result .res-body {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+    .try-result .res-tier {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .tier-low    { background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.35); color: #81C784; }
+    .tier-medium { background: rgba(255,193,7,0.12); border: 1px solid rgba(255,193,7,0.35);  color: #FFD43B; }
+    .tier-high   { background: rgba(244,67,54,0.12); border: 1px solid rgba(244,67,54,0.35);  color: #EF9A9A; }
+    /* Dropzone */
+    .try-dropzone {
+      border: 2px dashed rgba(0,229,255,0.25);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: rgba(0,0,0,0.2);
+    }
+    .try-dropzone.drag-over {
+      border-color: rgba(0,229,255,0.6);
+      background: rgba(0,229,255,0.04);
+    }
+    /* Symptom checkboxes */
+    .try-symptoms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px 14px;
+    }
+    .try-chk {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--gray);
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .try-chk input[type="checkbox"] {
+      width: 15px; height: 15px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .try-live-grid { grid-template-columns: 1fr; }
+      .try-card-wide { grid-column: auto; }
+      .try-symptoms-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .try-symptoms-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script>
+  /* ─── CareEZ Live Widget ─── */
+  (function() {
+    const API_BASE = 'https://www.seniordeli.com/api';
+
+    function show(el) { el.style.display = 'block'; }
+    function hide(el) { el.style.display = 'none'; }
+
+    function setResult(id, html, isError) {
+      const el = document.getElementById(id);
+      el.innerHTML = html;
+      el.className = 'try-result visible' + (isError ? ' error' : '');
+    }
+
+    function setSpinner(id, on) {
+      const el = document.getElementById(id);
+      el.style.display = on ? 'block' : 'none';
+    }
+
+    /* ── helpers ── */
+    function levelColor(lvl) {
+      const n = parseInt(lvl);
+      if (isNaN(n)) return 'var(--cyan)';
+      if (n <= 2) return '#81C784';
+      if (n <= 4) return '#FFD43B';
+      return 'var(--cyan)';
+    }
+
+    function renderClassifyResult(data, container) {
+      const level = data.iddsi_level ?? data.level ?? '—';
+      const labelEn = data.label_en ?? data.label ?? '';
+      const labelZh = data.label_zh_hk ?? data.label_zh ?? '';
+      const rationale = data.rationale ?? data.reasoning ?? data.explanation ?? '';
+      const color = levelColor(level);
+      setResult(container,
+        `<div class="res-level" style="color:${color}">IDDSI Level ${level}</div>` +
+        `<div class="res-label">${labelEn}${labelZh ? ' &middot; ' + labelZh : ''}</div>` +
+        `<div class="res-body">${rationale}</div>`
+      );
+    }
+
+    function renderVoiceResult(data, container) {
+      const tier = (data.risk_tier ?? data.tier ?? data.risk ?? 'unknown').toString().toLowerCase();
+      const action = data.recommended_action ?? data.action ?? data.recommendation ?? '';
+      const rationale = data.rationale ?? data.reasoning ?? data.explanation ?? '';
+      let tierClass = 'tier-low', tierLabel = 'Low Risk';
+      if (tier.includes('high'))   { tierClass = 'tier-high';   tierLabel = 'High Risk'; }
+      else if (tier.includes('med')) { tierClass = 'tier-medium'; tierLabel = 'Medium Risk'; }
+      else if (tier.includes('low')) { tierClass = 'tier-low';    tierLabel = 'Low Risk'; }
+      else { tierClass = 'tier-medium'; tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1); }
+      setResult(container,
+        `<span class="res-tier ${tierClass}">${tierLabel}</span>` +
+        `<div class="res-label" style="margin-top:6px;">${action}</div>` +
+        `<div class="res-body">${rationale}</div>`
+      );
+    }
+
+    /* ── Card 1: Text Classify ── */
+    window.runTextClassify = async function() {
+      const desc = document.getElementById('txt-desc').value.trim();
+      if (!desc) { setResult('res-text', 'Please enter a food or liquid description.', true); return; }
+      setSpinner('spin-text', true);
+      document.getElementById('res-text').className = 'try-result';
+      try {
+        const r = await fetch(API_BASE + '/iddsi-classify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ description: desc })
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? data.message ?? 'API error ' + r.status);
+        renderClassifyResult(data, 'res-text');
+      } catch(e) {
+        setResult('res-text', '⚠ ' + e.message, true);
+      } finally {
+        setSpinner('spin-text', false);
+      }
+    };
+
+    /* ── Card 2: Image Classify ── */
+    let _imgFile = null;
+
+    function previewImage(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image must be under 5 MB.');
+        return;
+      }
+      _imgFile = file;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const prev = document.getElementById('dz-preview');
+        const lbl  = document.getElementById('dz-label');
+        prev.src = e.target.result;
+        prev.style.display = 'block';
+        lbl.style.display = 'none';
+        document.getElementById('btn-image').disabled = false;
+      };
+      reader.readAsDataURL(file);
+      document.getElementById('dropzone').classList.remove('drag-over');
+    }
+
+    window.handleFileSelect = function(e) { previewImage(e.target.files[0]); };
+    window.handleDrop = function(e) {
+      e.preventDefault();
+      previewImage(e.dataTransfer.files[0]);
+    };
+
+    window.runImageClassify = async function() {
+      if (!_imgFile) return;
+      setSpinner('spin-image', true);
+      document.getElementById('res-image').className = 'try-result';
+      try {
+        const form = new FormData();
+        form.append('image', _imgFile);
+        const r = await fetch(API_BASE + '/iddsi-classify-image', {
+          method: 'POST',
+          body: form
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? data.message ?? 'API error ' + r.status);
+        renderClassifyResult(data, 'res-image');
+      } catch(e) {
+        setResult('res-image', '⚠ ' + e.message, true);
+      } finally {
+        setSpinner('spin-image', false);
+      }
+    };
+
+    /* ── Card 3: Voice Screen ── */
+    window.runVoiceScreen = async function() {
+      const checked = [...document.querySelectorAll('#card-voice input[type=checkbox]:checked')]
+        .map(c => c.value);
+      if (checked.length === 0) {
+        setResult('res-voice', 'Please select at least one symptom to screen.', true);
+        return;
+      }
+      const lang = document.getElementById('voice-lang').value;
+      setSpinner('spin-voice', true);
+      document.getElementById('res-voice').className = 'try-result';
+      try {
+        const r = await fetch(API_BASE + '/voice-aspiration-screen', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symptoms: checked, language: lang })
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? data.message ?? 'API error ' + r.status);
+        renderVoiceResult(data, 'res-voice');
+      } catch(e) {
+        setResult('res-voice', '⚠ ' + e.message, true);
+      } finally {
+        setSpinner('spin-voice', false);
+      }
+    };
+
+    /* Allow Enter key on textarea to trigger classify */
+    document.getElementById('txt-desc').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.runTextClassify(); }
+    });
+  })();
+  </script>
 
   <hr class="divider" />
 
