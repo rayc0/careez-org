@@ -1,0 +1,10 @@
+{
+  "name": "CareEZ",
+  "version": "1.0.0",
+  "description": "Multimodal clinical AI for dysphagia / 照護食 standard adoption",
+  "endpoints": {
+    "iddsi_classify": "https://www.seniordeli.com/api/iddsi-classify",
+    "voice_aspiration_screen": "https://www.seniordeli.com/api/voice-aspiration-screen"
+  },
+  "license": "Apache-2.0"
+}

@@ -5,6 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CareEZ — Social Enterprise | Carewells Limited</title>
   <meta name="description" content="CareEZ is a Hong Kong social enterprise developing care-food (照護食) and AI swallowing-safety solutions for older adults and care facilities. Grounded in HKCSS 護食標準 and IDDSI." />
+
+  <!-- ─── Canonical ─── -->
+  <link rel="canonical" href="https://careez.org/" />
+
+  <!-- ─── OpenGraph ─── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/" />
+  <meta property="og:title" content="CareEZ — Multimodal Clinical AI for Dysphagia | Carewells Limited" />
+  <meta property="og:description" content="CareEZ is a Hong Kong social enterprise developing care-food (照護食) and AI swallowing-safety solutions for older adults and care facilities. IDDSI-certified, HKCSS 護食標準 aligned." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="CareEZ — Multimodal Clinical AI for Dysphagia Care" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <!-- ─── Twitter Card ─── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CareEZ — Multimodal Clinical AI for Dysphagia | Carewells Limited" />
+  <meta name="twitter:description" content="Hong Kong social enterprise building care-food (照護食) and AI swallowing-safety tools for older adults. IDDSI-certified, HKCSS 護食標準 aligned." />
+  <meta name="twitter:image" content="https://careez.org/og-image.png" />
+
+  <!-- ─── JSON-LD: Organization ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Carewells Limited",
+    "alternateName": "CareEZ",
+    "url": "https://careez.org/",
+    "logo": "https://careez.org/og-image.png",
+    "description": "Carewells Limited is a Hong Kong social enterprise (SED-registered) operating under the brand CareEZ. It develops care-food products and clinical AI tools for dysphagia management, aligned with HKCSS 護食標準 and the international IDDSI framework.",
+    "foundingDate": "2023",
+    "founder": [
+      { "@type": "Person", "name": "Raymond Chau" },
+      { "@type": "Person", "name": "Karen Chan" },
+      { "@type": "Person", "name": "Abellona U" }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hong Kong",
+      "addressCountry": "HK"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@careez.org",
+      "contactType": "customer support"
+    },
+    "sameAs": [
+      "https://seniordeli.com",
+      "https://dysphagia.cn",
+      "https://demo.careez.org"
+    ],
+    "knowsAbout": [
+      "dysphagia", "IDDSI", "care food", "照護食", "swallowing safety",
+      "clinical AI", "texture-modified food", "HKCSS 護食標準"
+    ]
+  }
+  </script>
+
+  <!-- ─── JSON-LD: SoftwareApplication ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CareEZ",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "url": "https://demo.careez.org",
+    "description": "Multimodal clinical AI for dysphagia and 照護食 standard adoption. Classifies food and liquid IDDSI texture levels, performs thickener dosage calculations, and screens aspiration risk via voice analysis.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "url": "https://careez.org/"
+    },
+    "featureList": [
+      "IDDSI texture classification for food and liquids",
+      "Thickener dosage calculation",
+      "Voice-based aspiration risk screening",
+      "HKCSS 護食標準 compliance checking",
+      "Multilingual (English, Traditional Chinese)"
+    ],
+    "inLanguage": ["en", "zh-Hant"],
+    "releaseNotes": "Live API at api.seniordeli.com. IDDSI classification endpoint publicly callable."
+  }
+  </script>
+
+  <!-- ─── JSON-LD: MedicalWebPage ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "name": "CareEZ — Dysphagia & Care-Food Clinical AI",
+    "url": "https://careez.org/",
+    "description": "Clinical information on dysphagia management, IDDSI texture-modified food and liquids, and AI-assisted swallowing safety screening for older adults and care facilities in Hong Kong.",
+    "about": {
+      "@type": "MedicalCondition",
+      "name": "Dysphagia",
+      "alternateName": "Swallowing difficulty",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Otolaryngology"
+      }
+    },
+    "audience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Clinician, Care Facility Staff, Caregiver"
+    },
+    "medicalAudience": "Clinician",
+    "lastReviewed": "2026-05-24",
+    "reviewedBy": {
+      "@type": "Organization",
+      "name": "Carewells Limited"
+    }
+  }
+  </script>
   <style>
     /* ─── Reset & Base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
