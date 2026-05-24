@@ -1,10 +1,47 @@
 {
-  "generated": "static-stub",
-  "note": "Live status is fetched client-side by the status page JS. This file is a placeholder.",
+  "generated": "2026-05-24T18:04:38Z",
+  "overall": "operational",
+  "summary": {
+    "up": 4,
+    "slow": 0,
+    "down": 0
+  },
   "endpoints": {
-    "text": { "name": "IDDSI Text Classification", "url": "https://www.seniordeli.com/api/iddsi-classify", "status": "unknown" },
-    "image": { "name": "IDDSI Image Classification", "url": "https://www.seniordeli.com/api/iddsi-classify-image", "status": "unknown" },
-    "voice": { "name": "Voice Aspiration Screen", "url": "https://www.seniordeli.com/api/voice-aspiration-screen", "status": "unknown" },
-    "audio": { "name": "IDDSI Audio Classification", "url": "https://www.seniordeli.com/api/iddsi-classify-audio", "status": "unknown" }
+    "text": {
+      "id": "text",
+      "name": "IDDSI Text Classification",
+      "url": "https://www.seniordeli.com/api/iddsi-classify",
+      "status": "up",
+      "latency_ms": 730,
+      "http_code": "400",
+      "checked_at": "2026-05-24T18:04:38Z"
+    },
+    "image": {
+      "id": "image",
+      "name": "IDDSI Image Classification",
+      "url": "https://www.seniordeli.com/api/iddsi-classify-image",
+      "status": "up",
+      "latency_ms": 812,
+      "http_code": "400",
+      "checked_at": "2026-05-24T18:04:38Z"
+    },
+    "voice": {
+      "id": "voice",
+      "name": "Voice Aspiration Screen",
+      "url": "https://www.seniordeli.com/api/voice-aspiration-screen",
+      "status": "up",
+      "latency_ms": 630,
+      "http_code": "400",
+      "checked_at": "2026-05-24T18:04:38Z"
+    },
+    "audio": {
+      "id": "audio",
+      "name": "IDDSI Audio Classification",
+      "url": "https://www.seniordeli.com/api/iddsi-classify-audio",
+      "status": "up",
+      "latency_ms": 1127,
+      "http_code": "400",
+      "checked_at": "2026-05-24T18:04:38Z"
+    }
   }
 }
