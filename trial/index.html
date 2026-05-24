@@ -340,6 +340,24 @@
       .form-grid { grid-template-columns: 1fr; }
       .form-card { padding: 28px 20px; }
     }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
   </style>
   <!-- ─── Service Worker (PWA offline support) ─── -->
   <script>

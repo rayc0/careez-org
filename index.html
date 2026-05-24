@@ -813,6 +813,24 @@
       #hero { padding: 80px 20px 60px; }
       .hero-badges .badge { font-size: 11px; }
     }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
   </style>
   <!-- ─── Favicon & PWA ─── -->
   <link rel="icon" href="/favicon.ico" sizes="any">
