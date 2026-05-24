@@ -380,8 +380,135 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /clinical-qa:
+    get:
+      operationId: clinicalQaHealth
+      summary: Clinical Q&A health check
+      description: Returns the status of the clinical Q&A RAG endpoint, including the number of indexed articles and models used.
+      tags:
+        - Clinical Q&A
+      responses:
+        '200':
+          description: Endpoint healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  index_size:
+                    type: integer
+                    example: 120
+                  embedding_model:
+                    type: string
+                    example: text-embedding-3-small
+                  answer_model:
+                    type: string
+                    example: claude-haiku-4-5
+                  description:
+                    type: string
+    post:
+      operationId: clinicalQa
+      summary: Clinical Q&A — dysphagia / IDDSI / 護食標準
+      description: |
+        Retrieval-Augmented Generation (RAG) endpoint that answers clinical questions about dysphagia management, IDDSI texture levels, and 護食標準 (softmeal standards) by searching a 120-article softmeal.org knowledge base.
+
+        **Embedding model:** OpenAI `text-embedding-3-small` (1536-dim)
+        **Answer model:** Claude `claude-haiku-4-5`
+        **Index:** 120 softmeal.org articles across en / zh-HK / zh-CN / ja locales
+      tags:
+        - Clinical Q&A
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClinicalQaRequest'
+            examples:
+              iddsi_level_4:
+                summary: Ask about IDDSI Level 4
+                value:
+                  question: What is IDDSI Level 4?
+                  language: en
+                  top_k: 5
+              cantonese:
+                summary: Ask in Cantonese
+                value:
+                  question: IDDSI 第4級食物有什麼特點？
+                  language: zh-HK
+                  top_k: 3
+      responses:
+        '200':
+          description: Clinical answer with sources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClinicalQaResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
   schemas:
+    ClinicalQaRequest:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          minLength: 3
+          maxLength: 1000
+          description: Clinical question in any supported language
+          example: What is IDDSI Level 4?
+        language:
+          type: string
+          description: Preferred response language (boosts locale-matching results). Values: en, zh-HK, zh-CN, ja
+          example: en
+        top_k:
+          type: integer
+          minimum: 1
+          maximum: 10
+          default: 5
+          description: Number of source articles to retrieve and pass to the LLM
+          example: 5
+    ClinicalQaResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: AI-synthesised clinical answer based on retrieved softmeal.org content
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              url:
+                type: string
+                format: uri
+          description: Retrieved source articles (softmeal.org URLs)
+        model:
+          type: string
+          example: claude-haiku-4-5
+        embedding_model:
+          type: string
+          example: text-embedding-3-small
+        disclaimer:
+          type: string
+          description: Clinical disclaimer in the requested language
     MealItem:
       type: object
       required:
