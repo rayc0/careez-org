@@ -1,0 +1,669 @@
+{
+  "info": {
+    "_postman_id": "careez-clinical-ai-api-v1",
+    "name": "CareEZ Clinical AI API",
+    "description": "Complete collection for CareEZ public REST endpoints — IDDSI food texture classification (text, image, audio), aspiration risk screening, batch meal validation, and clinical Q&A RAG.\n\nBase URL: `{{base_url}}`\nProduction server: https://www.seniordeli.com\n\n**No authentication required.** All endpoints respond with `Access-Control-Allow-Origin: *`.\n\n⚠️ Clinical Disclaimer: Prototype rule-based classifiers — outputs are decision-support tools only. Clinical decisions require assessment by a qualified Speech-Language Pathologist (SLP).\n\nBuilt by Carewells Limited (Hong Kong SED-registered social enterprise).\nhello@careez.org | https://careez.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    }
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://www.seniordeli.com",
+      "type": "string",
+      "description": "Production base URL. Change to http://localhost:PORT for local dev."
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// ── CareEZ Collection-level Pre-request Script ──────────────────────────",
+          "// Sets common headers that apply to all requests in this collection.",
+          "// Override at the request level if needed.",
+          "",
+          "pm.request.headers.add({ key: 'Origin', value: 'https://careez.org' });",
+          "pm.request.headers.add({ key: 'X-Client', value: 'CareEZ-Postman-Collection/1.0' });",
+          "",
+          "// Log the target URL for debugging",
+          "console.log('[CareEZ] Request to:', pm.request.url.toString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// ── CareEZ Collection-level Tests ───────────────────────────────────────",
+          "// These run after every request in the collection.",
+          "",
+          "pm.test('Response time < 10000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(10000);",
+          "});",
+          "",
+          "pm.test('CORS header present', function () {",
+          "    const acao = pm.response.headers.get('Access-Control-Allow-Origin');",
+          "    pm.expect(acao).to.exist;",
+          "});",
+          "",
+          "// Log status for visibility",
+          "console.log('[CareEZ] Response status:', pm.response.status);"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "IDDSI Classification",
+      "description": "Classify food or liquid texture level using the IDDSI framework (Levels 0–7).",
+      "item": [
+        {
+          "name": "01 · Text → IDDSI Level (English)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// No additional pre-request logic needed — collection level sets Origin."
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has iddsi_level field', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('iddsi_level');",
+                  "    pm.expect(json.iddsi_level).to.be.a('number').and.to.be.within(0, 7);",
+                  "});",
+                  "pm.test('Has confidence score', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('confidence');",
+                  "    pm.expect(json.confidence).to.be.a('number').and.to.be.within(0, 1);",
+                  "});",
+                  "pm.test('Has clinical warning', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('warning');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"thick congee, soft, no lumps\",\n  \"language\": \"en\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-classify",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-classify"]
+            },
+            "description": "**POST /api/iddsi-classify**\n\nClassify a food or liquid item from a plain-text description. Returns:\n- `iddsi_level` (0–7)\n- `label` — English IDDSI label\n- `confidence` (0.0–1.0)\n- `explanation_en` — English explanation\n- `explanation_zh_hant` — Traditional Chinese explanation\n- `multilingual_explanation` — all supported languages\n- `warning` — clinical disclaimer\n\n**Supported languages:** `en`, `zh-HK`, `tl`, `id`, `vi`, `th`, `es`\n\nThis example uses English with a congee description → expects IDDSI Level 4 (Extremely Thick / Puréed)."
+          },
+          "response": [
+            {
+              "name": "200 OK — Congee → IDDSI Level 4",
+              "status": "OK",
+              "code": 200,
+              "header": [
+                { "key": "Content-Type", "value": "application/json" },
+                { "key": "Access-Control-Allow-Origin", "value": "*" }
+              ],
+              "body": "{\n  \"iddsi_level\": 4,\n  \"label\": \"Extremely Thick / Puréed\",\n  \"confidence\": 0.87,\n  \"explanation_en\": \"This food item matches IDDSI Level 4 (Extremely Thick / Puréed). It can be eaten with a spoon and does not require chewing.\",\n  \"explanation_zh_hant\": \"此食物符合IDDSI第4級（極稠/糊狀）。可用匙羹進食，無需咀嚼。\",\n  \"multilingual_explanation\": \"zh-Hant\",\n  \"warning\": \"Prototype rule-based classifier — clinical decisions require qualified SLP\"\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "02 · Text → IDDSI Level (Traditional Chinese 繁體中文)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has iddsi_level', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('iddsi_level');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"免治豬肉，質地柔軟，有少量小粒，加醬汁\",\n  \"language\": \"zh-HK\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-classify",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-classify"]
+            },
+            "description": "**POST /api/iddsi-classify — Traditional Chinese input**\n\nSame endpoint, Traditional Chinese food description (minced pork with sauce). Set `language: \"zh-HK\"` to receive explanations in Traditional Chinese.\n\nExpected: IDDSI Level 5 (Minced & Moist)."
+          },
+          "response": []
+        },
+        {
+          "name": "03 · Text → IDDSI Level (Simplified Chinese 简体中文)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has label', function () { pm.expect(pm.response.json()).to.have.property('label'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"嫩豆腐，极软，无颗粒，入口即化\",\n  \"language\": \"zh-CN\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-classify",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-classify"]
+            },
+            "description": "**POST /api/iddsi-classify — Simplified Chinese input**\n\nSilken tofu description in Simplified Chinese → expects IDDSI Level 4 (Extremely Thick / Puréed)."
+          },
+          "response": []
+        },
+        {
+          "name": "04 · Image → IDDSI Level (multipart upload)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// For actual use: attach a real JPEG/PNG/WebP image file via the 'image' form field.",
+                  "// This pre-request script logs a reminder.",
+                  "console.log('[CareEZ] Attach a JPEG/PNG/WebP food image (max 10 MB) to the \"image\" form-data field.');"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Accept 200 (successful classification) or 400 (no file attached in test environment)",
+                  "pm.test('Response is 200 or 400', function () {",
+                  "    pm.expect([200, 400]).to.include(pm.response.code);",
+                  "});",
+                  "if (pm.response.code === 200) {",
+                  "    pm.test('Has iddsi_level', function () {",
+                  "        pm.expect(pm.response.json()).to.have.property('iddsi_level');",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "",
+                  "description": "JPEG, PNG, or WebP image of the food/liquid item. Max 10 MB. For liquids, use a side-view photo in a transparent container."
+                },
+                {
+                  "key": "language",
+                  "value": "en",
+                  "type": "text",
+                  "description": "Response language: en | zh-HK | tl | id | vi | th | es"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-classify-image",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-classify-image"]
+            },
+            "description": "**POST /api/iddsi-classify-image**\n\nUpload a food/liquid photo for visual IDDSI classification. Uses multipart/form-data.\n\n**Fields:**\n- `image` (required) — JPEG, PNG, or WebP file, max 10 MB\n- `language` (optional) — response language; default `en`\n\n**Tips:**\n- For liquids: photograph in a transparent container from the side\n- Visual accuracy is lower for liquids than solid foods\n- Complement with a flow/viscosity test where possible\n\n**Responses:** 200 (classified), 400 (invalid/missing image), 413 (>10 MB), 500 (server error)"
+          },
+          "response": [
+            {
+              "name": "200 OK — Pureed soup → IDDSI Level 4",
+              "status": "OK",
+              "code": 200,
+              "header": [
+                { "key": "Content-Type", "value": "application/json" },
+                { "key": "Access-Control-Allow-Origin", "value": "*" }
+              ],
+              "body": "{\n  \"iddsi_level\": 4,\n  \"label\": \"Extremely Thick / Puréed\",\n  \"confidence\": 0.79,\n  \"explanation_en\": \"Visual analysis indicates a smooth, homogeneous purée consistent with IDDSI Level 4. No visible lumps or particulates detected.\",\n  \"explanation_zh_hant\": \"視覺分析顯示質地均勻，符合IDDSI第4級（糊狀）。未見可見顆粒。\",\n  \"multilingual_explanation\": \"zh-Hant\",\n  \"warning\": \"Prototype rule-based classifier — clinical decisions require qualified SLP\"\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Aspiration Screening",
+      "description": "Screen for aspiration risk via symptom description or (research-staged) voice/audio analysis.",
+      "item": [
+        {
+          "name": "05 · Symptoms → Aspiration Risk (English)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has risk_level', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('risk_level');",
+                  "    pm.expect(['low', 'moderate', 'high']).to.include(json.risk_level);",
+                  "});",
+                  "pm.test('Has risk_score 0-100', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json).to.have.property('risk_score');",
+                  "    pm.expect(json.risk_score).to.be.within(0, 100);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symptoms\": \"Patient coughs frequently during meals, has a wet/gurgly voice after swallowing, and has lost 3kg in the past month.\",\n  \"age\": 82,\n  \"diagnosis\": \"stroke\",\n  \"language\": \"en\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/voice-aspiration-screen",
+              "host": ["{{base_url}}"],
+              "path": ["api", "voice-aspiration-screen"]
+            },
+            "description": "**POST /api/voice-aspiration-screen**\n\nScreen for aspiration risk based on reported swallowing symptoms. Returns:\n- `risk_level` — `low` | `moderate` | `high`\n- `risk_score` — numeric 0–100 (higher = greater risk)\n- `flags` — specific symptom flags identified\n- `recommendation_en` — English clinical recommendation\n- `recommendation_zh_hant` — Traditional Chinese recommendation\n- `warning` — clinical disclaimer\n\nOptional fields `age` and `diagnosis` improve risk stratification accuracy.\n\nThis example: 82yo stroke patient with wet voice + coughing + weight loss → expects HIGH risk."
+          },
+          "response": [
+            {
+              "name": "200 OK — High aspiration risk",
+              "status": "OK",
+              "code": 200,
+              "header": [
+                { "key": "Content-Type", "value": "application/json" },
+                { "key": "Access-Control-Allow-Origin", "value": "*" }
+              ],
+              "body": "{\n  \"risk_level\": \"high\",\n  \"risk_score\": 78,\n  \"flags\": [\"wet/gurgly voice\", \"coughing during meals\", \"significant weight loss\"],\n  \"recommendation_en\": \"High aspiration risk detected. Refer to a Speech-Language Pathologist for formal swallowing assessment immediately. Consider NPO (nil per os) pending evaluation.\",\n  \"recommendation_zh_hant\": \"發現高度誤嚥風險。請立即轉介言語治療師進行正式吞嚥評估。評估前考慮禁食（NPO）。\",\n  \"warning\": \"Prototype rule-based classifier — clinical decisions require qualified SLP\"\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "06 · Symptoms → Aspiration Risk (Filipino/Tagalog)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has risk_level', function () { pm.expect(pm.response.json()).to.have.property('risk_level'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symptoms\": \"Ang pasyente ay umuubo habang kumakain, may basa at paos na boses pagkatapos lumunok, at gumagaan ng 2kg sa nakaraang buwan.\",\n  \"age\": 75,\n  \"language\": \"tl\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/voice-aspiration-screen",
+              "host": ["{{base_url}}"],
+              "path": ["api", "voice-aspiration-screen"]
+            },
+            "description": "**POST /api/voice-aspiration-screen — Filipino/Tagalog input**\n\nSame endpoint with Filipino symptom description. Language code `tl` (Tagalog). Useful for Filipino caregiver staff in RCHE settings.\n\nTranslation: 'The patient coughs while eating, has a wet/hoarse voice after swallowing, and has lost 2kg in the past month.'"
+          },
+          "response": []
+        },
+        {
+          "name": "07 · Audio → IDDSI (Research-Staged — 501)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 501 (research-staged stub)', function () {",
+                  "    pm.response.to.have.status(501);",
+                  "});",
+                  "pm.test('Has not_implemented error code', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.error).to.equal('not_implemented');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "audio",
+                  "type": "file",
+                  "src": "",
+                  "description": "WAV or MP3 audio of swallowing/voice. Max 30 MB. (Stub — returns 501)"
+                },
+                {
+                  "key": "language",
+                  "value": "en",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-classify-audio",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-classify-audio"]
+            },
+            "description": "**POST /api/iddsi-classify-audio — RESEARCH-STAGED**\n\n⚠️ This endpoint is not yet in production. It returns `501 Not Implemented` in all environments.\n\nPlanned capability: analyse swallowing/voice audio recordings to infer IDDSI-relevant swallowing function parameters. Ship timing coordinated with the audio analysis research agent.\n\n**Do not use in clinical workflows.**\n\nIncluded in collection for API design continuity and partner coordination."
+          },
+          "response": [
+            {
+              "name": "501 Not Implemented (expected)",
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                { "key": "Content-Type", "value": "application/json" }
+              ],
+              "body": "{\n  \"error\": \"not_implemented\",\n  \"message\": \"Audio classification endpoint is research-staged and not yet live. Coordinate with the audio analysis agent for ETA.\"\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Meal Validation",
+      "description": "Validate full RCHE meal plans against a resident's prescribed IDDSI level using Claude Haiku.",
+      "item": [
+        {
+          "name": "08 · IDDSI Batch Meal Validation (RCHE — English)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200 or 503', function () {",
+                  "    pm.expect([200, 503]).to.include(pm.response.code);",
+                  "});",
+                  "if (pm.response.code === 200) {",
+                  "    pm.test('Has items array', function () {",
+                  "        const json = pm.response.json();",
+                  "        pm.expect(json).to.have.property('items');",
+                  "        pm.expect(json.items).to.be.an('array');",
+                  "    });",
+                  "    pm.test('Has meal_safety_verdict', function () {",
+                  "        const json = pm.response.json();",
+                  "        pm.expect(['safe', 'caution', 'unsafe']).to.include(json.meal_safety_verdict);",
+                  "    });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meal\": [\n    { \"item\": \"steamed fish\", \"portion\": \"100g\" },\n    { \"item\": \"rice porridge (congee)\", \"portion\": \"200ml\" },\n    { \"item\": \"minced pork with sauce\", \"portion\": \"80g\" },\n    { \"item\": \"plain water\", \"portion\": \"150ml\" }\n  ],\n  \"resident_iddsi_level\": 5,\n  \"language\": \"en\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-batch",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-batch"]
+            },
+            "description": "**POST /api/iddsi-batch**\n\nValidate a full RCHE meal plan against a resident's prescribed IDDSI level. Uses Claude Haiku for per-item classification.\n\n**Request fields:**\n- `meal` — array of `{item, portion}` objects (max 20 items)\n- `resident_iddsi_level` — prescribed level 0–7\n- `language` — `en` | `zh-HK` | `zh-Hant` | `zh-Hans` | `tl` | `id`\n\n**Response:**\n- `items[]` — per-item classification with level, label, confidence, rationale\n- `meal_safety_verdict` — `safe` | `caution` | `unsafe`\n- `non_matching_items[]` — items exceeding resident's level\n- `recommendations` — modification instructions\n- `model` — Claude model used\n\n**Note:** 30-second timeout. Returns 503 if Anthropic API key not configured."
+          },
+          "response": [
+            {
+              "name": "200 OK — 4-item meal, Level 5 resident, verdict: unsafe",
+              "status": "OK",
+              "code": 200,
+              "header": [
+                { "key": "Content-Type", "value": "application/json" },
+                { "key": "Access-Control-Allow-Origin", "value": "*" }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"item\": \"steamed fish\",\n      \"portion\": \"100g\",\n      \"iddsi_level\": 6,\n      \"label\": \"Soft & Bite-Sized\",\n      \"label_zh\": \"軟爛切粒\",\n      \"color\": \"#64B4E1\",\n      \"match_resident_level\": false,\n      \"confidence\": \"high\",\n      \"rationale\": \"Steamed fish is typically soft and easily flaked — Level 6 Soft & Bite-Sized.\"\n    },\n    {\n      \"item\": \"rice porridge (congee)\",\n      \"portion\": \"200ml\",\n      \"iddsi_level\": 4,\n      \"label\": \"Pureed/Extremely Thick\",\n      \"label_zh\": \"糊狀／極稠\",\n      \"color\": \"#E06027\",\n      \"match_resident_level\": true,\n      \"confidence\": \"high\",\n      \"rationale\": \"Congee is smooth and lump-free — Level 4 Pureed.\"\n    }\n  ],\n  \"meal_safety_verdict\": \"unsafe\",\n  \"non_matching_items\": [\n    { \"item\": \"steamed fish\", \"iddsi_level\": 6, \"label\": \"Soft & Bite-Sized\" }\n  ],\n  \"recommendations\": \"The following items require modification to meet the resident's Minced & Moist (Level 5) requirement:\\n• steamed fish (currently IDDSI Level 6 – Soft & Bite-Sized): Mince finely and ensure moistened with sauce or gravy\",\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"resident_iddsi_level\": 5,\n  \"resident_iddsi_label\": \"Minced & Moist\",\n  \"disclaimer\": \"This meal assessment is for assistive reference only. Clinical decisions require a qualified SLP.\"\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "09 · IDDSI Batch Meal Validation (RCHE — Traditional Chinese 繁體中文)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200 or 503', function () {",
+                  "    pm.expect([200, 503]).to.include(pm.response.code);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meal\": [\n    { \"item\": \"蒸魚\", \"portion\": \"100克\" },\n    { \"item\": \"白粥\", \"portion\": \"200毫升\" },\n    { \"item\": \"免治豬肉\", \"portion\": \"80克\" },\n    { \"item\": \"清水\", \"portion\": \"150毫升\" }\n  ],\n  \"resident_iddsi_level\": 5,\n  \"language\": \"zh-HK\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/iddsi-batch",
+              "host": ["{{base_url}}"],
+              "path": ["api", "iddsi-batch"]
+            },
+            "description": "**POST /api/iddsi-batch — Traditional Chinese (zh-HK)**\n\nSame batch meal validation with Traditional Chinese food names and `language: \"zh-HK\"`. Rationale and recommendations will be returned in Traditional Chinese.\n\nUseful for Hong Kong RCHE staff who use Chinese in documentation."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Clinical Q&A (RAG)",
+      "description": "Retrieval-Augmented Generation endpoint for dysphagia/IDDSI clinical questions. Searches 120-article softmeal.org knowledge base.",
+      "item": [
+        {
+          "name": "10a · Clinical Q&A — Health Check (GET)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has status field', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('status');",
+                  "});",
+                  "pm.test('Has index_size', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('index_size');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/clinical-qa",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clinical-qa"]
+            },
+            "description": "**GET /api/clinical-qa**\n\nHealth check for the Clinical Q&A RAG endpoint. Returns:\n- `status` — `ok`\n- `index_size` — number of indexed softmeal.org articles (typically 120)\n- `embedding_model` — `text-embedding-3-small`\n- `answer_model` — `claude-haiku-4-5`\n- `description` — endpoint description\n\nCall this before using the POST endpoint to verify the RAG index is loaded."
+          },
+          "response": [
+            {
+              "name": "200 OK — Endpoint healthy",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"status\": \"ok\",\n  \"index_size\": 120,\n  \"embedding_model\": \"text-embedding-3-small\",\n  \"answer_model\": \"claude-haiku-4-5\",\n  \"description\": \"CareEZ Clinical Q&A RAG — 120 softmeal.org articles across en/zh-HK/zh-CN/ja locales\"\n}",
+              "_postman_previewlanguage": "json"
+            }
+          ]
+        },
+        {
+          "name": "10b · Clinical Q&A — Ask (POST, English)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has answer field', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('answer');",
+                  "    pm.expect(pm.response.json().answer).to.be.a('string').and.to.have.length.above(10);",
+                  "});",
+                  "pm.test('Has sources array', function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('sources');",
+                  "    pm.expect(pm.response.json().sources).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"What is IDDSI Level 4 and what foods are appropriate for it?\",\n  \"language\": \"en\",\n  \"top_k\": 5\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clinical-qa",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clinical-qa"]
+            },
+            "description": "**POST /api/clinical-qa**\n\nRetrieval-Augmented Generation (RAG) endpoint that answers clinical questions about:\n- Dysphagia management\n- IDDSI texture levels\n- 護食標準 (softmeal standards)\n\nSearches a 120-article softmeal.org knowledge base.\n\n**Request fields:**\n- `question` (required) — 3–1000 characters, any supported language\n- `language` (optional) — `en` | `zh-HK` | `zh-CN` | `ja` — boosts locale-matching results\n- `top_k` (optional) — articles to retrieve (1–10, default 5)\n\n**Response:**\n- `answer` — AI-synthesised clinical answer\n- `sources[]` — retrieved softmeal.org articles with title + URL\n- `model` — Claude model used\n- `embedding_model` — embedding model used\n- `disclaimer` — clinical disclaimer in requested language"
+          },
+          "response": []
+        },
+        {
+          "name": "10c · Clinical Q&A — Ask (POST, Cantonese 廣東話)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Has answer', function () { pm.expect(pm.response.json()).to.have.property('answer'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"IDDSI 第4級食物有什麼特點？適合什麼類型嘅病人？\",\n  \"language\": \"zh-HK\",\n  \"top_k\": 3\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clinical-qa",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clinical-qa"]
+            },
+            "description": "**POST /api/clinical-qa — Cantonese (zh-HK)**\n\nSame RAG endpoint with a question in Cantonese. `language: \"zh-HK\"` boosts locale-matching articles from the softmeal.org knowledge base.\n\nTranslation: 'What are the characteristics of IDDSI Level 4 foods? What type of patients is it suitable for?'"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
