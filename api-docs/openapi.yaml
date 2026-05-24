@@ -1,0 +1,433 @@
+openapi: 3.0.3
+info:
+  title: CareEZ Clinical AI API
+  version: "1.0.0"
+  description: |
+    Public REST endpoints for **CareEZ** — a multimodal clinical AI system for dysphagia
+    management developed by **Carewells Limited** (Hong Kong social enterprise, SED-registered).
+
+    All endpoints are production-live on `seniordeli.com` and callable without authentication.
+    They power the interactive demo at [demo.careez.org](https://demo.careez.org).
+
+    ### IDDSI Framework
+    The [International Dysphagia Diet Standardisation Initiative (IDDSI)](https://iddsi.org/)
+    defines 8 texture/thickness levels (0–7) for food and liquids:
+
+    | Level | Label | Type |
+    |-------|-------|------|
+    | 0 | Thin | Drink |
+    | 1 | Slightly Thick | Drink |
+    | 2 | Mildly Thick | Drink |
+    | 3 | Moderately Thick / Liquidised | Drink / Food |
+    | 4 | Extremely Thick / Puréed | Drink / Food |
+    | 5 | Minced & Moist | Food |
+    | 6 | Soft & Bite-Sized | Food |
+    | 7 | Regular | Food |
+
+    ### Clinical Disclaimer
+    > ⚠️ **Prototype rule-based classifier — clinical decisions require a qualified Speech-Language Pathologist (SLP).**
+    > CareEZ AI outputs are decision-support tools only and must not replace professional assessment.
+
+    ### CORS
+    All endpoints respond with `Access-Control-Allow-Origin: *`. No API key required.
+  contact:
+    name: Carewells Limited
+    url: https://careez.org
+    email: hello@careez.org
+  license:
+    name: Demo / Research Use
+    url: https://careez.org
+
+x-warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+
+servers:
+  - url: https://www.seniordeli.com/api
+    description: Production (live)
+
+tags:
+  - name: IDDSI Classification
+    description: Classify food/liquid texture level using the IDDSI framework
+  - name: Aspiration Screening
+    description: Screen for aspiration risk via symptom or voice analysis
+
+paths:
+  /iddsi-classify:
+    post:
+      operationId: classifyTextIddsi
+      summary: Text → IDDSI Level (L0–7)
+      description: |
+        Classify a food or liquid item described in plain text against the IDDSI framework.
+        Returns the recommended IDDSI level (0–7), a confidence score, and a multilingual explanation.
+
+        **Supported languages:** English (`en`), Traditional Chinese (`zh-Hant`), Simplified Chinese (`zh-Hans`)
+      tags:
+        - IDDSI Classification
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextClassifyRequest'
+            examples:
+              congee:
+                summary: Congee (稀粥)
+                value:
+                  text: "thick congee, soft, no lumps"
+                  language: "en"
+              thickened_juice:
+                summary: Mildly thickened apple juice
+                value:
+                  text: "mildly thickened apple juice, pours slowly"
+                  language: "en"
+              chinese_food:
+                summary: Chinese minced pork (Traditional Chinese input)
+                value:
+                  text: "免治豬肉，質地柔軟，有少量小粒"
+                  language: "zh-Hant"
+      responses:
+        '200':
+          description: Successful IDDSI classification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IddsiClassifyResponse'
+              examples:
+                congee_result:
+                  summary: Congee classified as IDDSI 4
+                  value:
+                    iddsi_level: 4
+                    label: "Extremely Thick / Puréed"
+                    confidence: 0.87
+                    explanation_en: "This food item matches IDDSI Level 4 (Extremely Thick / Puréed). It can be eaten with a spoon and does not require chewing."
+                    explanation_zh_hant: "此食物符合IDDSI第4級（極稠/糊狀）。可用匙羹進食，無需咀嚼。"
+                    multilingual_explanation: "zh-Hant"
+                    warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /iddsi-classify-image:
+    post:
+      operationId: classifyImageIddsi
+      summary: Image → IDDSI Level
+      description: |
+        Upload a photo of a food or liquid item. The API performs visual analysis and
+        returns an IDDSI classification (Level 0–7) with a confidence score.
+
+        Accepts JPEG, PNG, WebP images up to **10 MB**. For liquids, a side-view photo
+        in a transparent container improves accuracy.
+
+        **Note:** Visual classification accuracy is lower for liquids than for solid foods.
+        Complement with a flow/viscosity test where possible.
+      tags:
+        - IDDSI Classification
+      security: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImageClassifyRequest'
+      responses:
+        '200':
+          description: Successful IDDSI image classification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IddsiClassifyResponse'
+              examples:
+                soup_result:
+                  summary: Pureed soup classified as IDDSI 4
+                  value:
+                    iddsi_level: 4
+                    label: "Extremely Thick / Puréed"
+                    confidence: 0.79
+                    explanation_en: "Visual analysis indicates a smooth, homogeneous purée consistent with IDDSI Level 4. No visible lumps or particulates detected."
+                    explanation_zh_hant: "視覺分析顯示質地均勻，符合IDDSI第4級（糊狀）。未見可見顆粒。"
+                    multilingual_explanation: "zh-Hant"
+                    warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+        '400':
+          description: Invalid or missing image file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Image exceeds 10 MB size limit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /voice-aspiration-screen:
+    post:
+      operationId: voiceAspirationScreen
+      summary: Symptoms → Aspiration Risk Score
+      description: |
+        Screen for aspiration risk based on reported symptoms and clinical observations.
+        Designed for use by caregivers, nurses, and dietitians to flag patients who may
+        need a formal SLP swallowing assessment.
+
+        Returns a risk level (`low` / `moderate` / `high`) with a numeric score (0–100)
+        and recommended action.
+
+        **Input:** Provide a free-text description of swallowing-related symptoms, or
+        a structured list of symptom flags.
+      tags:
+        - Aspiration Screening
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AspirationScreenRequest'
+            examples:
+              caregiver_report:
+                summary: Caregiver symptom report
+                value:
+                  symptoms: "Patient coughs frequently during meals, has a wet/gurgly voice after swallowing, and has lost 3kg in the past month."
+                  language: "en"
+              structured_flags:
+                summary: Structured symptom flags
+                value:
+                  symptoms: "coughing during meals, wet voice post-swallow, weight loss"
+                  age: 82
+                  diagnosis: "stroke"
+                  language: "en"
+      responses:
+        '200':
+          description: Aspiration risk screening result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AspirationScreenResponse'
+              examples:
+                high_risk:
+                  summary: High aspiration risk
+                  value:
+                    risk_level: "high"
+                    risk_score: 78
+                    flags: ["wet/gurgly voice", "coughing during meals", "significant weight loss"]
+                    recommendation_en: "High aspiration risk detected. Refer to a Speech-Language Pathologist for formal swallowing assessment immediately. Consider NPO (nil per os) pending evaluation."
+                    recommendation_zh_hant: "發現高度誤嚥風險。請立即轉介言語治療師進行正式吞嚥評估。評估前考慮禁食（NPO）。"
+                    warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /iddsi-classify-audio:
+    post:
+      operationId: classifyAudioIddsi
+      summary: Audio → IDDSI (Research-Staged)
+      description: |
+        **⚠️ Research-staged endpoint — not yet in production.**
+
+        Planned capability: analyse voice/swallowing audio recordings to infer IDDSI-relevant
+        swallowing function parameters (e.g., swallowing frequency, voice quality post-swallow).
+
+        This stub is documented for partner coordination and API design continuity.
+        Response format mirrors `/voice-aspiration-screen`. Ship timing coordinated with
+        the audio-analysis research agent.
+
+        **Do not use in clinical workflows.** Returns `501 Not Implemented` in all environments.
+      tags:
+        - Aspiration Screening
+      security: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AudioClassifyRequest'
+      responses:
+        '501':
+          description: Not yet implemented — research-staged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                not_implemented:
+                  value:
+                    error: "not_implemented"
+                    message: "Audio classification endpoint is research-staged and not yet live. Coordinate with the audio analysis agent for ETA."
+
+components:
+  schemas:
+    TextClassifyRequest:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Plain-text description of the food or liquid item to classify
+          example: "thick congee, soft, no lumps"
+          minLength: 3
+          maxLength: 2000
+        language:
+          type: string
+          description: Preferred language for the explanation in the response
+          enum: [en, zh-Hant, zh-Hans]
+          default: en
+          example: "en"
+
+    ImageClassifyRequest:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          format: binary
+          description: Food/liquid image file (JPEG, PNG, or WebP, max 10 MB)
+        language:
+          type: string
+          description: Preferred language for the explanation in the response
+          enum: [en, zh-Hant, zh-Hans]
+          default: en
+
+    AudioClassifyRequest:
+      type: object
+      required:
+        - audio
+      properties:
+        audio:
+          type: string
+          format: binary
+          description: Audio recording of swallowing/voice (WAV or MP3, max 30 MB)
+        language:
+          type: string
+          enum: [en, zh-Hant, zh-Hans]
+          default: en
+
+    AspirationScreenRequest:
+      type: object
+      required:
+        - symptoms
+      properties:
+        symptoms:
+          type: string
+          description: Free-text description of swallowing symptoms or comma-separated symptom list
+          example: "coughing during meals, wet voice after swallowing, drooling"
+          minLength: 5
+          maxLength: 3000
+        age:
+          type: integer
+          description: Patient age (optional, improves risk stratification)
+          minimum: 0
+          maximum: 130
+          example: 82
+        diagnosis:
+          type: string
+          description: Primary diagnosis relevant to swallowing (optional)
+          example: "stroke"
+        language:
+          type: string
+          enum: [en, zh-Hant, zh-Hans]
+          default: en
+
+    IddsiClassifyResponse:
+      type: object
+      properties:
+        iddsi_level:
+          type: integer
+          description: Recommended IDDSI level (0 = Thin through 7 = Regular)
+          minimum: 0
+          maximum: 7
+          example: 4
+        label:
+          type: string
+          description: Human-readable IDDSI level label
+          example: "Extremely Thick / Puréed"
+        confidence:
+          type: number
+          format: float
+          description: Classification confidence (0.0–1.0)
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.87
+        explanation_en:
+          type: string
+          description: English explanation of the classification result
+        explanation_zh_hant:
+          type: string
+          description: Traditional Chinese explanation of the classification result
+        multilingual_explanation:
+          type: string
+          description: Language code of the primary explanation returned
+          enum: [en, zh-Hant, zh-Hans]
+          example: "zh-Hant"
+        warning:
+          type: string
+          description: Clinical disclaimer
+          example: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+
+    AspirationScreenResponse:
+      type: object
+      properties:
+        risk_level:
+          type: string
+          description: Categorical aspiration risk level
+          enum: [low, moderate, high]
+          example: "high"
+        risk_score:
+          type: integer
+          description: Numeric risk score (0–100, higher = greater risk)
+          minimum: 0
+          maximum: 100
+          example: 78
+        flags:
+          type: array
+          items:
+            type: string
+          description: Specific symptom flags identified
+          example: ["wet/gurgly voice", "coughing during meals", "weight loss"]
+        recommendation_en:
+          type: string
+          description: English clinical recommendation
+        recommendation_zh_hant:
+          type: string
+          description: Traditional Chinese clinical recommendation
+        warning:
+          type: string
+          description: Clinical disclaimer
+          example: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code
+          example: "invalid_request"
+        message:
+          type: string
+          description: Human-readable error description
+          example: "The 'text' field is required and must be at least 3 characters."
