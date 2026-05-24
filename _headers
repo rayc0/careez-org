@@ -23,6 +23,10 @@
 /og-image.png
   Cache-Control: public, max-age=2592000
 
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
 /*
   X-Robots-Tag: all
   X-Content-Type-Options: nosniff

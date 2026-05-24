@@ -1,0 +1,6 @@
+Contact: mailto:security@careez.org
+Expires: 2027-05-25T00:00:00.000Z
+Acknowledgments: https://careez.org/security#acknowledgments
+Policy: https://careez.org/security
+Preferred-Languages: en, zh-Hant, zh-Hans
+Canonical: https://careez.org/.well-known/security.txt
