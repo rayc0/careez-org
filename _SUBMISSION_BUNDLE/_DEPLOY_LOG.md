@@ -22,10 +22,17 @@
 - `careez-demo/index.html` — beacon added to `<head>` (line 8)
 - `softmeal-org/src/layouts/BaseLayout.astro` — beacon added to `<head>` (line ~217)
 
-**Verification post-deploy:**
-- careez.org: `curl https://careez.org/ | grep cloudflareinsights` → 1+ match ✅ (CF edge injection live)
-- demo.careez.org: pending fresh deploy
-- softmeal.org: pending fresh deploy (Astro build required)
+**Verification post-deploy (all GH Actions ✅ success):**
+- careez.org: `grep -c cloudflareinsights` → **2** ✅ (CF edge + manual HTML both active)
+- demo.careez.org: `grep -c cloudflareinsights` → **2** ✅
+- softmeal.org: redirects to /ja/; `grep -c cloudflareinsights` on /ja/ → **2** ✅
+
+**GH Actions run IDs:**
+- careez-org: `26367654764` (28s, success)
+- careez-demo: `26367655866` (24s, success)
+- softmeal-org: `26367656849` (1m59s, success)
+
+**Token note:** Beacon runs with `token: "auto"` — CF Pages edge injection. For explicit RUM site_tag UUIDs (to see data in CF dashboard → Web Analytics), Raymond should visit CF dashboard → each Pages project → Settings → Web Analytics → copy the UUID and replace `"auto"` in HTML `<head>`. Alternatively, create a CF API token with `Account Analytics:Edit` scope and run: `curl -X POST "https://api.cloudflare.com/client/v4/accounts/2c4fde32590a55f13c8181cbc33027ba/rum/site_info" -H "Authorization: Bearer TOKEN" -d '{"host":"careez.org","auto_install":true}'`
 
 ## 2026-05-25 01:05 HKT — seniordeli.com/[locale]/careez full landing page
 
