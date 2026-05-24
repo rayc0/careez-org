@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — CareEZ Clinical AI for Dysphagia &amp; 照護食</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="Frequently asked questions about CareEZ — clinical safety, language support, data governance, pricing, technical SLA, and how to join the pilot." />
+
+  <link rel="canonical" href="https://careez.org/faq/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/faq/" />
+  <meta property="og:title" content="FAQ — CareEZ Clinical AI for Dysphagia &amp; 照護食" />
+  <meta property="og:description" content="Clinical safety, language support, governance, pricing, technical SLA, and pilot onboarding — every common question about CareEZ answered." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "url": "https://careez.org/faq/",
+    "name": "CareEZ FAQ",
+    "isPartOf": { "@type": "WebSite", "url": "https://careez.org/" },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is CareEZ a medical device?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. CareEZ is a triage support tool, not a diagnostic medical device. It does not replace clinical assessment and is not cleared or registered as a medical device in Hong Kong, the EU, or the United States. Every output includes a disclaimer directing users to consult a qualified Speech-Language Pathologist (SLP) before acting on any recommendation. CareEZ is designed to extend, not replace, professional clinical judgment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is Snap-to-IDDSI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On our baseline test set, Snap-to-IDDSI achieves 4 of 8 IDDSI levels correctly (50%) under Claude Vision. All misses are ±1 level — meaning the model errs toward a safer, more restrictive texture rather than a dangerously permissive one. This clinical-safety bias is intentional. Our Year 1 Q3 target is 75% exact-level accuracy. Independent validation results are published in the changelog as they become available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if CareEZ makes a wrong call?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CareEZ is engineered with a clinical-safety bias: when uncertain, the system over-refers rather than under-refers. Institutional users operating under a Tier 2+ agreement are required to follow our adverse-event reporting protocol. All outputs include explicit 'consult qualified SLP' disclaimers. Pilot sites receive onboarding training that covers escalation pathways. We maintain a public changelog of accuracy improvements and known limitations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the voice biomarker available now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Voice biomarker analysis for Cantonese aspiration risk is currently research-staged, with a planned release in Year 1–2. The /api/voice-biomarker-cantonese endpoint stub is live today for workflow integration and validation testing — partners can build against its interface now so they are ready when the model goes live. Follow the changelog for research milestones."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What languages does CareEZ support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CareEZ currently supports 7–9 languages: English, Traditional Chinese (繁體中文 / zh-HK), Simplified Chinese (zh-CN), Japanese, Filipino (Tagalog / tl), Bahasa Indonesia (id), Vietnamese (vi), Thai (th), and Spanish (es, coming soon). The language portfolio is prioritised around the foreign domestic helper (FDH) workforce in Hong Kong — the largest untrained carer cohort — where Tagalog and Bahasa Indonesia are the dominant languages."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are all four CareEZ APIs multilingual?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All four core API endpoints — Snap-to-IDDSI (food texture classification), aspiration risk triage, dysphagia explain (plain-language explanations), and voice biomarker stub — return responses in the language specified by the caller. Multilingual output is not a post-processing layer; it is native to the model pipeline. This means carers receive guidance in their own language without any manual translation step."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who owns CareEZ's data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No single entity owns CareEZ's data. The platform operates under a co-stewardship model: the HKU Swallowing Research Laboratory holds clinical oversight, and Full Linkage Community Care Association (a Hong Kong s.88 registered charity) holds the public-interest data mandate. Carewells Limited operates the platform as the commercial operator under these co-governance principals. This structure ensures that clinical data cannot be monetised unilaterally by the operator. Full details are at /governance/."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is personal health information (PHI) stored?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No PHI is stored by default. All public-tier API calls are stateless — inputs are processed and discarded; no conversation history or identifiable data is retained on CareEZ servers. The honest exception: institutional operators (Tier 2+) may enable server-side logging within their own infrastructure at their discretion, subject to their own data protection obligations under the Hong Kong Personal Data (Privacy) Ordinance. Carewells does not receive that log data unless explicitly contracted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Carewells' role in CareEZ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Carewells Limited is the operator of the CareEZ public asset — not the owner. Carewells funds operations through its commercial layer (Tier 2+ enterprise subscriptions and the SeniorDeli food-modification product line). The public-good layer — free carer access, multilingual tools, and the 照護食 Adoption Index — is funded by grants and social-enterprise surplus, not by monetising carer data. This separation is structural, not aspirational."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is CareEZ really free for carers, forever?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, always. Tier 0 (individual carer access via web or WhatsApp) is permanently free, with no usage cap, no registration required, and no advertising. This is a structural commitment, not a promotional offer. The commercial sustainability model relies on Tier 2+ institutional subscriptions and the SeniorDeli product line — not on monetising the carers who need the tool most. See /pricing/ for the full tier breakdown."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the CareEZ API commercially?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tier 2 or above is required for production commercial use of the CareEZ API. Tier 1 (registered non-profit or research) allows non-commercial integration. The public API endpoints at www.seniordeli.com/api/ are accessible without a key for evaluation and piloting, but production commercial deployments must be contracted. Contact hello@careez.org to discuss a Tier 2+ agreement. See /pricing/ for tier definitions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does CareEZ align with the HKCSS 護食標準?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CareEZ is built on the HKCSS Care Food Standard (護食標準), not merely aligned with it. The texture classification logic maps directly to the HKCSS Seven Key Elements and the companion IDDSI framework. CareEZ is a co-drafting institution of T/SATA 094-2025 (GBA dysphagia food group standard) and is named in companion standards T/SATA 084-2025 and T/SATA 085-2025. A full alignment table mapping each CareEZ output to the relevant HKCSS standard clause is available at /standards/."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does CareEZ replace human Speech-Language Pathologists (SLPs)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. CareEZ extends the reach of SLPs; it does not replace them. Clinical diagnosis of dysphagia, the formal prescription of texture levels, and swallowing rehabilitation remain within the exclusive scope of qualified SLP practice. CareEZ handles the triage and point-of-care guidance layer — the 640,000 carers making meal decisions daily without a clinician present. SLP supervision remains mandatory for institutional users, and every CareEZ output includes an explicit referral prompt when risk indicators are detected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do the CareEZ API endpoints live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The live API endpoints are hosted at www.seniordeli.com/api/, running on Cloudflare Workers via the @opennextjs/cloudflare adapter. This gives edge-native deployment with sub-100ms latency to Hong Kong and Southeast Asia. Full endpoint documentation, including request/response schema and multilingual examples, is at /api-docs/. The source code is Apache-2.0 licensed and available on GitHub at rayc0/seniordeli-website."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the CareEZ API SLA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CareEZ is currently in public beta. No formal SLA is guaranteed for Tier 0 or Tier 1 users. Real-time uptime is reported at careez.org/status/. Tier 2+ institutional contracts include SLA terms negotiated case-by-case — contact hello@careez.org to discuss. The Cloudflare Workers infrastructure has historically maintained greater than 99.9% availability, but beta-grade caveats apply until a formal SLA is published."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I self-host CareEZ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The full CareEZ platform source is released under the Apache-2.0 licence at github.com/rayc0/seniordeli-website. Self-hosting requires a Cloudflare Workers account and your own LLM API key (currently Claude / Anthropic). Deployment instructions are in the repository README. Note that self-hosted instances are not covered by the CareEZ SLA, clinical safety protocol, or co-governance framework — those apply only to the hosted platform at careez.org and seniordeli.com."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I join the CareEZ pilot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Apply at /trial/. Pilot slots for Year 1 are conditional on the outcome of the HKEX IFS 2026 award, which funds the institutional rollout. Applications are reviewed on a rolling basis; priority is given to RCHEs, NGO care operators, and FDH employment agencies. You will receive an acknowledgement within five business days of submitting your application. Early applicants are added to the pre-launch cohort regardless of award timing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does participating in the CareEZ pilot involve?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A typical pilot site commitment is 8–12 weeks, covering: onboarding session (2 hours, in your staff's language), access to the full Tier 2 feature set at no cost during the pilot, a structured feedback protocol (weekly 5-minute check-in + exit interview), and optional participation in the 照護食 Adoption Index baseline assessment. Pilot sites are named in our published research outputs (with consent). Full details, including the governance and data-sharing terms, are at /trial/ and /governance/."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+      --cyan: #00E5FF; --cyan2: #29B6F6;
+      --white: #FFFFFF; --gray: #B0BEC5; --gray2: #78909C;
+      --yellow: #FFD43B; --green: #4CAF50;
+      --accent-bar: 5px; --max-w: 1100px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--navy); color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: var(--accent-bar); height: 22px;
+      background: var(--cyan); border-radius: 2px; flex-shrink: 0;
+    }
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,20,40,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,229,255,0.12); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); text-decoration: none; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 0; }
+    /* Page hero */
+    .page-hero {
+      padding: 80px 24px 60px; background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero h1 span { color: var(--cyan); }
+    .page-hero .lead {
+      font-size: clamp(16px, 2vw, 19px); color: var(--gray);
+      max-width: 680px; line-height: 1.65; font-weight: 400;
+    }
+    /* Category pills */
+    .faq-nav {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      max-width: var(--max-w); margin: 32px auto 0; padding: 0 24px;
+    }
+    .faq-nav a {
+      display: inline-block; padding: 6px 16px;
+      border: 1px solid rgba(0,229,255,0.25); border-radius: 20px;
+      font-size: 12px; font-weight: 600; color: var(--gray);
+      letter-spacing: 0.04em; transition: all 0.2s;
+    }
+    .faq-nav a:hover { background: rgba(0,229,255,0.08); color: var(--white); border-color: var(--cyan); text-decoration: none; }
+    /* FAQ content */
+    .faq-section { padding: 64px 24px; }
+    .faq-section.alt { background: var(--navy2); }
+    .faq-inner { max-width: var(--max-w); margin: 0 auto; }
+    .faq-category-title {
+      font-size: clamp(20px, 2.5vw, 26px); font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 28px; color: var(--white);
+    }
+    /* Accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 860px; }
+    .faq-item {
+      background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none; cursor: pointer;
+      padding: 20px 24px; font-size: 15px; font-weight: 700; color: var(--white);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; line-height: 1.4;
+      border-left: var(--accent-bar) solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 22px; font-weight: 300;
+      color: var(--cyan); flex-shrink: 0; transition: transform 0.25s;
+    }
+    .faq-item[open] summary {
+      border-left-color: var(--cyan);
+      background: rgba(0,229,255,0.04);
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-answer {
+      padding: 0 24px 22px 29px;
+      font-size: 14px; color: var(--gray); line-height: 1.85;
+    }
+    .faq-answer p { margin-bottom: 12px; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+    .faq-answer a { color: var(--cyan); }
+    /* CTA */
+    .cta-section { padding: 64px 24px; background: var(--navy2); border-top: 1px solid rgba(0,229,255,0.08); }
+    .cta-inner { max-width: var(--max-w); margin: 0 auto; }
+    .cta-inner h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .cta-inner p { font-size: 15px; color: var(--gray); max-width: 640px; margin-bottom: 28px; line-height: 1.75; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 40px;
+      font-size: 14px; font-weight: 700;
+      background: var(--cyan); color: var(--navy); text-decoration: none;
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 40px;
+      font-size: 14px; font-weight: 600;
+      border: 1.5px solid var(--cyan); color: var(--cyan); text-decoration: none;
+    }
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta { font-size: 12px; color: var(--gray2); text-align: right; }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">Care<span>EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/">Governance</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/faq/" class="active">FAQ</a></li>
+        <li><a href="/#live-api">Live API</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li><a href="/trial/" style="background:var(--cyan);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:20px;font-size:12px;letter-spacing:0.03em;text-decoration:none;">Apply Pilot</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-label">FAQ</div>
+      <h1>Common questions about <span>CareEZ</span></h1>
+      <p class="lead">
+        Clinical safety, data governance, languages, pricing, technical SLA, and how to join the pilot &mdash; answered.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category jump nav -->
+  <div class="faq-nav">
+    <a href="#clinical">Clinical / Safety</a>
+    <a href="#languages">Languages</a>
+    <a href="#governance">Governance &amp; Data</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#standards">Standards</a>
+    <a href="#technical">Technical</a>
+    <a href="#pilot">Pilot</a>
+  </div>
+
+  <hr class="divider" style="margin-top:32px;" />
+
+  <!-- ── CLINICAL / SAFETY ── -->
+  <section class="faq-section" id="clinical">
+    <div class="faq-inner">
+      <div class="section-label">Clinical / Safety</div>
+      <h2 class="faq-category-title">Clinical &amp; Safety</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>Is CareEZ a medical device?</summary>
+            <div class="faq-answer">
+              <p>No. CareEZ is a triage support tool, not a diagnostic medical device. It is not cleared or registered as a medical device in Hong Kong, the EU, or the United States. Every output includes a disclaimer directing users to consult a qualified Speech-Language Pathologist (SLP) before acting on any recommendation.</p>
+              <p>CareEZ is designed to extend, not replace, professional clinical judgment. The distinction matters: a medical device undergoes regulatory review for diagnostic efficacy; CareEZ operates as a decision-support layer in the hands of carers, subject to SLP oversight.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>How accurate is Snap-to-IDDSI?</summary>
+            <div class="faq-answer">
+              <p>On our baseline test set, Snap-to-IDDSI achieves 4 of 8 IDDSI levels correctly (50%) under Claude Vision. All misses are ±1 level — the model errs toward a safer, more restrictive texture rather than a dangerously permissive one. This clinical-safety bias is intentional: over-referral is always preferable to under-referral in dysphagia care.</p>
+              <p>Our Year 1 Q3 target is 75% exact-level accuracy. Independent validation results are published in the <a href="/changelog/">changelog</a> as they become available.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>What happens if CareEZ makes a wrong call?</summary>
+            <div class="faq-answer">
+              <p>CareEZ is engineered with a clinical-safety bias: when uncertain, the system over-refers rather than under-refers. Institutional users operating under a Tier 2+ agreement are required to follow our adverse-event reporting protocol; all incidents are reviewed by the clinical advisory team.</p>
+              <p>All outputs include explicit "consult qualified SLP" disclaimers. Pilot sites receive onboarding training covering escalation pathways. We maintain a public <a href="/changelog/">changelog</a> of accuracy improvements and known limitations so users always know the current confidence envelope.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>Is the voice biomarker available now?</summary>
+            <div class="faq-answer">
+              <p>No. Voice biomarker analysis for Cantonese aspiration risk is currently research-staged, with a planned release in Year 1&ndash;2. The <code>/api/voice-biomarker-cantonese</code> endpoint stub is live today for workflow integration and validation testing &mdash; partners can build against its interface now and be ready when the model goes live.</p>
+              <p>Follow the <a href="/changelog/">changelog</a> and <a href="/research/">research page</a> for milestone updates. The research is being conducted in collaboration with the HKU Swallowing Research Laboratory.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── LANGUAGES ── -->
+  <section class="faq-section alt" id="languages">
+    <div class="faq-inner">
+      <div class="section-label">Languages</div>
+      <h2 class="faq-category-title">Language Support</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>What languages does CareEZ support?</summary>
+            <div class="faq-answer">
+              <p>CareEZ currently supports 7&ndash;9 languages: English, Traditional Chinese (繁體中文 / zh-HK), Simplified Chinese (zh-CN), Japanese, Filipino (Tagalog / tl), Bahasa Indonesia (id), Vietnamese (vi), Thai (th), and Spanish (es, coming soon).</p>
+              <p>The language portfolio is prioritised around the foreign domestic helper (FDH) workforce in Hong Kong &mdash; the largest untrained carer cohort &mdash; where Tagalog and Bahasa Indonesia are the dominant languages. This ensures the tool is accessible to the carers who need it most, not just those who speak Cantonese or English.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>Are all four CareEZ APIs multilingual?</summary>
+            <div class="faq-answer">
+              <p>Yes. All four core API endpoints &mdash; Snap-to-IDDSI (food texture classification), aspiration risk triage, dysphagia explain (plain-language explanations), and voice biomarker stub &mdash; return responses in the language specified by the caller.</p>
+              <p>Multilingual output is not a post-processing translation layer; it is native to the model pipeline. This means carers receive guidance in their own language without manual translation, reducing the risk of miscommunication at the meal.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── GOVERNANCE / DATA ── -->
+  <section class="faq-section" id="governance">
+    <div class="faq-inner">
+      <div class="section-label">Governance &amp; Data</div>
+      <h2 class="faq-category-title">Governance &amp; Data</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>Who owns CareEZ's data?</summary>
+            <div class="faq-answer">
+              <p>No single entity owns CareEZ's data. The platform operates under a co-stewardship model: the HKU Swallowing Research Laboratory holds clinical oversight, and Full Linkage Community Care Association (a Hong Kong s.88 registered charity) holds the public-interest data mandate.</p>
+              <p>Carewells Limited operates the platform as the commercial operator under these co-governance principals. This structure ensures that clinical data cannot be monetised unilaterally by the operator. Full details are at <a href="/governance/">governance</a>.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>Where is personal health information (PHI) stored?</summary>
+            <div class="faq-answer">
+              <p>No PHI is stored by default. All public-tier API calls are stateless &mdash; inputs are processed and discarded; no conversation history or identifiable data is retained on CareEZ servers.</p>
+              <p>The honest exception: institutional operators (Tier 2+) may enable server-side logging within their own infrastructure at their discretion, subject to their own data protection obligations under the Hong Kong Personal Data (Privacy) Ordinance. Carewells does not receive that log data unless explicitly contracted.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>What is Carewells' role in CareEZ?</summary>
+            <div class="faq-answer">
+              <p>Carewells Limited is the operator of the CareEZ public asset &mdash; not the owner. Carewells funds operations through its commercial layer (Tier 2+ enterprise subscriptions and the SeniorDeli food-modification product line).</p>
+              <p>The public-good layer &mdash; free carer access, multilingual tools, and the 照護食 Adoption Index &mdash; is funded by grants and social-enterprise surplus, not by monetising carer data. This separation is structural, not aspirational. See <a href="/governance/">governance</a> for the legal and contractual details.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── PRICING ── -->
+  <section class="faq-section alt" id="pricing">
+    <div class="faq-inner">
+      <div class="section-label">Pricing</div>
+      <h2 class="faq-category-title">Pricing</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>Is CareEZ really free for carers, forever?</summary>
+            <div class="faq-answer">
+              <p>Yes, always. Tier 0 (individual carer access via web or WhatsApp) is permanently free, with no usage cap, no registration required, and no advertising. This is a structural commitment, not a promotional offer.</p>
+              <p>The commercial sustainability model relies on Tier 2+ institutional subscriptions and the SeniorDeli product line &mdash; not on monetising the carers who need the tool most. See <a href="/pricing/">pricing</a> for the full tier breakdown.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>Can I use the CareEZ API commercially?</summary>
+            <div class="faq-answer">
+              <p>Tier 2 or above is required for production commercial use of the CareEZ API. Tier 1 (registered non-profit or research) allows non-commercial integration. The public API endpoints at <code>www.seniordeli.com/api/</code> are accessible without a key for evaluation and piloting, but production commercial deployments must be contracted.</p>
+              <p>Contact <a href="mailto:hello@careez.org">hello@careez.org</a> to discuss a Tier 2+ agreement. See <a href="/pricing/">pricing</a> for tier definitions.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── STANDARDS ── -->
+  <section class="faq-section" id="standards">
+    <div class="faq-inner">
+      <div class="section-label">Standards</div>
+      <h2 class="faq-category-title">Standards &amp; Clinical Scope</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>How does CareEZ align with the HKCSS 護食標準?</summary>
+            <div class="faq-answer">
+              <p>CareEZ is built on the HKCSS Care Food Standard (護食標準), not merely aligned with it. The texture classification logic maps directly to the HKCSS Seven Key Elements and the companion IDDSI framework.</p>
+              <p>CareEZ (via Carewells / SeniorDeli) is a co-drafting institution of T/SATA 094-2025 (the Greater Bay Area group standard on General Requirements for Dysphagia Foods for Elderly Care) and is named in companion standards T/SATA 084-2025 and T/SATA 085-2025. A full alignment table is at <a href="/standards/">standards</a>.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>Does CareEZ replace human Speech-Language Pathologists (SLPs)?</summary>
+            <div class="faq-answer">
+              <p>No. CareEZ extends the reach of SLPs; it does not replace them. Clinical diagnosis of dysphagia, the formal prescription of texture levels, and swallowing rehabilitation remain within the exclusive scope of qualified SLP practice.</p>
+              <p>CareEZ handles the triage and point-of-care guidance layer &mdash; the 640,000 carers making meal decisions daily without a clinician present. SLP supervision remains mandatory for institutional users, and every CareEZ output includes an explicit referral prompt when risk indicators are detected.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── TECHNICAL ── -->
+  <section class="faq-section alt" id="technical">
+    <div class="faq-inner">
+      <div class="section-label">Technical</div>
+      <h2 class="faq-category-title">Technical</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>Where do the CareEZ API endpoints live?</summary>
+            <div class="faq-answer">
+              <p>The live API endpoints are hosted at <code>www.seniordeli.com/api/</code>, running on Cloudflare Workers via the <code>@opennextjs/cloudflare</code> adapter. This gives edge-native deployment with sub-100ms latency to Hong Kong and Southeast Asia.</p>
+              <p>Full endpoint documentation &mdash; including request/response schema and multilingual examples &mdash; is at <a href="/api-docs/">api-docs</a>. The source code is Apache-2.0 licensed and available on GitHub at <a href="https://github.com/rayc0/seniordeli-website" target="_blank" rel="noopener">rayc0/seniordeli-website</a>.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>What is the CareEZ API SLA?</summary>
+            <div class="faq-answer">
+              <p>CareEZ is currently in public beta. No formal SLA is guaranteed for Tier 0 or Tier 1 users. Real-time uptime is reported at <a href="/status/">careez.org/status/</a>.</p>
+              <p>Tier 2+ institutional contracts include SLA terms negotiated case-by-case &mdash; contact <a href="mailto:hello@careez.org">hello@careez.org</a> to discuss. The Cloudflare Workers infrastructure has historically maintained &gt;99.9% availability, but beta-grade caveats apply until a formal SLA is published post-pilot.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>Can I self-host CareEZ?</summary>
+            <div class="faq-answer">
+              <p>Yes. The full CareEZ platform source is released under the Apache-2.0 licence at <a href="https://github.com/rayc0/seniordeli-website" target="_blank" rel="noopener">github.com/rayc0/seniordeli-website</a>. Self-hosting requires a Cloudflare Workers account and your own LLM API key (currently Claude / Anthropic). Deployment instructions are in the repository README.</p>
+              <p>Note: self-hosted instances are not covered by the CareEZ SLA, clinical safety protocol, or co-governance framework &mdash; those apply only to the hosted platform at careez.org and seniordeli.com.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── PILOT ── -->
+  <section class="faq-section" id="pilot">
+    <div class="faq-inner">
+      <div class="section-label">Pilot</div>
+      <h2 class="faq-category-title">Pilot Programme</h2>
+      <ul class="faq-list">
+
+        <li class="faq-item">
+          <details>
+            <summary>How do I join the CareEZ pilot?</summary>
+            <div class="faq-answer">
+              <p>Apply at <a href="/trial/">/trial/</a>. Pilot slots for Year 1 are conditional on the outcome of the HKEX IFS 2026 award, which funds the institutional rollout. Applications are reviewed on a rolling basis; priority is given to RCHEs, NGO care operators, and FDH employment agencies.</p>
+              <p>You will receive an acknowledgement within five business days of submitting your application. Early applicants are added to the pre-launch cohort regardless of award timing.</p>
+            </div>
+          </details>
+        </li>
+
+        <li class="faq-item">
+          <details>
+            <summary>What does participating in the CareEZ pilot involve?</summary>
+            <div class="faq-answer">
+              <p>A typical pilot site commitment is 8&ndash;12 weeks, covering: an onboarding session (2 hours, in your staff's language), access to the full Tier 2 feature set at no cost during the pilot, a structured feedback protocol (weekly 5-minute check-in plus exit interview), and optional participation in the 照護食 Adoption Index baseline assessment.</p>
+              <p>Pilot sites are named in our published research outputs (with consent). Full details &mdash; including the governance and data-sharing terms &mdash; are at <a href="/trial/">trial</a> and <a href="/governance/">governance</a>.</p>
+            </div>
+          </details>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="section-label">Get Started</div>
+      <h2>Still have questions?</h2>
+      <p>
+        Reach us at <a href="mailto:hello@careez.org">hello@careez.org</a> or apply for the pilot directly.
+        We respond within five business days.
+      </p>
+      <div class="btn-row">
+        <a href="/trial/" class="btn-primary">Apply for pilot &rarr;</a>
+        <a href="/governance/" class="btn-secondary">Governance details &rarr;</a>
+        <a href="/pricing/" class="btn-secondary">View pricing &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
