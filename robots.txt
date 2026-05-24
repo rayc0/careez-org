@@ -26,4 +26,5 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+Sitemap: https://careez.org/sitemap-index.xml
 Sitemap: https://careez.org/sitemap.xml
