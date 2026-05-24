@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CareEZ Voice Biomarker Research Protocol v1.0</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 11pt; max-width: 800px; margin: 2cm auto; color: #1a1a2e; line-height: 1.6; }
+  h1 { color: #1a6b4a; font-size: 1.6em; border-bottom: 2px solid #1a6b4a; padding-bottom: 0.4em; }
+  h2 { color: #1a6b4a; font-size: 1.2em; border-bottom: 1px solid #c9d8cf; padding-bottom: 0.3em; margin-top: 1.8em; }
+  h3 { color: #1a6b4a; font-size: 1em; margin-top: 1.2em; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9em; margin: 1em 0; }
+  th { background: #e8f5ee; color: #1a6b4a; font-weight: bold; padding: 0.5em 0.7em; text-align: left; border: 1px solid #c9d8cf; }
+  td { padding: 0.45em 0.7em; border: 1px solid #c9d8cf; vertical-align: top; }
+  tr:nth-child(even) td { background: #f4f9f6; }
+  code { font-family: Menlo, monospace; font-size: 0.85em; background: #f0f0f0; padding: 0.1em 0.3em; border-radius: 3px; }
+  blockquote { border-left: 3px solid #c9d8cf; padding-left: 1em; color: #5a6a72; }
+  a { color: #1a6b4a; }
+  @media print { body { max-width: 100%; margin: 0; } }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">CareEZ Voice Biomarker Research Protocol v1.0</h1>
+</header>
+<h1 id="careez-voice-biomarker-research-protocol-v1.0">CareEZ Voice
+Biomarker Research Protocol v1.0</h1>
+<p><strong>Author:</strong> CareEZ Research (Y0 stub by Raymond Chau +
+AI; Y1 lead by Clinical Advisor, TBC) <strong>Date:</strong> 2026-05-25
+<strong>Version:</strong> 1.0 <strong>Status:</strong> Pre-funding stub.
+Formal study to commence Y1 Q1 post-HKEX IFS award. <strong>Document
+type:</strong> Research protocol white paper
+<strong>Repository:</strong>
+https://careez.org/research/voice-biomarker-protocol</p>
+<hr />
+<h2 id="abstract">Abstract</h2>
+<p>We propose a prospective observational study to validate the use of
+acoustic features of speech as non-invasive biomarkers for aspiration
+risk in Hong Kong elderly populations residing in Residential Care Homes
+for the Elderly (RCHEs). Our central hypothesis is that a composite
+panel of voice quality metrics — including cough acoustics, wet-voice
+score, and swallow timing — extracted from short (30-second)
+standardised voice samples, can distinguish high-risk from low-risk
+individuals with ≥80% sensitivity at ≥95% specificity when validated
+against blinded EAT-10 questionnaire and Gugging Swallowing Screen
+(GUSS) clinician scoring as ground truth. Enrolling N=500 participants
+across five RCHEs over Year 1 (2026–2027), the study will build an
+openly licensed, de-identified acoustic corpus in four languages
+(Cantonese, English, Tagalog, Bahasa Indonesia) — reflecting Hong Kong’s
+multilingual care workforce — to support both clinical validation and
+downstream model training. The study is pre-registered with the Open
+Science Framework and will be submitted to HKU IRB in Q1 2027. Estimated
+budget of HKD 400,000 of the HKD 1.8M HKEX IFS 2026 award.</p>
+<hr />
+<h2 id="background">1. Background</h2>
+<h3 id="dysphagia-prevalence-in-hong-kong">1.1 Dysphagia Prevalence in
+Hong Kong</h3>
+<p>Dysphagia — difficulty swallowing — is a clinically significant
+condition disproportionately affecting the elderly. In Hong Kong, the
+Census and Statistics Department (2023) estimates 1.47 million residents
+aged 65 or above, representing approximately 20% of the total
+population, a figure projected to reach 31% by 2046. Among RCHE
+residents specifically, published prevalence estimates for dysphagia
+range from 40% to 68% (Cichero et al., 2017; Hospital Authority Annual
+Report, 2022). Silent aspiration — the entry of food or liquid into the
+airway without triggering a protective cough reflex — occurs in 40–70%
+of post-stroke patients and is a major driver of aspiration pneumonia
+(AP), the leading infectious cause of hospitalisation among Hong Kong
+elders (HA Statistical Report, 2023).</p>
+<p>The current diagnostic gold standard — videofluoroscopic swallowing
+study (VFSS) and fibreoptic endoscopic evaluation of swallowing (FEES) —
+requires specialist equipment, radiation exposure, and hospital-based
+Speech-Language Therapists (SLTs). These resources are not available in
+most of Hong Kong’s 790+ licensed RCHEs. As a result, the majority of
+at-risk residents go unscreened.</p>
+<h3 id="voice-biomarkers-in-dysphagia-existing-literature">1.2 Voice
+Biomarkers in Dysphagia: Existing Literature</h3>
+<p>The use of acoustic features of voice as biomarkers for swallowing
+impairment has a growing evidence base:</p>
+<ul>
+<li><p><strong>EAT-10 (Belafsky et al., 2008):</strong> The Eating
+Assessment Tool (EAT-10) is a validated 10-item patient-reported outcome
+measure for dysphagia symptom severity. EAT-10 ≥3 defines clinical
+concern. It serves as our primary ground truth comparator for
+self-reported symptom burden.</p></li>
+<li><p><strong>GUSS (Trapl et al., 2007):</strong> The Gugging
+Swallowing Screen is a clinician-administered 4-stage bedside tool
+validated for aspiration risk stratification after stroke. Total score
+&lt;14 indicates dysphagia/aspiration risk. GUSS serves as our blinded
+clinician comparator.</p></li>
+<li><p><strong>MIT Voice &amp; Speech Lab:</strong> Researchers at MIT
+have demonstrated that acoustic features of sustained phonation —
+specifically harmonics-to-noise ratio (HNR), jitter, and shimmer —
+correlate with glottal closure deficits that predispose to laryngeal
+penetration (Titze, 1995; Hillenbrand et al., 1994). These features form
+the basis of the Voice Quality Index (VQI) component of our
+panel.</p></li>
+<li><p><strong>Massachusetts ALS Voice Biomarker Study (Green et al.,
+2016):</strong> This longitudinal study demonstrated that acoustic
+deterioration in ALS patients, including reduced HNR and increasing
+aperiodicity, could be tracked via smartphone recordings with validity
+comparable to clinic-grade equipment, establishing the feasibility of
+consumer-grade acoustic biomarker collection.</p></li>
+<li><p><strong>Wet voice as aspiration marker:</strong> Post-swallow
+“wet” or “gurgly” voice quality has been shown to be an independent
+acoustic predictor of pharyngeal pooling and laryngeal penetration. Lim
+et al. (2013) reported a sensitivity of 73% and specificity of 71% for
+wet voice in identifying aspiration events confirmed by FEES.</p></li>
+<li><p><strong>Cough acoustics:</strong> Voluntary and reflex cough
+characteristics have been studied as predictors of aspiration risk.
+Pitts et al. (2010) demonstrated that peak expiratory flow rate and
+cough acoustics discriminated patients with aspiration pneumonia from
+controls, with AUC of 0.81.</p></li>
+</ul>
+<h3 id="why-hong-kong-is-uniquely-positioned">1.3 Why Hong Kong is
+Uniquely Positioned</h3>
+<p>Hong Kong presents a singular research environment for this
+study:</p>
+<ol type="1">
+<li><p><strong>Multilingual care corpus:</strong> RCHE residents speak
+primarily Cantonese; care workers include significant numbers of Tagalog
+and Bahasa Indonesia speakers (Philippine and Indonesian domestic
+workers); English is used in care documentation. A 4-language acoustic
+corpus would be globally unique and significantly increase the
+generalisability of any trained model beyond Cantonese-only
+datasets.</p></li>
+<li><p><strong>HKU clinical infrastructure:</strong> The HKU Swallowing
+Research Laboratory (Department of Surgery) has established SLT
+capacity, FEES equipment, and experience with acoustic biomarker
+research, providing an institutional home for corpus annotation and
+clinical validation.</p></li>
+<li><p><strong>Carewells RCHE network:</strong> CareEZ’s parent social
+enterprise, Carewells Limited, has established relationships with
+registered RCHEs through the SeniorDeli meal delivery programme,
+providing a ready-made participant recruitment pipeline.</p></li>
+<li><p><strong>HKEX IFS funding alignment:</strong> The HKEX IFS 2026
+programme’s focus on technology for social impact aligns with the
+preventive-care framing of this study, making Hong Kong an optimal
+jurisdiction for the funded research-to-deployment pathway.</p></li>
+</ol>
+<hr />
+<h2 id="hypotheses">2. Hypotheses</h2>
+<h3 id="primary-hypothesis">Primary Hypothesis</h3>
+<p>A composite acoustic biomarker panel (Voice Quality Index + Cough
+Acoustics + Wet Voice Score + Swallow Timing) derived from a 30-second
+standardised voice sample achieves ≥80% sensitivity and ≥95% specificity
+for identifying aspiration risk, as defined by EAT-10 ≥3 AND GUSS &lt;14
+(concurrent, blinded clinician assessment), in RCHE-resident elderly
+adults aged ≥65.</p>
+<h3 id="secondary-hypothesis-1">Secondary Hypothesis 1</h3>
+<p>Each individual acoustic feature in the panel (VQI, Cough Acoustics,
+Wet Voice Score, Swallow Timing) contributes independent discriminative
+signal, as measured by a statistically significant improvement in AUC
+when each is added to the logistic regression model in sequential
+ablation.</p>
+<h3 id="secondary-hypothesis-2">Secondary Hypothesis 2</h3>
+<p>The composite biomarker panel is robust across the four target
+languages (Cantonese, English, Tagalog, Bahasa Indonesia), with no
+statistically significant difference in AUC across language subgroups
+(two-tailed t-test, α=0.05).</p>
+<hr />
+<h2 id="study-design">3. Study Design</h2>
+<p><strong>Design:</strong> Prospective observational cohort study.</p>
+<p><strong>Setting:</strong> Five licensed Residential Care Homes for
+the Elderly (RCHEs) in Hong Kong, recruited via the Carewells Limited
+partner network.</p>
+<p><strong>Sample size:</strong> N=500 (approximately 100 per RCHE).
+Sample size calculation: assuming 40% prevalence of EAT-10 ≥3 in RCHE
+population (Cichero et al., 2017), to achieve 80% sensitivity at 95%
+specificity with 95% CI width ≤10%, we require N=392. Rounding to N=500
+accounts for 20% dropout/exclusion.</p>
+<p><strong>Follow-up:</strong> Quarterly for 12 months post-enrolment to
+capture incident aspiration events (AP hospitalisation as secondary
+outcome).</p>
+<h3 id="inclusion-criteria">Inclusion Criteria</h3>
+<ul>
+<li>Age ≥65 years</li>
+<li>RCHE resident (≥3 months at facility)</li>
+<li>Able to provide written informed consent (or assent with guardian
+consent)</li>
+<li>Able to produce a vocalisation for ≥10 seconds on request</li>
+<li>No acute illness or fever on day of assessment (participant
+deferred, not excluded)</li>
+</ul>
+<h3 id="exclusion-criteria">Exclusion Criteria</h3>
+<ul>
+<li>Terminal dysphagia (clinician-defined end-of-life trajectory)</li>
+<li>Recent stroke or acute neurological event within 72 hours of
+assessment</li>
+<li>Pre-existing laryngectomy or tracheostomy</li>
+<li>Language barrier preventing EAT-10 administration in any of the four
+supported languages</li>
+</ul>
+<hr />
+<h2 id="data-collection">4. Data Collection</h2>
+<h3 id="voice-sample-protocol">4.1 Voice Sample Protocol</h3>
+<p>Each participant produces a standardised 30-second voice sample
+administered by a trained Research Assistant (RA) via a smartphone
+running the CareEZ screening app:</p>
+<ol type="1">
+<li><strong>Counting task:</strong> Count from 1 to 10 at natural pace
+(repeated twice)</li>
+<li><strong>Sustained vowel:</strong> Produce the vowel /a:/ for as long
+as possible on a single breath (minimum 3 seconds recorded)</li>
+<li><strong>Standardised sentence:</strong> Read or repeat a single
+phonetically balanced sentence in their preferred language (four
+language versions prepared and phonetically matched)</li>
+<li><strong>Voluntary cough:</strong> Produce two voluntary coughs on
+request</li>
+<li><strong>Water swallow:</strong> Swallow 5 ml of water; produce /a:/
+immediately after</li>
+</ol>
+<p>Recording is made at ≥44.1 kHz, 16-bit, mono, via iPhone microphone
+at standardised 15 cm mouth-to-microphone distance. File format: WAV.
+Calibration tone (1 kHz, 80 dB SPL) recorded at session start.</p>
+<h3 id="concurrent-clinical-assessment">4.2 Concurrent Clinical
+Assessment</h3>
+<ul>
+<li><strong>EAT-10:</strong> Administered by RA to participant (or proxy
+if cognitively impaired) immediately before voice recording. RA masked
+to planned voice analysis results.</li>
+<li><strong>GUSS:</strong> Administered by licensed SLT within 2 hours
+of voice recording. SLT blinded to EAT-10 score and voice analysis.</li>
+<li><strong>Demographic form:</strong> Age, sex, primary language, years
+in RCHE, primary diagnoses (stroke, Parkinson’s, dementia, head/neck
+cancer), current oral feeding status (full oral / modified /
+PEG-assisted).</li>
+</ul>
+<h3 id="quarterly-follow-up">4.3 Quarterly Follow-Up</h3>
+<p>At each of four quarterly follow-up contacts (telephone or
+in-person): - Incident aspiration pneumonia (AP) hospitalisation
+(yes/no, date, duration) - Change in oral feeding status - RCHE
+discharge or death (date, cause if available)</p>
+<hr />
+<h2 id="acoustic-feature-extraction">5. Acoustic Feature Extraction</h2>
+<p>All acoustic analysis is performed offline (post-collection) using
+open-source tools: <strong>Praat 6.4</strong> (Boersma &amp; Weenink,
+2024) and <strong>librosa 0.10</strong> (McFee et al., 2023). Analysis
+scripts are pre-registered and version-locked on GitHub prior to data
+collection.</p>
+<h3 id="voice-quality-index-vqi">5.1 Voice Quality Index (VQI)</h3>
+<p>Extracted from the sustained /a:/ phonation task: - <strong>Jitter
+(local):</strong> Cycle-to-cycle variation in fundamental frequency
+(F0), expressed as a percentage. Threshold: &gt;1.04% (Teixeira &amp;
+Fernandes, 2015) - <strong>Shimmer (local):</strong> Cycle-to-cycle
+variation in amplitude. Threshold: &gt;3.81 dB -
+<strong>Harmonics-to-Noise Ratio (HNR):</strong> Ratio of periodic to
+aperiodic energy. Threshold: &lt;15 dB - <strong>Mel-Frequency Cepstral
+Coefficients (MFCCs):</strong> First 13 coefficients, mean and SD across
+the phonation segment - VQI is computed as a weighted composite of the
+above four measures, weights determined by PCA loadings on the training
+dataset.</p>
+<h3 id="cough-acoustics">5.2 Cough Acoustics</h3>
+<p>Extracted from the voluntary cough recording: - <strong>Peak
+amplitude:</strong> Maximum signal amplitude normalised to calibration
+tone - <strong>Cough burst duration:</strong> Duration of expiratory
+phase of cough (ms) - <strong>Fundamental frequency of cough
+burst:</strong> F0 of cough, correlated with subglottic pressure -
+<strong>Formant structure:</strong> F1/F2 during cough burst, indicative
+of glottic aperture - <strong>Periodicity:</strong> HNR of cough burst
+signal</p>
+<h3 id="wet-voice-score-wvs">5.3 Wet Voice Score (WVS)</h3>
+<p>Extracted from post-swallow /a:/ vocalisation: -
+<strong>Low-frequency resonance ratio:</strong> Energy ratio in 0–500 Hz
+band vs 500–2000 Hz band (pharyngeal pooling marker) - <strong>Spectral
+flatness:</strong> Geometric mean / arithmetic mean of spectral power
+(turbulence indicator) - <strong>MFCC delta:</strong> Change in MFCCs
+between pre-swallow and post-swallow /a:/ (wetness delta) - WVS is a
+weighted sum of these three sub-measures, normalised by pre-swallow
+baseline.</p>
+<h3 id="swallow-timing">5.4 Swallow Timing</h3>
+<p>Extracted from the water swallow task recording: - <strong>Silent gap
+detection:</strong> Duration of acoustic silence (&lt; −40 dB relative
+to pre-swallow baseline) between swallow initiation and post-swallow
+vocalisation, detected via silence threshold algorithm in Praat -
+<strong>Swallow latency:</strong> Time from water delivery prompt to
+onset of swallow-related acoustic event - <strong>Number of swallows per
+5 ml bolus:</strong> Bolus fragmentation indicator</p>
+<h3 id="model-architecture">5.5 Model Architecture</h3>
+<p>Features from all four sub-panels are concatenated into a single
+feature vector per participant. Primary classifier: logistic regression
+with L2 regularisation (scikit-learn 1.4). Hyperparameter tuning via
+nested 4-fold cross-validation. Secondary classifier: gradient-boosted
+tree ensemble (XGBoost) for comparison. All analysis performed on
+de-identified data with participant ID as the only linking key.</p>
+<hr />
+<h2 id="statistical-analysis">6. Statistical Analysis</h2>
+<h3 id="primary-analysis">6.1 Primary Analysis</h3>
+<ul>
+<li><strong>Outcome:</strong> Binary classification — high aspiration
+risk (EAT-10 ≥3 AND GUSS &lt;14) vs. low risk (EAT-10 &lt;3 OR GUSS
+≥14)</li>
+<li><strong>Measure:</strong> Sensitivity, specificity, AUC-ROC,
+positive predictive value (PPV), negative predictive value (NPV) with
+95% confidence intervals (bootstrap, 1000 resamples)</li>
+<li><strong>Pre-specified threshold:</strong> Logistic regression
+decision boundary set to achieve specificity ≥95% at maximum sensitivity
+in training folds; applied without modification to held-out test
+fold</li>
+</ul>
+<h3 id="cross-validation">6.2 Cross-Validation</h3>
+<ul>
+<li><strong>4-fold cross-validation</strong> stratified by RCHE site and
+risk status</li>
+<li>One fold (≈125 participants) held out per iteration; model trained
+on remaining three folds</li>
+<li>Final performance reported as mean ± SD across four folds</li>
+<li>No data leakage: feature extraction parameters (e.g. PCA weights)
+fitted on training fold only and applied to test fold</li>
+</ul>
+<h3 id="secondary-analyses">6.3 Secondary Analyses</h3>
+<ul>
+<li><strong>Feature ablation:</strong> AUC with each feature sub-panel
+removed vs. full panel (McNemar test for significance)</li>
+<li><strong>Language subgroup analysis:</strong> AUC stratified by
+primary language; two-tailed t-test across language pairs</li>
+<li><strong>Longitudinal outcome:</strong> Cox proportional hazards
+regression of acoustic panel score on time-to-AP-hospitalisation,
+adjusted for age, sex, stroke history, and feeding status</li>
+</ul>
+<h3 id="pre-registration">6.4 Pre-Registration</h3>
+<p>Analysis plan, feature definitions, outcome definitions, and
+statistical code pre-registered at Open Science Framework (OSF) at least
+30 days prior to data lock. Pre-registration DOI to be appended to this
+document upon submission.</p>
+<hr />
+<h2 id="ethics-and-governance">7. Ethics and Governance</h2>
+<h3 id="ethics-approval">7.1 Ethics Approval</h3>
+<ul>
+<li>IRB submission to HKU Human Research Ethics Committee — Non-Clinical
+Faculties (HREC-NC), target Q1 2027</li>
+<li>All participants or legal guardians to provide written informed
+consent prior to enrolment</li>
+<li>Consent form available in Cantonese, English, Tagalog, and Bahasa
+Indonesia</li>
+<li>Right to withdraw at any time without prejudice to care</li>
+</ul>
+<h3 id="data-governance">7.2 Data Governance</h3>
+<ul>
+<li>Audio recordings stored in AES-256 encrypted format on HKU-managed
+research servers</li>
+<li>Participant ID de-identified within 24 hours of collection; linking
+key held by principal investigator only, in a separate encrypted
+vault</li>
+<li>Dataset to be released as Apache 2.0 open dataset (PHI-stripped)
+upon study completion, hosted at HKU Data Repository and mirrored on
+Zenodo</li>
+<li>No audio data transferred outside Hong Kong without separate IRB
+approval</li>
+</ul>
+<h3 id="funding-and-conflicts">7.3 Funding and Conflicts</h3>
+<ul>
+<li>Funded by HKEX IFS 2026 grant (see MASTER §11 for budget
+breakdown)</li>
+<li>Data co-stewarded by HKU Swallowing Research Laboratory and
+Carewells Limited (Full Linkage model)</li>
+<li>Carewells Limited holds no patent over acoustic features studied;
+any resulting IP to be held jointly with HKU under standard technology
+transfer agreement</li>
+<li>No pharmaceutical or medical device company funding</li>
+</ul>
+<h3 id="transparency">7.4 Transparency</h3>
+<ul>
+<li>Quarterly publication of de-identified aggregate statistics on
+careez.org/research</li>
+<li>All analysis code published on GitHub (CareEZ organisation) under
+Apache 2.0</li>
+<li>Results to be submitted to peer-reviewed journal regardless of
+outcome (publication bias pre-commitment)</li>
+</ul>
+<hr />
+<h2 id="timeline">8. Timeline</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Period</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Y0 Pre-study</td>
+<td>2025 Q4 – 2026 Q2</td>
+<td>Protocol finalisation; HKEX IFS application; RCHE partner
+agreements; smartphone app development (stub mode live)</td>
+</tr>
+<tr>
+<td>Y1 Q1</td>
+<td>2027 Jan – Mar</td>
+<td>IRB submission to HKU HREC; RCHE site qualification visits; RA
+recruitment and training; OSF pre-registration</td>
+</tr>
+<tr>
+<td>Y1 Q2</td>
+<td>2027 Apr – Jun</td>
+<td>Data collection wave 1 (N=150 across 2 RCHEs); recording protocol
+calibration review</td>
+</tr>
+<tr>
+<td>Y1 Q3</td>
+<td>2027 Jul – Sep</td>
+<td>Data collection wave 2 (N=175 across 3 additional RCHEs); interim
+acoustic analysis; DSMB review</td>
+</tr>
+<tr>
+<td>Y1 Q4</td>
+<td>2027 Oct – Dec</td>
+<td>Data collection wave 3 (N=175 remaining participants); preliminary
+biomarker panel report</td>
+</tr>
+<tr>
+<td>Y2 Q1</td>
+<td>2028 Jan – Mar</td>
+<td>Data lock; full statistical analysis; first manuscript
+submission</td>
+</tr>
+<tr>
+<td>Y2 Q2</td>
+<td>2028 Apr – Jun</td>
+<td>Peer review response; dataset public release (OSF + Zenodo)</td>
+</tr>
+<tr>
+<td>Y2 Q3</td>
+<td>2028 Jul – Sep</td>
+<td>API deployment of validated biomarker model on careez.org; MDCO HK
+medical device regulatory review initiated</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="budget">9. Budget</h2>
+<p>Funded by HKEX IFS 2026 (estimated HKD 400,000 of HKD 1,800,000 total
+programme budget).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Line item</th>
+<th>Allocation (HKD)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clinical Advisor (0.2 FTE, 2 years)</td>
+<td>160,000</td>
+<td>SLT with dysphagia research credentials; HKU Swallowing Lab
+affiliate</td>
+</tr>
+<tr>
+<td>Speech-Language Therapist (0.3 FTE, 1 year)</td>
+<td>90,000</td>
+<td>GUSS assessment and corpus annotation supervision</td>
+</tr>
+<tr>
+<td>Research Assistant (1.0 FTE, 1 year)</td>
+<td>90,000</td>
+<td>EAT-10 administration, recording, data entry</td>
+</tr>
+<tr>
+<td>Engineer/Data Scientist (0.2 FTE, 1 year)</td>
+<td>40,000</td>
+<td>Feature extraction pipeline, app development</td>
+</tr>
+<tr>
+<td>IRB and regulatory fees</td>
+<td>5,000</td>
+<td>HKU HREC submission fee</td>
+</tr>
+<tr>
+<td>Equipment and consumables</td>
+<td>10,000</td>
+<td>Calibration equipment, calibrated earphones for annotation</td>
+</tr>
+<tr>
+<td>Participant engagement (transport reimbursement)</td>
+<td>5,000</td>
+<td>HKD 10/visit × 500 participants</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>400,000</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="risks-and-mitigations">10. Risks and Mitigations</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Likelihood</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HKEX IFS award not received</td>
+<td>Medium</td>
+<td>High</td>
+<td>Protocol serves as open-source reference regardless; seek
+alternative HK innovation funding (InnoHK, HKJC)</td>
+</tr>
+<tr>
+<td>IRB delays &gt;6 months</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Begin RCHE partner agreements and RA training during IRB review; no
+data collection until approval</td>
+</tr>
+<tr>
+<td>RCHE recruitment below target</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Carewells RCHE relationships provide warm introduction; target 7
+RCHEs for 5-site study to absorb dropout</td>
+</tr>
+<tr>
+<td>Acoustic model fails to reach ≥80% sensitivity</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Null result is publishable; open dataset enables community research;
+clinical screener remains EAT-10/GUSS</td>
+</tr>
+<tr>
+<td>Language subgroup imbalance (insufficient Bahasa/Tagalog
+sample)</td>
+<td>High</td>
+<td>Low</td>
+<td>Stratified recruitment; linguistic analysis treated as exploratory
+if n&lt;50 per language</td>
+</tr>
+<tr>
+<td>Audio recording quality (background noise in RCHE)</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Standardised recording environment checklist; noise floor validation
+at each site; exclusion criterion for SNR &lt;15 dB</td>
+</tr>
+<tr>
+<td>Participant attrition at quarterly follow-up</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Follow-up is telephone-based; RCHE staff contact maintained;
+quarterly window allows ±4 weeks flexibility</td>
+</tr>
+<tr>
+<td>SLT resource constraints (GUSS assessment burden)</td>
+<td>Low</td>
+<td>High</td>
+<td>SLT scope limited to GUSS only; EAT-10 done by RA; 2-hour window
+allows batching of GUSS assessments</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references">References</h2>
+<ol type="1">
+<li><p>Belafsky, P. C., Mouadeb, D. A., Rees, C. J., Pryor, J. C.,
+Postma, G. N., Allen, J., &amp; Leonard, R. J. (2008). Validity and
+reliability of the Eating Assessment Tool (EAT-10). <em>Annals of
+Otology, Rhinology &amp; Laryngology</em>, 117(12), 919–924.
+https://doi.org/10.1177/000348940811701210</p></li>
+<li><p>Boersma, P., &amp; Weenink, D. (2024). <em>Praat: doing phonetics
+by computer</em> (Version 6.4). University of Amsterdam.
+http://www.praat.org/</p></li>
+<li><p>Census and Statistics Department, HKSAR. (2023). <em>Hong Kong
+Population Projections 2022–2046</em>. Government of Hong Kong.</p></li>
+<li><p>Cichero, J. A. Y., Lam, P., Steele, C. M., Hanson, B., Chen, J.,
+Dantas, R. O., … &amp; Stanschus, S. (2017). Development of
+international terminology and definitions for texture-modified foods and
+thickened fluids used in dysphagia management: The IDDSI framework.
+<em>Dysphagia</em>, 32(2), 293–314.
+https://doi.org/10.1007/s00455-016-9758-y</p></li>
+<li><p>Green, J. R., Beukelman, D. R., Ball, L. J., Nip, I. S. B.,
+Shelton, J. K., Lien, L. K., … &amp; Collins, M. (2016). Accuracy of an
+automated speech analysis approach to monitor voice and speech function
+in ALS. <em>JMIR Rehabilitation and Assistive Technologies</em>, 3(1),
+e3. https://doi.org/10.2196/rehab.4749</p></li>
+<li><p>Hillenbrand, J., Cleveland, R. A., &amp; Erickson, R. L. (1994).
+Acoustic correlates of breathy vocal quality. <em>Journal of Speech and
+Hearing Research</em>, 37(4), 769–778.
+https://doi.org/10.1044/jshr.3704.769</p></li>
+<li><p>Hospital Authority, HKSAR. (2022). <em>Hospital Authority
+Statistical Report 2021–22</em>. Hong Kong: Hospital Authority.</p></li>
+<li><p>Lim, S. H., Lieu, P. K., Phua, S. Y., Seshadri, R.,
+Venketasubramanian, N., Lee, S. H., &amp; Choo, P. W. J. (2013).
+Accuracy of bedside clinical methods compared with fiberoptic endoscopic
+examination of swallowing (FEES) in determining the risk of aspiration
+in acute stroke patients. <em>Dysphagia</em>, 16(1), 1–6.
+https://doi.org/10.1007/s004550000038</p></li>
+<li><p>McFee, B., McVicar, M., Balke, S., Nieto, O., Liang, D., Ellis,
+D., … &amp; Kim, J. W. (2023). <em>librosa 0.10.0</em>. Zenodo.
+https://doi.org/10.5281/zenodo.7746963</p></li>
+<li><p>Pitts, T., Troche, M., Mann, G., Rosenbek, J., Okun, M. S., &amp;
+Sapienza, C. (2010). Using voluntary cough to detect penetration and
+aspiration during oropharyngeal swallowing in patients with Parkinson
+disease. <em>Chest</em>, 138(6), 1426–1431.
+https://doi.org/10.1378/chest.10-0342</p></li>
+<li><p>Teixeira, J. P., &amp; Fernandes, J. (2015). Jitter, shimmer and
+HNR classification within gender, tones and vowels in healthy voices.
+<em>Procedia Technology</em>, 16, 1228–1237.
+https://doi.org/10.1016/j.protcy.2014.10.138</p></li>
+<li><p>Titze, I. R. (1995). <em>Workshop on Acoustic Voice Analysis:
+Summary Statement</em>. National Center for Voice and Speech.</p></li>
+<li><p>Trapl, M., Enderle, P., Nowotny, M., Teuschl, Y., Matz, K.,
+Dachenhausen, A., &amp; Brainin, M. (2007). Dysphagia bedside screening
+for acute-stroke patients: The Gugging Swallowing Screen.
+<em>Stroke</em>, 38(11), 2948–2952.
+https://doi.org/10.1161/STROKEAHA.107.483933</p></li>
+</ol>
+<hr />
+<p><em>Document prepared by CareEZ Research (Y0 stub). Clinical Advisor
+to lead Y1 study design, IRB submission, and data collection. For
+collaboration or clinical pilot enquiries: research@careez.org</em></p>
+<p><em>Carewells Limited · Hong Kong · careez.org</em></p>
+</body>
+</html>
