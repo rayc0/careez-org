@@ -1,0 +1,10 @@
+{
+  "generated": "static-stub",
+  "note": "Live status is fetched client-side by the status page JS. This file is a placeholder.",
+  "endpoints": {
+    "text": { "name": "IDDSI Text Classification", "url": "https://www.seniordeli.com/api/iddsi-classify", "status": "unknown" },
+    "image": { "name": "IDDSI Image Classification", "url": "https://www.seniordeli.com/api/iddsi-classify-image", "status": "unknown" },
+    "voice": { "name": "Voice Aspiration Screen", "url": "https://www.seniordeli.com/api/voice-aspiration-screen", "status": "unknown" },
+    "audio": { "name": "IDDSI Audio Classification", "url": "https://www.seniordeli.com/api/iddsi-classify-audio", "status": "unknown" }
+  }
+}

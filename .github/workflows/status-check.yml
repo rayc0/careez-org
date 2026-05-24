@@ -1,0 +1,120 @@
+name: API Status Check
+
+on:
+  schedule:
+    # Every 5 minutes
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Ping endpoints & update data.json
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ping all CareEZ API endpoints
+        id: ping
+        run: |
+          set -e
+          NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+          ping_endpoint() {
+            local id="$1"
+            local name="$2"
+            local url="$3"
+            local body="$4"
+
+            local start end latency http_code status
+
+            start=$(date +%s%3N)
+            http_code=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X POST "$url" \
+              -H "Content-Type: application/json" \
+              -d "$body" \
+              --max-time 10 \
+              --connect-timeout 5 \
+              2>/dev/null || echo "000")
+            end=$(date +%s%3N)
+            latency=$((end - start))
+
+            if [[ "$http_code" == "000" ]]; then
+              status="down"
+            elif [[ "$http_code" -lt 500 ]]; then
+              if [[ $latency -gt 5000 ]]; then
+                status="slow"
+              else
+                status="up"
+              fi
+            else
+              status="down"
+            fi
+
+            echo "{\"id\":\"$id\",\"name\":\"$name\",\"url\":\"$url\",\"status\":\"$status\",\"latency_ms\":$latency,\"http_code\":\"$http_code\",\"checked_at\":\"$NOW\"}"
+          }
+
+          TEXT=$(ping_endpoint "text" "IDDSI Text Classification" \
+            "https://www.seniordeli.com/api/iddsi-classify" \
+            '{"text":"status check"}')
+
+          IMAGE=$(ping_endpoint "image" "IDDSI Image Classification" \
+            "https://www.seniordeli.com/api/iddsi-classify-image" \
+            '{"image_url":"https://careez.org/og-image.png"}')
+
+          VOICE=$(ping_endpoint "voice" "Voice Aspiration Screen" \
+            "https://www.seniordeli.com/api/voice-aspiration-screen" \
+            '{"audio_url":""}')
+
+          AUDIO=$(ping_endpoint "audio" "IDDSI Audio Classification" \
+            "https://www.seniordeli.com/api/iddsi-classify-audio" \
+            '{"audio_url":""}')
+
+          python3 - <<PYEOF
+          import json
+
+          results = [
+              $TEXT,
+              $IMAGE,
+              $VOICE,
+              $AUDIO,
+          ]
+
+          by_id = {r["id"]: r for r in results}
+          up_count = sum(1 for r in results if r["status"] == "up")
+          slow_count = sum(1 for r in results if r["status"] == "slow")
+          down_count = sum(1 for r in results if r["status"] == "down")
+
+          if down_count > 0:
+              overall = "degraded"
+          elif slow_count > 0:
+              overall = "slow"
+          else:
+              overall = "operational"
+
+          data = {
+              "generated": "$NOW",
+              "overall": overall,
+              "summary": {"up": up_count, "slow": slow_count, "down": down_count},
+              "endpoints": by_id,
+          }
+
+          with open("status/data.json", "w") as f:
+              json.dump(data, f, indent=2)
+
+          print(f"Overall: {overall} | up={up_count} slow={slow_count} down={down_count}")
+          PYEOF
+
+      - name: Commit updated data.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add status/data.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: status check $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
