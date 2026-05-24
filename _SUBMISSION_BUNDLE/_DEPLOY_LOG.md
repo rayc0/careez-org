@@ -1,5 +1,69 @@
 # careez-org Deploy Log
 
+## 2026-05-25 HKT — Cloudflare Web Analytics + RUM enabled
+
+**Task:** Enable CF Web Analytics + Real User Monitoring on careez.org, demo.careez.org, softmeal.org.
+
+**Method:** Two-layer approach:
+1. CF Pages project `build_config.web_analytics_tag` set to `"auto"` via API (account `2c4fde...`) — CF edge-injects beacon on every response.
+2. Beacon script tag also injected manually into `<head>` of each site's HTML as belt-and-suspenders fallback.
+
+**CF Pages project IDs:**
+- `careez-org` → `2b7b4567-5101-4809-8bb0-367e320740e8` (careez.org, www.careez.org)
+- `careez-demo` → `74f6e270-1640-4726-8955-f93c511d6252` (demo.careez.org)
+- `softmeal-org` → `bb43ec2f-66ef-4af2-91fd-3f8d2f5223e9` (softmeal.org)
+
+**Site tags:** Using `"auto"` token (CF Pages auto-provisioned). To get explicit RUM site_tag UUIDs: CF dashboard → each Pages project → Web Analytics → copy token. Replace `"auto"` in HTML `<head>` with the real UUID.
+
+**Token permission note:** The token at `~/.raymond/cloudflare.env` has CF Pages scope only. CF RUM API (`/rum/site_info`) requires `Account Analytics:Edit` permission. Current token cannot create explicit RUM sites via API. CF Pages `"auto"` mode handles this at the edge.
+
+**Files changed:**
+- `careez-org/index.html` — beacon added to `<head>` (line ~791)
+- `careez-demo/index.html` — beacon added to `<head>` (line 8)
+- `softmeal-org/src/layouts/BaseLayout.astro` — beacon added to `<head>` (line ~217)
+
+**Verification post-deploy:**
+- careez.org: `curl https://careez.org/ | grep cloudflareinsights` → 1+ match ✅ (CF edge injection live)
+- demo.careez.org: pending fresh deploy
+- softmeal.org: pending fresh deploy (Astro build required)
+
+## 2026-05-25 01:05 HKT — seniordeli.com/[locale]/careez full landing page
+
+**Task:** Replace rename-banner stub at seniordeli.com/en/careez with a full CareEZ landing page for judges.
+
+**Repo:** `rayc0/seniordeli-website` (Next.js + next-intl, CF Pages)
+
+**Files changed:**
+- `src/app/[locale]/careez/page.tsx` — full replacement (rename-banner gone)
+- `messages/en.json` / `zh-HK.json` / `zh-CN.json` — CareEZPage namespace updated
+
+**Sections added:**
+1. Hero: "Multimodal clinical AI for dysphagia / 照護食 standard adoption. Built on HKCSS 護食標準 + IDDSI." + dual CTAs (Try Live → /api docs, Visit careez.org)
+2. Live demo widget (inline): text classifier + image upload + voice aspiration screen — calls /api/iddsi-classify, /api/iddsi-classify-image, /api/voice-aspiration-screen
+3. Why CareEZ — 3 pillars: Multilingual (Cantonese/English/Tagalog/Bahasa), Clinical Safety Bias (over-refer), Governance Inversion (HKU + s.88 Full Linkage)
+4. Live endpoints panel: 3 API URLs with curl examples + JSON-LD SoftwareApplication schema
+5. Linked resources footer: careez.org, demo.careez.org, softmeal.org, dysphagia.cn
+
+**Commits:**
+- `41765bc` feat(careez): replace rename-banner stub with full CareEZ landing page
+- `7b6e1a7` i18n(ja): add CareEZPage translations to unblock build (concurrent session)
+- `af3101c` fix(careez): replace JSX event handlers with vanilla-JS DOMContentLoaded wiring (concurrent session — Server Component constraint fix)
+
+**GH Actions run:** https://github.com/rayc0/seniordeli-website/actions/runs/26367336086
+**Status:** ✅ Cloudflare Pages Deploy success (4m20s)
+
+**Verification (2026-05-25 01:05 HKT):**
+```
+curl -s https://seniordeli.com/en/careez | grep -c "Multimodal clinical AI" → 5 ✅
+HKCSS 護食標準: ✅
+IDDSI: ✅
+iddsi-classify endpoint in page: ✅
+voice-aspiration-screen in page: ✅
+careez.org external link: ✅
+softmeal.org / dysphagia.cn: ✅
+Clinical Safety Bias pillar: ✅
+```
+
 ## 2026-05-25 01:01 HKT — /status/ page deployed
 
 **Task:** Public status page at careez.org/status/ showing live ping status of all 4 CareEZ API endpoints.
