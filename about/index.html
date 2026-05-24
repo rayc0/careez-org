@@ -55,7 +55,18 @@
       --yellow: #FFD43B; --green: #4CAF50;
       --accent-bar: 5px; --max-w: 1100px; --r: 6px;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
     body {
       background-color: var(--navy); color: var(--white);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -166,7 +177,7 @@
       border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r);
       border-top: 3px solid var(--cyan);
     }
-    .why-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .why-card h3, .why-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
     .why-card p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 0; }
     /* Footer */
     footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
@@ -196,9 +207,11 @@
 </head>
 <body>
 
-  <nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
-      <a class="nav-brand" href="/">Care<span>EZ</span></a>
+      <a class="nav-brand" aria-label="CareEZ home" href="/">Care<span aria-hidden="true">EZ</span></a>
       <ul class="nav-links">
         <li><a href="/about/" class="active">About</a></li>
         <li><a href="/team/">Team</a></li>
@@ -212,6 +225,8 @@
       </ul>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- Page Hero -->
   <section class="page-hero">
@@ -439,19 +454,19 @@
 
       <div class="why-grid">
         <div class="why-card">
-          <h4>Multilingual at marginal cost</h4>
+          <h3>Multilingual at marginal cost</h3>
           <p>LLM-based classification runs at under HK$0.50 per carer session. Reaching 150,000 caregivers in Year 2 costs under HK$75,000 in incremental AI inference — roughly 1/10th the cost of classroom-equivalent training per carer.</p>
         </div>
         <div class="why-card">
-          <h4>HKCSS standard is ready</h4>
+          <h3>HKCSS standard is ready</h3>
           <p>The 照護食 clinical standard, product directory, and institutional partnerships are fully built. CareEZ does not need to create the clinical content — it routes carers to what already exists, in their language.</p>
         </div>
         <div class="why-card">
-          <h4>WhatsApp is already in every FDH's pocket</h4>
+          <h3>WhatsApp is already in every FDH's pocket</h3>
           <p>No app install required. No Cantonese literacy required. No workplace leave required. The delivery channel for the world's largest carer cohort is already deployed — CareEZ meets carers where they are.</p>
         </div>
         <div class="why-card">
-          <h4>Co-governance is structurally possible</h4>
+          <h3>Co-governance is structurally possible</h3>
           <p>HKU Swallowing Research Laboratory and Full Linkage Community Care Association (s.88 charity) provide the clinical and data-governance anchors that make a public-asset commitment credible and auditable.</p>
         </div>
       </div>
@@ -520,6 +535,8 @@
       </div>
     </div>
   </footer>
+
+  </main><!-- /#main-content -->
 
 </body>
 </html>

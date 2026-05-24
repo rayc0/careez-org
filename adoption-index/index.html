@@ -118,7 +118,18 @@
       --r:       6px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body { overflow-x: hidden; }
 
     body {
       background-color: var(--navy);
@@ -828,8 +839,10 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ─── Navigation ─── -->
-  <nav>
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
       <div class="nav-brand">
         <a href="/" class="nav-back">&#8592; Care<span>EZ</span></a>
@@ -844,6 +857,8 @@
       </ul>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- ─── Hero ─── -->
   <section id="hero">
@@ -1359,6 +1374,8 @@
       </div>
     </div>
   </footer>
+
+  </main><!-- /#main-content -->
 
 </body>
 </html>

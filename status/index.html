@@ -28,11 +28,13 @@
       --card-bg: #0E1C3A;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--navy);
       color: var(--white);
       min-height: 100vh;
+      overflow-x: hidden;
     }
     nav {
       background: rgba(10,20,40,0.95);
@@ -264,7 +266,9 @@
 </head>
 <body>
 
-<nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
   <div class="nav-inner">
     <a href="/" class="nav-brand">Care<span>EZ</span></a>
     <ul class="nav-links">
@@ -275,6 +279,8 @@
     </ul>
   </div>
 </nav>
+
+  <main id="main-content">
 
 <div class="container">
   <div class="page-header">
@@ -755,5 +761,7 @@ resetCountdown();
 fetchDataJson(); // load last server-side result immediately
 checkAll();      // then do live client-side check
 </script>
+  </main><!-- /#main-content -->
+
 </body>
 </html>

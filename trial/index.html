@@ -39,7 +39,16 @@
       --r:       6px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
 
     body {
       background-color: var(--navy);
@@ -208,13 +217,14 @@
       font-size: 15px;
       padding: 11px 14px;
       width: 100%;
-      outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
       appearance: none;
       -webkit-appearance: none;
     }
     input::placeholder, textarea::placeholder { color: var(--gray2); }
     input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
       border-color: var(--cyan);
       box-shadow: 0 0 0 3px rgba(0,229,255,0.12);
     }
@@ -323,6 +333,9 @@
     footer a:hover { color: var(--gray); }
 
     /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
     @media (max-width: 600px) {
       .form-grid { grid-template-columns: 1fr; }
       .form-card { padding: 28px 20px; }
@@ -337,16 +350,22 @@
 </head>
 <body>
 
+  <!-- ─── Skip navigation ─── -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ─── Navigation ─── -->
-  <nav>
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
-      <a class="nav-brand" href="/">Care<span>EZ</span></a>
+      <a class="nav-brand" href="/" aria-label="CareEZ home">Care<span aria-hidden="true">EZ</span></a>
       <a class="nav-back" href="/">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg>
         Back to main site
       </a>
     </div>
   </nav>
+
+  <!-- ─── Main content ─── -->
+  <main id="main-content">
 
   <!-- ─── Hero ─── -->
   <div class="page-hero">
@@ -609,6 +628,8 @@
       });
     })();
   </script>
+
+  </main><!-- /#main-content -->
 
 </body>
 </html>
