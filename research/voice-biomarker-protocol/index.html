@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Biomarker Research Protocol — CareEZ / Carewells Limited</title>
+  <meta name="description" content="CareEZ voice biomarker research programme: acoustic detection of aspiration risk, swallowing safety, and dysphagia screening. HKEX IFS 2026 funded, Y1-Y2 milestone." />
+  <link rel="canonical" href="https://careez.org/research/voice-biomarker-protocol" />
+
+  <style>
+    :root {
+      --primary: #1a6b4a;
+      --accent:  #e8f5ee;
+      --text:    #1a1a2e;
+      --muted:   #5a6a72;
+      --border:  #c9d8cf;
+      --warn:    #7a3c00;
+      --warn-bg: #fff3e0;
+      --font: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: #f8faf9;
+      line-height: 1.65;
+      padding: 0 1rem 4rem;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 2rem 1rem 1.5rem;
+      text-align: center;
+    }
+    header .logo { font-size: 0.85rem; letter-spacing: .12em; opacity: .75; margin-bottom: .5rem; }
+    header h1 { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; }
+    header p  { margin-top: .5rem; font-size: .95rem; opacity: .85; }
+
+    .container { max-width: 820px; margin: 0 auto; }
+
+    .badge {
+      display: inline-block;
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid #f0c080;
+      border-radius: 6px;
+      padding: .35rem .8rem;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      margin: 1.5rem 0 .5rem;
+    }
+
+    section { margin: 2.5rem 0; }
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: .4rem;
+      margin-bottom: 1rem;
+    }
+    h3 { font-size: 1rem; font-weight: 600; margin: 1.2rem 0 .4rem; }
+    p  { margin-bottom: .8rem; color: var(--muted); }
+    p strong { color: var(--text); }
+
+    ul, ol { padding-left: 1.4rem; margin-bottom: .8rem; color: var(--muted); }
+    li { margin-bottom: .3rem; }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .card-title { font-weight: 700; color: var(--primary); font-size: .95rem; margin-bottom: .3rem; }
+    .card p { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+      margin: 1rem 0;
+    }
+    th {
+      background: var(--accent);
+      color: var(--primary);
+      font-weight: 700;
+      padding: .6rem .8rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    td {
+      padding: .55rem .8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    td:first-child { font-weight: 600; color: var(--text); }
+    tr:nth-child(even) td { background: #f4f9f6; }
+
+    .endpoint-box {
+      background: #0f2027;
+      color: #8be47a;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: .85rem;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin: .8rem 0;
+      overflow-x: auto;
+    }
+    .endpoint-box .method { color: #ffd580; }
+    .endpoint-box .url    { color: #82d9ff; }
+
+    .disclaimer {
+      background: var(--warn-bg);
+      border: 1px solid #f0c080;
+      border-left: 4px solid #f0a000;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      font-size: .88rem;
+      color: var(--warn);
+      margin: 1.5rem 0;
+    }
+
+    footer {
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+    a { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CAREEZ · CAREWELLS LIMITED · RESEARCH</div>
+  <h1>Voice Biomarker Research Protocol</h1>
+  <p>Acoustic detection of aspiration risk and dysphagia screening — HKEX IFS 2026 funded programme</p>
+</header>
+
+<div class="container">
+
+  <div class="badge">RESEARCH-STAGED — Not for clinical use</div>
+
+  <section>
+    <h2>Overview</h2>
+    <p>
+      CareEZ is developing a <strong>non-invasive, audio-based dysphagia screening module</strong>
+      that analyses voice and swallowing sounds to detect biomarkers associated with aspiration risk.
+      This page documents the research design, planned biomarker panel, and current integration status
+      under the HKEX IFS 2026 funded programme.
+    </p>
+    <p>
+      The voice biomarker module complements the existing
+      <a href="https://www.seniordeli.com/api/iddsi-classify-image">Snap-to-IDDSI vision classifier</a>
+      and <a href="https://www.seniordeli.com/api/voice-aspiration-screen">EAT-10 symptom screener</a>
+      to form a multimodal dysphagia risk pipeline.
+    </p>
+  </section>
+
+  <section>
+    <h2>Research Rationale</h2>
+    <p>
+      Silent aspiration — food or liquid entering the airway without triggering cough — affects an estimated
+      <strong>40–70% of post-stroke patients</strong> and up to <strong>50% of nursing home residents</strong>
+      in Hong Kong (Cichero et al., 2017; HKCSS Care-Food White Paper, 2023). Current gold-standard assessment
+      (VFSS / FEES) requires specialist equipment and hospital access, creating a diagnostic gap in
+      community and residential care settings.
+    </p>
+    <p>
+      Acoustic biomarkers derived from voice and swallowing sounds offer a low-cost, non-invasive
+      first-line screening pathway that can be administered via smartphone.
+    </p>
+  </section>
+
+  <section>
+    <h2>Planned Biomarker Panel</h2>
+
+    <div class="card">
+      <div class="card-title">1. Voice Quality Index (VQI)</div>
+      <p>
+        Mel-spectrogram analysis of sustained phonation (/a/, /i/) to detect jitter, shimmer,
+        and harmonics-to-noise ratio (HNR) changes associated with laryngeal pathology and
+        reduced glottic closure — a predictor of penetration/aspiration events.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">2. Swallow Count &amp; Timing</div>
+      <p>
+        Acoustic event detection of cervical auscultation sounds during swallowing trials
+        (standardised water swallow test protocol). Counts swallow events and measures
+        swallow latency as proxy for pharyngeal phase delay.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">3. Cough Acoustics</div>
+      <p>
+        Classification of voluntary vs. reflexive cough signatures. Absent or attenuated
+        cough reflex is a known aspiration risk factor. Cough peak expiratory flow proxies
+        derived from microphone signal amplitude.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">4. Wet Voice Score (WVS)</div>
+      <p>
+        Spectral analysis of post-swallow vocalisation for formant turbulence and low-frequency
+        resonance patterns associated with pharyngeal pooling and laryngeal penetration
+        ("wet/gurgly" voice quality). Validated against FEES findings in published literature.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Programme Timeline (HKEX IFS 2026)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Period</th>
+          <th>Milestone</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pre-study</td>
+          <td>2025 Q4 – 2026 Q1</td>
+          <td>IRB application; recording protocol finalisation; pilot microphone calibration study (n=20)</td>
+          <td>Planning</td>
+        </tr>
+        <tr>
+          <td>Y1 — Data Collection</td>
+          <td>2026 Q2 – 2026 Q4</td>
+          <td>Recruit 150 participants (50 healthy controls, 50 dysphagia mild-moderate, 50 severe); FEES-correlated audio corpus; annotation pipeline</td>
+          <td>Planned</td>
+        </tr>
+        <tr>
+          <td>Y1 — Model Training</td>
+          <td>2026 Q3 – 2027 Q1</td>
+          <td>Train convolutional + attention-based classifier on annotated corpus; internal validation; benchmark against EAT-10 AUC</td>
+          <td>Planned</td>
+        </tr>
+        <tr>
+          <td>Y2 — Clinical Pilot</td>
+          <td>2027 Q1 – 2027 Q3</td>
+          <td>Prospective pilot (n=100) in 2 HK residential care homes; SLP-concurrent assessment; sensitivity / specificity vs. VFSS ground truth</td>
+          <td>Planned</td>
+        </tr>
+        <tr>
+          <td>Y2 — API Integration</td>
+          <td>2027 Q2 – 2027 Q4</td>
+          <td>Replace stub endpoint with live inference; regulatory review (MDCO HK); commercial deployment planning</td>
+          <td>Planned</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Current Integration Status</h2>
+    <p>
+      To validate the <strong>clinical workflow integration</strong> (upload path, CORS handling,
+      content-type negotiation, file-size limits) before the acoustic model is trained,
+      CareEZ has shipped a <strong>live stub endpoint</strong> at:
+    </p>
+
+    <div class="endpoint-box">
+      <span class="method">POST</span>
+      <span class="url"> https://www.seniordeli.com/api/iddsi-classify-audio</span>
+    </div>
+
+    <p>
+      The stub accepts <code>multipart/form-data</code> (field: <code>audio</code>) or
+      <code>application/json</code> (field: <code>audio_base64</code>), validates content type
+      (mp3, m4a, wav, ogg, webm), enforces a 10 MB limit, and returns a structured
+      <code>research_staged: true</code> response with the planned biomarker panel keys
+      set to <code>"research-pending"</code>.
+    </p>
+    <p>
+      This pattern — ship the contract first, fill in the model later — follows
+      API-first design and allows frontend/clinical-IT integration to begin before
+      the acoustic model exits the training pipeline.
+    </p>
+
+    <h3>Sample response</h3>
+    <div class="endpoint-box" style="color:#e2e8f0;">
+{
+  "research_staged": true,
+  "audio_mode": "metadata-stub",
+  "audio_received_bytes": 10240,
+  "duration_seconds_estimate": null,
+  "biomarker_panel": {
+    "voice_quality":   "research-pending",
+    "swallow_count":   "research-pending",
+    "cough_count":     "research-pending",
+    "wet_voice_score": "research-pending"
+  },
+  "stub_disclosure": "...",
+  "recommendation": "For aspiration risk screening today, use /api/voice-aspiration-screen",
+  "research_protocol_url": "https://careez.org/research/voice-biomarker-protocol"
+}
+    </div>
+  </section>
+
+  <section>
+    <h2>Screening Available Today</h2>
+    <p>While acoustic biomarker analysis is research-staged, clinicians and care workers can use:</p>
+    <ul>
+      <li>
+        <strong><a href="https://www.seniordeli.com/api/voice-aspiration-screen">POST /api/voice-aspiration-screen</a></strong>
+        — Validated EAT-10 symptom-flag screener (live, no API key required)
+      </li>
+      <li>
+        <strong><a href="https://www.seniordeli.com/api/iddsi-classify-image">POST /api/iddsi-classify-image</a></strong>
+        — Snap-to-IDDSI food texture classifier via Claude Vision (live, prototype)
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ethics &amp; Safety Commitments</h2>
+    <ul>
+      <li>All data collection subject to IRB approval (target: HKU / CUHK ethics committee)</li>
+      <li>Audio recordings stored encrypted; de-identified before annotation</li>
+      <li>No diagnostic output produced until prospective clinical validation is complete</li>
+      <li>Model will be benchmarked against VFSS / FEES ground truth before any deployment</li>
+      <li>MDCO Hong Kong medical device regulatory pathway review planned for Y2</li>
+    </ul>
+  </section>
+
+  <div class="disclaimer">
+    <strong>Research disclaimer:</strong> This programme is at the data-collection and model-design
+    stage. The stub API endpoint does not perform any acoustic analysis. No output from this
+    system constitutes medical advice or clinical diagnosis. All clinical decisions must be made
+    by a qualified speech-language pathologist following a formal swallowing assessment.
+    Programme milestones are subject to HKEX IFS 2026 funding approval and IRB clearance.
+  </div>
+
+  <section>
+    <h2>Contact</h2>
+    <p>
+      For collaboration inquiries, research data sharing agreements, or clinical pilot participation:
+      <strong>research@careez.org</strong>
+    </p>
+    <p>
+      Carewells Limited · Hong Kong · Social Enterprise Registration pending
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <p>CareEZ · Carewells Limited · &copy; 2026</p>
+  <p style="margin-top:.3rem;">
+    <a href="https://careez.org">careez.org</a> &nbsp;|&nbsp;
+    <a href="https://www.seniordeli.com">seniordeli.com</a> &nbsp;|&nbsp;
+    <a href="https://iddsi.org/framework">IDDSI Framework v2</a>
+  </p>
+</footer>
+
+</body>
+</html>
