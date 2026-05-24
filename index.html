@@ -157,6 +157,23 @@
 
     html { scroll-behavior: smooth; }
 
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: var(--cyan);
+      color: var(--navy);
+      font-weight: 700;
+      padding: 8px 16px;
+      z-index: 9999;
+      border-radius: 0 0 4px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
     body {
       background-color: var(--navy);
       color: var(--white);
@@ -818,14 +835,18 @@
 </head>
 <body>
 
+  <!-- ─── Skip navigation ─── -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ─── Navigation ─── -->
-  <nav>
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
-      <a class="nav-brand" href="/" style="text-decoration:none;color:inherit;">Care<span>EZ</span></a>
+      <a class="nav-brand" href="/" aria-label="CareEZ home" style="text-decoration:none;color:inherit;">Care<span aria-hidden="true">EZ</span></a>
       <ul class="nav-links">
         <li><a href="/about/">About</a></li>
         <li><a href="/team/">Team</a></li>
         <li><a href="/governance/">Governance</a></li>
+        <li><a href="/partners/">Partners</a></li>
         <li><a href="/standards/">Standards</a></li>
         <li><a href="#programmes">Programmes</a></li>
         <li><a href="#live-api">Live API</a></li>
@@ -838,6 +859,9 @@
       </ul>
     </div>
   </nav>
+
+  <!-- ─── Main content ─── -->
+  <main id="main-content">
 
   <!-- ─── Hero ─── -->
   <section id="hero">
@@ -937,7 +961,7 @@
       <!-- SeniorDeli Card -->
       <div class="prog-card">
         <div class="prog-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan)"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan)" aria-hidden="true" focusable="false"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
         </div>
         <div class="prog-sub">Care Food &middot; 照護食</div>
         <h3>SeniorDeli</h3>
@@ -964,7 +988,7 @@
       <!-- AI Programme Card -->
       <div class="prog-card card-ai">
         <div class="prog-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--yellow)"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--yellow)" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         </div>
         <div class="prog-sub">Point-of-Care AI</div>
         <h3>Swallowing Safety AI</h3>
@@ -1186,11 +1210,12 @@
       font-family: inherit;
       padding: 10px 14px;
       resize: vertical;
-      outline: none;
       transition: border-color 0.2s;
       line-height: 1.6;
     }
     .try-card textarea:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
       border-color: rgba(0,229,255,0.45);
     }
     .try-btn {
@@ -1621,6 +1646,8 @@
       Contact: Karen Chan &middot; Raymond Chau &middot; Abellona U
     </div>
   </section>
+
+  </main><!-- /#main-content -->
 
   <!-- ─── Footer ─── -->
   <footer>
