@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+  CareEZ Social Card — WhatsApp Status (1080x1920)
+  Render: google-chrome --headless=new --window-size=1080,1920 --screenshot=out.png whatsapp-1080x1920.html
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+  --cyan: #00E5FF; --cyan2: #29B6F6;
+  --white: #FFFFFF; --gray: #B0BEC5;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  width: 1080px; height: 1920px;
+  background: var(--navy); color: var(--white); overflow: hidden;
+}
+.card {
+  width: 1080px; height: 1920px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 100px 80px;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 50%, var(--navy) 100%);
+  position: relative;
+}
+.glow-top {
+  position: absolute; top: 200px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.glow-bot {
+  position: absolute; bottom: 200px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(41,182,246,0.04) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.icon-wrap {
+  width: 200px; height: 175px; margin: 0 auto 70px;
+  border: 10px solid var(--cyan);
+  border-right: none;
+  border-radius: 20px 0 0 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.check { font-size: 90px; color: var(--cyan); font-weight: 900; }
+.logo  { font-size: 130px; font-weight: 900; letter-spacing: -4px; margin-bottom: 36px; line-height: 1; }
+.care  { color: var(--white); }
+.ez    { color: var(--cyan); }
+.accent-bar {
+  width: 280px; height: 7px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+  margin: 0 auto 70px;
+}
+.title   { font-size: 54px; font-weight: 800; line-height: 1.4; margin-bottom: 24px; }
+.subtitle { font-size: 34px; color: var(--gray); line-height: 1.55; margin-bottom: 70px; }
+.divider {
+  width: 100%; height: 1px;
+  background: rgba(0,229,255,0.15);
+  margin: 0 auto 70px;
+}
+.features { display: flex; flex-direction: column; gap: 28px; margin-bottom: 80px; width: 100%; }
+.feat-row { display: flex; gap: 24px; justify-content: center; }
+.feat {
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.25);
+  color: var(--cyan); border-radius: 16px;
+  font-size: 34px; font-weight: 600;
+  padding: 16px 36px;
+}
+.domain { color: var(--cyan); font-size: 44px; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 16px; }
+.tagline-sm { color: var(--gray); font-size: 26px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow-top"></div>
+  <div class="glow-bot"></div>
+
+  <div class="icon-wrap"><span class="check">✓</span></div>
+  <div class="logo"><span class="care">Care</span><span class="ez">EZ</span></div>
+  <div class="accent-bar"></div>
+
+  <!-- EDIT BELOW -->
+  <div class="title">Multimodal Clinical AI<br>for Dysphagia</div>
+  <div class="subtitle">Helping clinicians diagnose<br>and manage swallowing disorders</div>
+  <div class="divider"></div>
+  <div class="features">
+    <div class="feat-row">
+      <span class="feat">VFSS Analysis</span>
+      <span class="feat">FEES Review</span>
+    </div>
+    <div class="feat-row">
+      <span class="feat">Clinical NLP</span>
+      <span class="feat">Free Beta</span>
+    </div>
+  </div>
+  <div class="domain">careez.org</div>
+  <div class="tagline-sm">Multimodal Clinical AI · CE/FDA Pathway</div>
+  <!-- EDIT ABOVE -->
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <defs>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#29B6F6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: stylized "C" bracket with EZ accent -->
+  <g transform="translate(10, 10)">
+    <!-- Outer arc left bracket -->
+    <path d="M52 10 Q20 10 20 50 Q20 90 52 90" fill="none" stroke="url(#accentGrad)" stroke-width="7" stroke-linecap="round"/>
+    <!-- Inner dot/pulse -->
+    <circle cx="42" cy="50" r="5" fill="#00E5FF"/>
+    <!-- Small tick suggesting a check / ease -->
+    <path d="M35 50 L42 57 L55 43" fill="none" stroke="#00E5FF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wordmark: CareEZ -->
+  <text
+    x="90"
+    y="67"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    font-size="52"
+    font-weight="900"
+    letter-spacing="-1"
+    fill="#FFFFFF">Care</text>
+  <text
+    x="244"
+    y="67"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    font-size="52"
+    font-weight="900"
+    letter-spacing="-1"
+    fill="#00E5FF">EZ</text>
+
+  <!-- Tagline underline accent bar -->
+  <rect x="90" y="74" width="290" height="3" rx="1.5" fill="url(#accentGrad)" opacity="0.6"/>
+</svg>
