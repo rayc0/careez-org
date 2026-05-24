@@ -314,12 +314,16 @@
     /* ─── Swagger UI container ─── */
     .swagger-section {
       padding: 0 0 80px;
+      overflow-x: hidden;
     }
     #swagger-ui {
       max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 24px;
+      overflow-x: hidden;
     }
+    .swagger-ui .wrapper { overflow-x: hidden !important; }
+    .swagger-ui .servers-title, .swagger-ui .schemes { max-width: 100%; overflow-x: auto; }
 
     /* ─── Swagger UI theming overrides ─── */
     .swagger-ui .topbar { display: none !important; }
