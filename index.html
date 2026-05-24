@@ -849,6 +849,7 @@
         <li><a href="/partners/">Partners</a></li>
         <li><a href="/standards/">Standards</a></li>
         <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/opensource/">Open Source</a></li>
         <li><a href="#programmes">Programmes</a></li>
         <li><a href="#live-api">Live API</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -856,6 +857,7 @@
         <li><a href="/compare/">Compare</a></li>
         <li><a href="/pricing/">Pricing</a></li>
         <li><a href="/adoption-index/" style="color:var(--cyan);font-weight:600;">照護食 Index</a></li>
+        <li><a href="/roadmap/">Roadmap</a></li>
         <li><a href="/trial/" style="background:var(--cyan);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:20px;font-size:12px;letter-spacing:0.03em;text-decoration:none;">Apply Pilot</a></li>
       </ul>
     </div>
@@ -1214,10 +1216,16 @@
       transition: border-color 0.2s;
       line-height: 1.6;
     }
-    .try-card textarea:focus {
+    .try-card textarea:focus,
+    .try-card select:focus,
+    .try-card input:focus {
       outline: 2px solid var(--cyan);
       outline-offset: 2px;
       border-color: rgba(0,229,255,0.45);
+    }
+    .try-btn:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
     }
     .try-btn {
       align-self: flex-start;
