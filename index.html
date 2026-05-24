@@ -805,6 +805,13 @@
   <meta name="msapplication-TileColor" content="#0a1428">
   <meta name="theme-color" content="#0a1428">
 
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script>
   <!-- End Cloudflare Web Analytics -->
