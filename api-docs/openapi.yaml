@@ -47,6 +47,8 @@ servers:
 tags:
   - name: IDDSI Classification
     description: Classify food/liquid texture level using the IDDSI framework
+  - name: Meal Validation
+    description: Validate full RCHE meal plans against a resident's prescribed IDDSI level
   - name: Aspiration Screening
     description: Screen for aspiration risk via symptom or voice analysis
 
@@ -59,7 +61,7 @@ paths:
         Classify a food or liquid item described in plain text against the IDDSI framework.
         Returns the recommended IDDSI level (0–7), a confidence score, and a multilingual explanation.
 
-        **Supported languages:** English (`en`), Traditional Chinese (`zh-Hant`), Simplified Chinese (`zh-Hans`)
+        **Supported languages:** English (`en`), Traditional Chinese (`zh-HK`), Filipino/Tagalog (`tl`), Bahasa Indonesia (`id`), Vietnamese (`vi`), Thai (`th`), Spanish (`es`)
       tags:
         - IDDSI Classification
       security: []
@@ -278,8 +280,229 @@ paths:
                     error: "not_implemented"
                     message: "Audio classification endpoint is research-staged and not yet live. Coordinate with the audio analysis agent for ETA."
 
+  /iddsi-batch:
+    post:
+      operationId: batchValidateMeal
+      summary: IDDSI Batch Meal Validation (RCHE)
+      description: |
+        Accepts a full RCHE meal plan (array of food/liquid items) and a resident's
+        prescribed IDDSI level. Returns per-item IDDSI classification via Claude Haiku
+        plus a meal-level safety verdict with modification recommendations.
+
+        **Safety verdict logic:**
+        - `safe` — all items ≤ resident's IDDSI level
+        - `caution` — minor 1-level overshoot with low-confidence classification
+        - `unsafe` — one or more items exceed the resident's IDDSI level
+
+        **Language support:** `en`, `zh-HK`, `zh-Hant`, `zh-Hans`, `tl`, `id`
+
+        Max 20 items per request. 30-second timeout (batch LLM call).
+      tags:
+        - Meal Validation
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchMealRequest'
+            examples:
+              four_item_meal:
+                summary: 4-item meal for Level 5 resident
+                value:
+                  meal:
+                    - item: "steamed fish"
+                      portion: "100g"
+                    - item: "rice porridge (congee)"
+                      portion: "200ml"
+                    - item: "minced pork with sauce"
+                      portion: "80g"
+                    - item: "plain water"
+                      portion: "150ml"
+                  resident_iddsi_level: 5
+                  language: "en"
+      responses:
+        '200':
+          description: Meal validation result with per-item classifications and safety verdict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchMealResponse'
+              examples:
+                safe_meal:
+                  summary: All items within resident level
+                  value:
+                    items:
+                      - item: "steamed fish"
+                        portion: "100g"
+                        iddsi_level: 6
+                        label: "Soft & Bite-Sized"
+                        label_zh: "軟爛切粒"
+                        color: "#64B4E1"
+                        match_resident_level: false
+                        confidence: "high"
+                        rationale: "Steamed fish is typically soft and easily flaked — Level 6 Soft & Bite-Sized."
+                      - item: "rice porridge (congee)"
+                        portion: "200ml"
+                        iddsi_level: 4
+                        label: "Pureed/Extremely Thick"
+                        label_zh: "糊狀／極稠"
+                        color: "#E06027"
+                        match_resident_level: true
+                        confidence: "high"
+                        rationale: "Congee is smooth and lump-free — Level 4 Pureed."
+                    meal_safety_verdict: "unsafe"
+                    non_matching_items:
+                      - item: "steamed fish"
+                        iddsi_level: 6
+                        label: "Soft & Bite-Sized"
+                    recommendations: "The following items require modification to meet the resident's Minced & Moist (Level 5) requirement:\n• steamed fish (currently IDDSI Level 6 – Soft & Bite-Sized): Mince finely and ensure moistened with sauce or gravy"
+                    model: "claude-haiku-4-5-20251001"
+                    resident_iddsi_level: 5
+                    resident_iddsi_label: "Minced & Moist"
+                    disclaimer: "This meal assessment is for assistive reference only..."
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Anthropic API key not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
   schemas:
+    MealItem:
+      type: object
+      required:
+        - item
+      properties:
+        item:
+          type: string
+          description: Food or liquid item name (free-text)
+          example: "steamed fish"
+          minLength: 1
+          maxLength: 200
+        portion:
+          type: string
+          description: Optional portion size (descriptive)
+          example: "100g"
+
+    BatchMealRequest:
+      type: object
+      required:
+        - meal
+        - resident_iddsi_level
+      properties:
+        meal:
+          type: array
+          items:
+            $ref: '#/components/schemas/MealItem'
+          description: Array of meal items to validate (max 20)
+          minItems: 1
+          maxItems: 20
+        resident_iddsi_level:
+          type: integer
+          description: Resident's prescribed IDDSI level (0–7)
+          minimum: 0
+          maximum: 7
+          example: 5
+        language:
+          type: string
+          description: Language for rationale and recommendations
+          enum: [en, zh-HK, zh-Hant, zh-Hans, tl, id]
+          default: en
+          example: "en"
+
+    ClassifiedMealItem:
+      type: object
+      properties:
+        item:
+          type: string
+          description: Original item name
+          example: "steamed fish"
+        portion:
+          type: string
+          description: Original portion string
+          example: "100g"
+        iddsi_level:
+          type: integer
+          description: Classified IDDSI level (0–7)
+          minimum: 0
+          maximum: 7
+          example: 6
+        label:
+          type: string
+          description: English IDDSI level label
+          example: "Soft & Bite-Sized"
+        label_zh:
+          type: string
+          description: Traditional Chinese IDDSI level label
+          example: "軟爛切粒"
+        color:
+          type: string
+          description: IDDSI colour hex code
+          example: "#64B4E1"
+        match_resident_level:
+          type: boolean
+          description: True if item IDDSI level ≤ resident's prescribed level
+          example: false
+        confidence:
+          type: string
+          enum: [high, medium, low]
+          description: Claude's classification confidence
+          example: "high"
+        rationale:
+          type: string
+          description: One-sentence classification rationale (in requested language)
+
+    BatchMealResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassifiedMealItem'
+          description: Per-item classification results (same order as request)
+        meal_safety_verdict:
+          type: string
+          enum: [safe, caution, unsafe]
+          description: Overall meal safety verdict
+          example: "unsafe"
+        non_matching_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClassifiedMealItem'
+          description: Items whose IDDSI level exceeds resident's prescribed level
+        recommendations:
+          type: string
+          description: Modification instructions for non-matching items (in requested language)
+        model:
+          type: string
+          description: Claude model used for classification
+          example: "claude-haiku-4-5-20251001"
+        resident_iddsi_level:
+          type: integer
+          description: Resident's prescribed IDDSI level (echoed from request)
+          example: 5
+        resident_iddsi_label:
+          type: string
+          description: Human-readable label for the resident's IDDSI level
+          example: "Minced & Moist"
+        disclaimer:
+          type: string
+          description: Clinical disclaimer
+
     TextClassifyRequest:
       type: object
       required:
@@ -293,8 +516,8 @@ components:
           maxLength: 2000
         language:
           type: string
-          description: Preferred language for the explanation in the response
-          enum: [en, zh-Hant, zh-Hans]
+          description: Preferred language for the multilingual labels in the response
+          enum: [en, zh-HK, tl, id, vi, th, es]
           default: en
           example: "en"
 
@@ -309,8 +532,8 @@ components:
           description: Food/liquid image file (JPEG, PNG, or WebP, max 10 MB)
         language:
           type: string
-          description: Preferred language for the explanation in the response
-          enum: [en, zh-Hant, zh-Hans]
+          description: Preferred language for the multilingual_explanation in the response
+          enum: [en, zh-HK, tl, id, vi, th, es]
           default: en
 
     AudioClassifyRequest:
@@ -324,7 +547,7 @@ components:
           description: Audio recording of swallowing/voice (WAV or MP3, max 30 MB)
         language:
           type: string
-          enum: [en, zh-Hant, zh-Hans]
+          enum: [en, zh-HK, tl, id, vi, th, es]
           default: en
 
     AspirationScreenRequest:
@@ -350,7 +573,7 @@ components:
           example: "stroke"
         language:
           type: string
-          enum: [en, zh-Hant, zh-Hans]
+          enum: [en, zh-HK, tl, id, vi, th, es]
           default: en
 
     IddsiClassifyResponse:
@@ -380,10 +603,16 @@ components:
           type: string
           description: Traditional Chinese explanation of the classification result
         multilingual_explanation:
-          type: string
-          description: Language code of the primary explanation returned
-          enum: [en, zh-Hant, zh-Hans]
-          example: "zh-Hant"
+          type: object
+          description: Multilingual IDDSI level explanations (all 7 languages returned)
+          properties:
+            en: { type: string }
+            zh-HK: { type: string }
+            tl: { type: string }
+            id: { type: string }
+            vi: { type: string }
+            th: { type: string }
+            es: { type: string }
         warning:
           type: string
           description: Clinical disclaimer
