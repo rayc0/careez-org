@@ -28,3 +28,9 @@ Allow: /
 
 Sitemap: https://careez.org/sitemap-index.xml
 Sitemap: https://careez.org/sitemap.xml
+
+# AI agent context files
+# llms.txt: https://careez.org/llms.txt
+# llms-full.txt: https://careez.org/llms-full.txt
+# agent.json: https://careez.org/agent.json
+# ai-plugin.json: https://careez.org/.well-known/ai-plugin.json
