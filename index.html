@@ -1,1 +1,1697 @@
-<h1>CareEZ — coming online</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareEZ — Social Enterprise | Carewells Limited</title>
+  <meta name="description" content="CareEZ is a Hong Kong social enterprise developing care-food (照護食) and AI swallowing-safety solutions for older adults and care facilities. Grounded in HKCSS 護食標準 and IDDSI." />
+
+  <!-- ─── Search Engine Verification (replace PLACEHOLDERs in GSC / Bing / Baidu dashboards) ─── -->
+  <meta name="google-site-verification" content="GSC_PLACEHOLDER_careez">
+  <meta name="msvalidate.01" content="BING_PLACEHOLDER_careez">
+  <meta name="baidu-site-verification" content="BAIDU_PLACEHOLDER_careez">
+
+  <!-- ─── Canonical ─── -->
+  <link rel="canonical" href="https://careez.org/" />
+
+  <!-- ─── OpenSearch ─── -->
+  <link rel="search" type="application/opensearchdescription+xml" title="CareEZ" href="/opensearch.xml">
+
+  <!-- ─── OpenGraph ─── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/" />
+  <meta property="og:title" content="CareEZ — Multimodal Clinical AI for Dysphagia | Carewells Limited" />
+  <meta property="og:description" content="CareEZ is a Hong Kong social enterprise developing care-food (照護食) and AI swallowing-safety solutions for older adults and care facilities. IDDSI-certified, HKCSS 護食標準 aligned." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="CareEZ — Multimodal Clinical AI for Dysphagia Care" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <!-- ─── Twitter Card ─── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CareEZ — Multimodal Clinical AI for Dysphagia | Carewells Limited" />
+  <meta name="twitter:description" content="Hong Kong social enterprise building care-food (照護食) and AI swallowing-safety tools for older adults. IDDSI-certified, HKCSS 護食標準 aligned." />
+  <meta name="twitter:image" content="https://careez.org/og-image.png" />
+
+  <!-- ─── JSON-LD: Organization ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Carewells Limited",
+    "alternateName": "CareEZ",
+    "url": "https://careez.org/",
+    "logo": "https://careez.org/og-image.png",
+    "description": "Carewells Limited is a Hong Kong social enterprise (SED-registered) operating under the brand CareEZ. It develops care-food products and clinical AI tools for dysphagia management, aligned with HKCSS 護食標準 and the international IDDSI framework.",
+    "foundingDate": "2023",
+    "founder": [
+      { "@type": "Person", "name": "Raymond Chau" },
+      { "@type": "Person", "name": "Karen Chan" },
+      { "@type": "Person", "name": "Abellona U" }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hong Kong",
+      "addressCountry": "HK"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@careez.org",
+      "contactType": "customer support"
+    },
+    "sameAs": [
+      "https://seniordeli.com",
+      "https://dysphagia.cn",
+      "https://demo.careez.org"
+    ],
+    "knowsAbout": [
+      "dysphagia", "IDDSI", "care food", "照護食", "swallowing safety",
+      "clinical AI", "texture-modified food", "HKCSS 護食標準"
+    ]
+  }
+  </script>
+
+  <!-- ─── JSON-LD: SoftwareApplication ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CareEZ",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "url": "https://demo.careez.org",
+    "description": "Multimodal clinical AI for dysphagia and 照護食 standard adoption. Classifies food and liquid IDDSI texture levels, performs thickener dosage calculations, and screens aspiration risk via voice analysis.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "url": "https://careez.org/"
+    },
+    "featureList": [
+      "IDDSI texture classification for food and liquids",
+      "Thickener dosage calculation",
+      "Voice-based aspiration risk screening",
+      "HKCSS 護食標準 compliance checking",
+      "Multilingual (English, Traditional Chinese)"
+    ],
+    "inLanguage": ["en", "zh-Hant"],
+    "releaseNotes": "Live API at api.seniordeli.com. IDDSI classification endpoint publicly callable."
+  }
+  </script>
+
+  <!-- ─── JSON-LD: MedicalWebPage ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "name": "CareEZ — Dysphagia & Care-Food Clinical AI",
+    "url": "https://careez.org/",
+    "description": "Clinical information on dysphagia management, IDDSI texture-modified food and liquids, and AI-assisted swallowing safety screening for older adults and care facilities in Hong Kong.",
+    "about": {
+      "@type": "MedicalCondition",
+      "name": "Dysphagia",
+      "alternateName": "Swallowing difficulty",
+      "relevantSpecialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Otolaryngology"
+      }
+    },
+    "audience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Clinician, Care Facility Staff, Caregiver"
+    },
+    "medicalAudience": "Clinician",
+    "lastReviewed": "2026-05-24",
+    "reviewedBy": {
+      "@type": "Organization",
+      "name": "Carewells Limited"
+    }
+  }
+  </script>
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A1428;
+      --navy2:   #0E1C3A;
+      --navy3:   #132046;
+      --cyan:    #00E5FF;
+      --cyan2:   #29B6F6;
+      --white:   #FFFFFF;
+      --gray:    #B0BEC5;
+      --gray2:   #78909C;
+      --yellow:  #FFD43B;
+      --green:   #4CAF50;
+      --accent-bar: 5px;
+      --max-w:   1100px;
+      --r:       6px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: var(--cyan);
+      color: var(--navy);
+      font-weight: 700;
+      padding: 8px 16px;
+      z-index: 9999;
+      border-radius: 0 0 4px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Section label with vertical accent bar ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 22px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 20, 40, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+    /* ─── Hero ─── */
+    #hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 70% 40%, rgba(0,229,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 70%, rgba(41,182,246,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: var(--max-w); margin: 0 auto; width: 100%; }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 20px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+    .hero-title {
+      font-size: clamp(52px, 8vw, 88px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+    .hero-title .brand-cyan { color: var(--cyan); }
+    .hero-tagline {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: var(--gray);
+      font-weight: 400;
+      margin-bottom: 28px;
+      max-width: 640px;
+      line-height: 1.4;
+    }
+    .hero-tagline strong { color: var(--white); font-weight: 600; }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--cyan);
+      color: var(--navy);
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .hero-cta:hover {
+      background: var(--cyan2);
+      color: var(--navy);
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 13px;
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cyan2);
+      background: rgba(0,229,255,0.05);
+      letter-spacing: 0.02em;
+    }
+    .badge-yellow {
+      border-color: rgba(255,212,59,0.35);
+      color: var(--yellow);
+      background: rgba(255,212,59,0.05);
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 0;
+    }
+
+    /* ─── About ─── */
+    #about {
+      padding: 100px 24px;
+      background: var(--navy2);
+    }
+    .about-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-grid h2 {
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .about-grid p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .about-grid p:last-child { margin-bottom: 0; }
+    .about-stat-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .stat-item {
+      padding: 20px 24px;
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-left: var(--accent-bar) solid var(--cyan);
+      border-radius: var(--r);
+    }
+    .stat-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* ─── Programmes ─── */
+    #programmes {
+      padding: 100px 24px;
+    }
+    .programmes-header {
+      max-width: var(--max-w);
+      margin: 0 auto 52px;
+    }
+    .programmes-header h2 {
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .programmes-header p {
+      font-size: 15px;
+      color: var(--gray);
+      max-width: 540px;
+    }
+    .prog-cards {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .prog-card {
+      background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .prog-card:hover {
+      border-color: rgba(0,229,255,0.28);
+      transform: translateY(-3px);
+    }
+    .prog-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+    }
+    .prog-card.card-ai::before {
+      background: linear-gradient(90deg, var(--yellow), #FFA726);
+    }
+    .prog-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .card-ai .prog-icon {
+      background: rgba(255,212,59,0.08);
+      border-color: rgba(255,212,59,0.2);
+    }
+    .prog-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .prog-card .prog-sub {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan2);
+      margin-bottom: 14px;
+    }
+    .card-ai .prog-sub { color: var(--yellow); }
+    .prog-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .prog-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .prog-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 30px;
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.18);
+      color: var(--cyan2);
+    }
+    .card-ai .prog-tag {
+      background: rgba(255,212,59,0.06);
+      border-color: rgba(255,212,59,0.2);
+      color: var(--yellow);
+    }
+
+    /* ─── Live API Section ─── */
+    #live-api {
+      padding: 100px 24px;
+      background: var(--navy2);
+    }
+    .api-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .api-inner h2 {
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .api-intro {
+      font-size: 15px;
+      color: var(--gray);
+      max-width: 680px;
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .api-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .api-card {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 10px;
+      padding: 24px 28px;
+    }
+    .api-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan2);
+      margin-bottom: 10px;
+    }
+    .api-card pre {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #A8FF78;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .api-note {
+      font-size: 13px;
+      color: var(--gray2);
+      line-height: 1.7;
+      padding: 16px 20px;
+      background: rgba(0,229,255,0.04);
+      border-left: var(--accent-bar) solid rgba(0,229,255,0.3);
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+    .api-note a { color: var(--cyan2); }
+    .api-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(76,175,80,0.12);
+      border: 1px solid rgba(76,175,80,0.35);
+      color: #81C784;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+    .api-live-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4CAF50;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ─── Public Asset Commitment ─── */
+    #commitment {
+      padding: 100px 24px;
+    }
+    .commitment-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .commitment-intro h2 {
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .commitment-intro p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+    .commitment-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .commitment-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .commitment-list li:last-child { border-bottom: none; }
+    .ci-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--cyan);
+      font-weight: 700;
+    }
+    .ci-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .ci-text span {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── Credentials Strip ─── */
+    #credentials {
+      padding: 80px 24px;
+      background: var(--navy2);
+    }
+    .cred-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .cred-inner h2 {
+      font-size: clamp(22px, 2.8vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+    .cred-card {
+      padding: 22px 20px;
+      background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--r);
+      border-left: var(--accent-bar) solid rgba(0,229,255,0.35);
+    }
+    .cred-card .cred-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .cred-card .cred-desc {
+      font-size: 12px;
+      color: var(--gray2);
+      line-height: 1.5;
+    }
+    .cred-card a { color: var(--cyan2); }
+    .cred-card-highlight {
+      border-left-color: var(--yellow);
+    }
+    .cred-card-highlight .cred-name {
+      color: var(--yellow);
+    }
+
+    /* ─── Contact ─── */
+    #contact {
+      padding: 80px 24px;
+      text-align: center;
+    }
+    #contact h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    #contact p {
+      color: var(--gray);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .contact-btn {
+      display: inline-block;
+      padding: 11px 26px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1.5px solid var(--cyan);
+      color: var(--cyan);
+      background: transparent;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-btn:hover {
+      background: var(--cyan);
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .contact-people {
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--gray2);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 28px 24px;
+      background: var(--navy2);
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta {
+      font-size: 12px;
+      color: var(--gray2);
+      text-align: right;
+    }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .prog-cards { grid-template-columns: 1fr; }
+      .commitment-inner { grid-template-columns: 1fr; gap: 36px; }
+      .api-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+
+    @media (max-width: 500px) {
+      #hero { padding: 80px 20px 60px; }
+      .hero-badges .badge { font-size: 11px; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+  <!-- ─── Skip navigation ─── -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Navigation ─── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/" aria-label="CareEZ home" style="text-decoration:none;color:inherit;">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/">Governance</a></li>
+        <li><a href="/partners/">Partners</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/opensource/">Open Source</a></li>
+        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#live-api">Live API</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/press/">Press</a></li>
+        <li><a href="/compare/">Compare</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+        <li><a href="/adoption-index/" style="color:var(--cyan);font-weight:600;">照護食 Index</a></li>
+        <li><a href="/roadmap/">Roadmap</a></li>
+        <li><a href="/trial/" style="background:var(--cyan);color:var(--navy);font-weight:700;padding:6px 14px;border-radius:20px;font-size:12px;letter-spacing:0.03em;text-decoration:none;">Apply Pilot</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── Main content ─── -->
+  <main id="main-content">
+
+  <!-- ─── Hero ─── -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Social Enterprise &middot; Hong Kong</div>
+      <h1 class="hero-title">Care<span class="brand-cyan">EZ</span></h1>
+      <p class="hero-tagline">
+        <strong>Dignified nutrition and clinical safety for older adults.</strong><br>
+        A Hong Kong social enterprise built on HKCSS 護食標準 (照護食) and IDDSI.
+      </p>
+      <p class="hero-desc">
+        CareEZ develops care-food products and point-of-care AI tools for swallowing safety,
+        deployed across 200+ partner facilities in Hong Kong. Our work is grounded in
+        Hong Kong's own 照護食 standard (HKCSS Care Food Working Group) and the international
+        IDDSI clinical framework, governed as a public asset.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">HK Tree Mark #83</span>
+        <span class="badge">IDDSI Certified</span>
+        <span class="badge">T/SATA 094</span>
+        <span class="badge">HKCSS 護食標準</span>
+        <span class="badge">HKSTP Tech Startup</span>
+        <span class="badge badge-yellow">TechUp HKD 600K (2025)</span>
+        <span class="badge">SED Registered</span>
+      </div>
+      <a class="hero-cta" href="https://demo.careez.org">See the live demo &rarr;</a>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── About ─── -->
+  <section id="about">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About CareEZ</div>
+        <h2>A Hong Kong social enterprise serving care settings across the city</h2>
+        <p>
+          CareEZ is the operating social enterprise name of Carewells Limited, a company
+          registered under the Hong Kong Social Enterprise Directory. We design and deliver
+          two complementary programmes: care-food products (照護食) that meet the HKCSS
+          護食標準 and IDDSI international dysphagia standard, and an AI-assisted
+          swallowing-safety platform for point-of-care clinical use.
+        </p>
+        <p>
+          Our work addresses a structural gap in Hong Kong's care ecosystem: the absence of
+          affordable, standardised, clinically safe nutrition options in residential care homes,
+          day-care centres, and community meal programmes. Every product and tool we develop
+          is governed to remain accessible as a public-good resource, not extracted as a
+          commercial asset.
+        </p>
+        <p>
+          CareEZ Senior Deli is registered on HK Tree Mark #83, Hong Kong's social enterprise
+          quality mark. We operate as a HKSTP-affiliated tech startup and hold a HKSAR TechUp
+          grant of HKD 600,000 awarded in 2025 to accelerate AI programme development. The
+          broader knowledge base for this work is maintained at
+          <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a> — a
+          free multilingual IDDSI and 照護食 reference resource.
+        </p>
+      </div>
+      <div class="about-stat-col">
+        <div class="stat-item">
+          <div class="stat-num">200+</div>
+          <div class="stat-label">Partner care facilities in Hong Kong</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">HKD 600K</div>
+          <div class="stat-label">HKSAR TechUp grant awarded 2025</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">#83</div>
+          <div class="stat-label">HK Tree Mark &mdash; CareEZ Senior Deli</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">IDDSI</div>
+          <div class="stat-label">International Dysphagia Diet Standardisation Initiative certified</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">640K</div>
+          <div class="stat-label">Frontline carers in Hong Kong making meal-safety decisions daily</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Programmes ─── -->
+  <section id="programmes">
+    <div class="programmes-header">
+      <div class="section-label">Programmes</div>
+      <h2>Two integrated programmes, one mission</h2>
+      <p>CareEZ delivers care-food (照護食) and clinical AI tools under the same social enterprise governance and public-asset commitment.</p>
+    </div>
+    <div class="prog-cards">
+
+      <!-- SeniorDeli Card -->
+      <div class="prog-card">
+        <div class="prog-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan)" aria-hidden="true" focusable="false"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        </div>
+        <div class="prog-sub">Care Food &middot; 照護食</div>
+        <h3>SeniorDeli</h3>
+        <p>
+          Texture-modified food products (照護食) formulated for older adults with swallowing
+          difficulties (dysphagia). Products are IDDSI-compliant, aligned with HKCSS
+          護食標準, and T/SATA 094 credentialed, designed for use in residential care homes,
+          day-care centres, and community meal programmes across Hong Kong.
+        </p>
+        <p>
+          Distributed through 200+ partner facilities. Available in standardised
+          powder and portion formats for consistent clinical preparation and
+          cost-effective facility-scale deployment.
+        </p>
+        <div class="prog-tags">
+          <span class="prog-tag">IDDSI</span>
+          <span class="prog-tag">HKCSS 護食標準</span>
+          <span class="prog-tag">T/SATA 094</span>
+          <span class="prog-tag">Tree Mark #83</span>
+          <span class="prog-tag">200+ Facilities</span>
+        </div>
+      </div>
+
+      <!-- AI Programme Card -->
+      <div class="prog-card card-ai">
+        <div class="prog-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--yellow)" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div class="prog-sub">Point-of-Care AI</div>
+        <h3>Swallowing Safety AI</h3>
+        <p>
+          An AI-assisted screening and monitoring programme for swallowing safety,
+          designed for point-of-care deployment in care settings. The programme
+          uses validated clinical indicators to support care staff in identifying
+          swallowing risk and guiding safe diet texture selection for residents.
+        </p>
+        <p>
+          Developed under the CareEZ umbrella with HKSTP tech startup support and
+          HKSAR TechUp grant funding. AI assistant accessible via browser and
+          WhatsApp Business (Year 1 deployment). The live classification API
+          powers the interactive demo below.
+        </p>
+        <div class="prog-tags">
+          <span class="prog-tag">HKSTP</span>
+          <span class="prog-tag">TechUp 2025</span>
+          <span class="prog-tag">Live API</span>
+          <span class="prog-tag">Point-of-Care</span>
+        </div>
+        <a href="https://demo.careez.org" style="display:inline-block;margin-top:18px;font-size:13px;font-weight:600;color:var(--yellow);letter-spacing:0.03em;text-decoration:none;border-bottom:1px solid rgba(255,212,59,0.35);padding-bottom:1px;">Try the live demo &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Live API ─── -->
+  <section id="live-api">
+    <div class="api-inner">
+      <div class="section-label">Live API</div>
+      <h2>Try the live classification API</h2>
+      <div class="api-live-badge">LIVE &middot; api.seniordeli.com</div>
+      <p class="api-intro">
+        The IDDSI texture-classification engine is live and publicly callable. Two endpoints are
+        available today: one returns the IDDSI level and 照護食 (護食標準) equivalent for a food
+        description, the other performs a thickener dosage calculation for a target IDDSI liquid
+        level. The interactive demo at <a href="https://demo.careez.org" target="_blank" rel="noopener">demo.careez.org</a> calls
+        these same endpoints in real time &mdash; no mock data, no hardcoded responses.
+      </p>
+
+      <div class="api-grid">
+        <div class="api-card">
+          <div class="api-card-label">IDDSI Classification &mdash; Food or Liquid</div>
+          <pre>curl -s -X POST \
+  https://www.seniordeli.com/api/iddsi-classify \
+  -H "Content-Type: application/json" \
+  -d '{"description":"steamed egg custard, soft, spoonable"}'</pre>
+        </div>
+        <div class="api-card">
+          <div class="api-card-label">Thickener Dosage Calculator</div>
+          <pre>curl -s -X POST \
+  https://www.seniordeli.com/api/iddsi-classify \
+  -H "Content-Type: application/json" \
+  -d '{"description":"orange juice, thickened to IDDSI Level 2 mildly thick, 200ml"}'</pre>
+        </div>
+      </div>
+
+      <p class="api-note">
+        Both endpoints return JSON with <code>iddsi_level</code>, <code>label_en</code>,
+        <code>label_zh_hk</code> (照護食 / 護食標準 terminology), and a <code>rationale</code> field.
+        No API key required for evaluation calls. Full documentation and OpenAPI spec available at
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com</a>.
+        The demo at <a href="https://demo.careez.org" target="_blank" rel="noopener">demo.careez.org</a>
+        demonstrates end-to-end carer-facing UX built on top of this API.
+      </p>
+
+      <!-- ─── Try CareEZ Live Widget ─── -->
+      <div id="try-live" style="margin-top:52px;">
+        <div class="section-label" style="margin-bottom:8px;">Try CareEZ Live</div>
+        <p style="font-size:13px;color:var(--gray2);margin-bottom:28px;max-width:600px;">
+          Live API &middot; response in real-time &middot; no PHI stored
+        </p>
+
+        <div class="try-live-grid">
+
+          <!-- Card 1: Text Classifier -->
+          <div class="try-card" id="card-text">
+            <div class="try-card-header">
+              <span class="try-card-num">01</span>
+              <div>
+                <div class="try-card-title">IDDSI Text Classifier</div>
+                <div class="try-card-sub">Describe a food or liquid — get the IDDSI level</div>
+              </div>
+            </div>
+            <textarea id="txt-desc" placeholder="e.g. steamed egg custard, soft, spoonable" rows="3"></textarea>
+            <button class="try-btn" onclick="runTextClassify()">Classify &rarr;</button>
+            <div class="try-spinner" id="spin-text" aria-label="Loading"></div>
+            <div class="try-result" id="res-text"></div>
+          </div>
+
+          <!-- Card 2: Image Classifier -->
+          <div class="try-card" id="card-image">
+            <div class="try-card-header">
+              <span class="try-card-num">02</span>
+              <div>
+                <div class="try-card-title">IDDSI Image Classifier</div>
+                <div class="try-card-sub">Upload or drag a food photo — AI reads the texture</div>
+              </div>
+            </div>
+            <div class="try-dropzone" id="dropzone"
+              ondragover="event.preventDefault();this.classList.add('drag-over')"
+              ondragleave="this.classList.remove('drag-over')"
+              ondrop="handleDrop(event)">
+              <input type="file" id="img-file" accept="image/*" onchange="handleFileSelect(event)" style="display:none">
+              <div id="dz-label" onclick="document.getElementById('img-file').click()">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--cyan2);margin-bottom:8px" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <div style="font-size:13px;color:var(--gray);">Click or drag &amp; drop an image</div>
+                <div style="font-size:11px;color:var(--gray2);margin-top:4px;">JPG, PNG, WebP &mdash; max 5 MB</div>
+              </div>
+              <img id="dz-preview" style="display:none;max-width:100%;max-height:160px;border-radius:6px;object-fit:cover;" alt="Preview">
+            </div>
+            <button class="try-btn" id="btn-image" onclick="runImageClassify()" disabled>Classify Image &rarr;</button>
+            <div class="try-spinner" id="spin-image" aria-label="Loading"></div>
+            <div class="try-result" id="res-image"></div>
+          </div>
+
+          <!-- Card 3: Voice Aspiration Screen -->
+          <div class="try-card try-card-wide" id="card-voice">
+            <div class="try-card-header">
+              <span class="try-card-num">03</span>
+              <div>
+                <div class="try-card-title">Voice Aspiration Risk Screen</div>
+                <div class="try-card-sub">Select observed symptoms &mdash; AI screens aspiration risk and recommends action</div>
+              </div>
+            </div>
+            <div class="try-symptoms-grid">
+              <label class="try-chk"><input type="checkbox" value="coughing during meals"> Coughing during meals</label>
+              <label class="try-chk"><input type="checkbox" value="wet or gurgly voice after eating"> Wet / gurgly voice after eating</label>
+              <label class="try-chk"><input type="checkbox" value="throat clearing frequently"> Frequent throat clearing</label>
+              <label class="try-chk"><input type="checkbox" value="prolonged meal time"> Prolonged meal time (&gt;30 min)</label>
+              <label class="try-chk"><input type="checkbox" value="food or liquid residue in mouth"> Food / liquid residue in mouth</label>
+              <label class="try-chk"><input type="checkbox" value="drooling or poor lip seal"> Drooling / poor lip seal</label>
+              <label class="try-chk"><input type="checkbox" value="recurrent chest infections"> Recurrent chest infections</label>
+              <label class="try-chk"><input type="checkbox" value="unexplained weight loss"> Unexplained weight loss</label>
+              <label class="try-chk"><input type="checkbox" value="choking episodes"> Choking episodes</label>
+              <label class="try-chk"><input type="checkbox" value="avoidance of certain food textures"> Avoids certain food textures</label>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+              <label style="font-size:12px;color:var(--gray);display:flex;align-items:center;gap:6px;">
+                Language:
+                <select id="voice-lang" style="background:var(--navy3);border:1px solid rgba(0,229,255,0.2);color:var(--white);border-radius:5px;padding:4px 10px;font-size:12px;">
+                  <option value="en">English</option>
+                  <option value="zh-HK">繁體中文</option>
+                  <option value="tl">Filipino (Tagalog)</option>
+                  <option value="id">Bahasa Indonesia</option>
+                  <option value="vi">Tiếng Việt</option>
+                  <option value="th">ภาษาไทย</option>
+                  <option value="es">Español</option>
+                </select>
+              </label>
+              <button class="try-btn" style="margin-top:0;" onclick="runVoiceScreen()">Screen &rarr;</button>
+            </div>
+            <div class="try-spinner" id="spin-voice" aria-label="Loading"></div>
+            <div class="try-result" id="res-voice"></div>
+          </div>
+
+        </div><!-- /try-live-grid -->
+      </div><!-- /try-live -->
+
+    </div>
+  </section>
+
+  <style>
+    /* ─── Try CareEZ Live Widget Styles ─── */
+    .try-live-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .try-card-wide {
+      grid-column: 1 / -1;
+    }
+    .try-card {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 10px;
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .try-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .try-card-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--cyan2);
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 4px;
+      padding: 3px 8px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .try-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .try-card-sub {
+      font-size: 12px;
+      color: var(--gray2);
+    }
+    .try-card textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 6px;
+      color: var(--white);
+      font-size: 13px;
+      font-family: inherit;
+      padding: 10px 14px;
+      resize: vertical;
+      transition: border-color 0.2s;
+      line-height: 1.6;
+    }
+    .try-card textarea:focus,
+    .try-card select:focus,
+    .try-card input:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+      border-color: rgba(0,229,255,0.45);
+    }
+    .try-btn:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+    .try-btn {
+      align-self: flex-start;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--cyan);
+      color: var(--navy);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+    .try-btn:hover:not(:disabled) {
+      background: var(--cyan2);
+      transform: translateY(-1px);
+    }
+    .try-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .try-spinner {
+      display: none;
+      width: 22px; height: 22px;
+      border: 3px solid rgba(0,229,255,0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .try-result {
+      display: none;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+    .try-result.visible { display: block; }
+    .try-result.error {
+      border-color: rgba(255,100,100,0.3);
+      color: #EF9A9A;
+    }
+    .try-result .res-level {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .try-result .res-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .try-result .res-body {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+    .try-result .res-tier {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .tier-low    { background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.35); color: #81C784; }
+    .tier-medium { background: rgba(255,193,7,0.12); border: 1px solid rgba(255,193,7,0.35);  color: #FFD43B; }
+    .tier-high   { background: rgba(244,67,54,0.12); border: 1px solid rgba(244,67,54,0.35);  color: #EF9A9A; }
+    /* Dropzone */
+    .try-dropzone {
+      border: 2px dashed rgba(0,229,255,0.25);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: rgba(0,0,0,0.2);
+    }
+    .try-dropzone.drag-over {
+      border-color: rgba(0,229,255,0.6);
+      background: rgba(0,229,255,0.04);
+    }
+    /* Symptom checkboxes */
+    .try-symptoms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px 14px;
+    }
+    .try-chk {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--gray);
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .try-chk input[type="checkbox"] {
+      width: 15px; height: 15px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .try-live-grid { grid-template-columns: 1fr; }
+      .try-card-wide { grid-column: auto; }
+      .try-symptoms-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .try-symptoms-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script>
+  /* ─── CareEZ Live Widget ─── */
+  (function() {
+    const API_BASE = 'https://www.seniordeli.com/api';
+
+    function show(el) { el.style.display = 'block'; }
+    function hide(el) { el.style.display = 'none'; }
+
+    function setResult(id, html, isError) {
+      const el = document.getElementById(id);
+      el.innerHTML = html;
+      el.className = 'try-result visible' + (isError ? ' error' : '');
+    }
+
+    function setSpinner(id, on) {
+      const el = document.getElementById(id);
+      el.style.display = on ? 'block' : 'none';
+    }
+
+    /* ── helpers ── */
+    function levelColor(lvl) {
+      const n = parseInt(lvl);
+      if (isNaN(n)) return 'var(--cyan)';
+      if (n <= 2) return '#81C784';
+      if (n <= 4) return '#FFD43B';
+      return 'var(--cyan)';
+    }
+
+    function renderClassifyResult(data, container) {
+      const level = data.iddsi_level ?? data.level ?? '—';
+      const labelEn = data.label_en ?? data.label ?? '';
+      const labelZh = data.label_zh_hk ?? data.label_zh ?? '';
+      const rationale = data.rationale ?? data.reasoning ?? data.explanation ?? '';
+      const color = levelColor(level);
+      setResult(container,
+        `<div class="res-level" style="color:${color}">IDDSI Level ${level}</div>` +
+        `<div class="res-label">${labelEn}${labelZh ? ' &middot; ' + labelZh : ''}</div>` +
+        `<div class="res-body">${rationale}</div>`
+      );
+    }
+
+    function renderVoiceResult(data, container) {
+      const tier = (data.risk_tier ?? data.tier ?? data.risk ?? 'unknown').toString().toLowerCase();
+      const action = data.recommended_action ?? data.action ?? data.recommendation ?? '';
+      const rationale = data.rationale ?? data.reasoning ?? data.explanation ?? '';
+      let tierClass = 'tier-low', tierLabel = 'Low Risk';
+      if (tier.includes('high'))   { tierClass = 'tier-high';   tierLabel = 'High Risk'; }
+      else if (tier.includes('med')) { tierClass = 'tier-medium'; tierLabel = 'Medium Risk'; }
+      else if (tier.includes('low')) { tierClass = 'tier-low';    tierLabel = 'Low Risk'; }
+      else { tierClass = 'tier-medium'; tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1); }
+      setResult(container,
+        `<span class="res-tier ${tierClass}">${tierLabel}</span>` +
+        `<div class="res-label" style="margin-top:6px;">${action}</div>` +
+        `<div class="res-body">${rationale}</div>`
+      );
+    }
+
+    /* ── Card 1: Text Classify ── */
+    window.runTextClassify = async function() {
+      const desc = document.getElementById('txt-desc').value.trim();
+      if (!desc) { setResult('res-text', 'Please enter a food or liquid description.', true); return; }
+      setSpinner('spin-text', true);
+      document.getElementById('res-text').className = 'try-result';
+      try {
+        const r = await fetch(API_BASE + '/iddsi-classify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ description: desc })
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? data.message ?? 'API error ' + r.status);
+        renderClassifyResult(data, 'res-text');
+      } catch(e) {
+        setResult('res-text', '⚠ ' + e.message, true);
+      } finally {
+        setSpinner('spin-text', false);
+      }
+    };
+
+    /* ── Card 2: Image Classify ── */
+    let _imgFile = null;
+
+    function previewImage(file) {
+      if (!file || !file.type.startsWith('image/')) return;
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image must be under 5 MB.');
+        return;
+      }
+      _imgFile = file;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const prev = document.getElementById('dz-preview');
+        const lbl  = document.getElementById('dz-label');
+        prev.src = e.target.result;
+        prev.style.display = 'block';
+        lbl.style.display = 'none';
+        document.getElementById('btn-image').disabled = false;
+      };
+      reader.readAsDataURL(file);
+      document.getElementById('dropzone').classList.remove('drag-over');
+    }
+
+    window.handleFileSelect = function(e) { previewImage(e.target.files[0]); };
+    window.handleDrop = function(e) {
+      e.preventDefault();
+      previewImage(e.dataTransfer.files[0]);
+    };
+
+    window.runImageClassify = async function() {
+      if (!_imgFile) return;
+      setSpinner('spin-image', true);
+      document.getElementById('res-image').className = 'try-result';
+      try {
+        const form = new FormData();
+        form.append('image', _imgFile);
+        const r = await fetch(API_BASE + '/iddsi-classify-image', {
+          method: 'POST',
+          body: form
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? data.message ?? 'API error ' + r.status);
+        renderClassifyResult(data, 'res-image');
+      } catch(e) {
+        setResult('res-image', '⚠ ' + e.message, true);
+      } finally {
+        setSpinner('spin-image', false);
+      }
+    };
+
+    /* ── Card 3: Voice Screen ── */
+    window.runVoiceScreen = async function() {
+      const checked = [...document.querySelectorAll('#card-voice input[type=checkbox]:checked')]
+        .map(c => c.value);
+      if (checked.length === 0) {
+        setResult('res-voice', 'Please select at least one symptom to screen.', true);
+        return;
+      }
+      const lang = document.getElementById('voice-lang').value;
+      setSpinner('spin-voice', true);
+      document.getElementById('res-voice').className = 'try-result';
+      try {
+        const r = await fetch(API_BASE + '/voice-aspiration-screen', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symptoms: checked, language: lang })
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? data.message ?? 'API error ' + r.status);
+        renderVoiceResult(data, 'res-voice');
+      } catch(e) {
+        setResult('res-voice', '⚠ ' + e.message, true);
+      } finally {
+        setSpinner('spin-voice', false);
+      }
+    };
+
+    /* Allow Enter key on textarea to trigger classify */
+    document.getElementById('txt-desc').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.runTextClassify(); }
+    });
+  })();
+  </script>
+
+  <hr class="divider" />
+
+  <!-- ─── Public Asset Commitment ─── -->
+  <section id="commitment">
+    <div class="commitment-inner">
+      <div class="commitment-intro">
+        <div class="section-label">Our Commitment</div>
+        <h2>We keep public-good health infrastructure public</h2>
+        <p>
+          CareEZ is structured as a social enterprise because clinical nutrition standards
+          and AI safety tools for vulnerable populations must not be locked behind commercial
+          barriers. The following principles govern how we operate and how any future funding
+          or partnership is structured.
+        </p>
+      </div>
+      <ul class="commitment-list">
+        <li>
+          <div class="ci-icon">&#10005;</div>
+          <div class="ci-text">
+            <strong>We do not take equity that extracts value</strong>
+            <span>No investor terms that transfer clinical IP or pricing control away from the social enterprise governance structure.</span>
+          </div>
+        </li>
+        <li>
+          <div class="ci-icon">&#10005;</div>
+          <div class="ci-text">
+            <strong>We do not gate access by affordability</strong>
+            <span>Products and tools are priced or subsidised for accessibility across all partner facility tiers, including subsidised care homes.</span>
+          </div>
+        </li>
+        <li>
+          <div class="ci-icon">&#10005;</div>
+          <div class="ci-text">
+            <strong>We do not commercialise patient data</strong>
+            <span>All clinical data collected via the AI programme remains within the care setting and is not monetised or sold to third parties.</span>
+          </div>
+        </li>
+        <li>
+          <div class="ci-icon">&#10005;</div>
+          <div class="ci-text">
+            <strong>We do not dilute clinical standards for commercial convenience</strong>
+            <span>IDDSI compliance, HKCSS 護食標準 alignment, and T/SATA 094 credential requirements are non-negotiable across all product formulations and facility deployments.</span>
+          </div>
+        </li>
+        <li>
+          <div class="ci-icon">&#10005;</div>
+          <div class="ci-text">
+            <strong>We do not accept funding that contradicts our mission</strong>
+            <span>Grant and impact funding terms are reviewed against our SED registration requirements and Tree Mark obligations before acceptance.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Credentials Strip ─── -->
+  <section id="credentials">
+    <div class="cred-inner">
+      <div class="section-label">Credentials &amp; Standards</div>
+      <h2>Recognised by Hong Kong&rsquo;s leading clinical and innovation bodies</h2>
+      <div class="cred-grid">
+
+        <div class="cred-card cred-card-highlight">
+          <div class="cred-name">HKEX IFS Applicant 2026</div>
+          <div class="cred-desc">
+            Applying to HKEX Foundation &times; HKCSS Impact Funding Scheme 2026 for the
+            AI 照護食 Adoption Assistant &mdash; HK&rsquo;s first AI-accelerated
+            護食標準 adoption infrastructure.
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">HKCSS 護食標準 Aligned</div>
+          <div class="cred-desc">
+            Products and AI tools grounded in the HKCSS Care Food Working Group&rsquo;s
+            照護食 standard. Supports Hong Kong&rsquo;s 8-year 照護食 adoption programme.
+            <br><a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">HK Tree Mark #83</div>
+          <div class="cred-desc">
+            CareEZ Senior Deli registered on the Hong Kong Social Enterprise quality mark.
+            <br><a href="https://www.hkcss.org.hk/e/treemark/" target="_blank" rel="noopener">HKCSS Tree Mark &#8599;</a>
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">IDDSI Certified</div>
+          <div class="cred-desc">
+            Products formulated and labelled to the International Dysphagia Diet Standardisation Initiative framework for clinical texture classification.
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">T/SATA 094</div>
+          <div class="cred-desc">
+            SeniorDeli holds the T/SATA 094 credential. Specific scope and coverage as defined by the certifying body&rsquo;s published standard.
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">HKSTP Tech Startup</div>
+          <div class="cred-desc">
+            Affiliated with Hong Kong Science &amp; Technology Parks Corporation as a recognised technology startup.
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">TechUp Grant &middot; HKD 600K</div>
+          <div class="cred-desc">
+            HKSAR Government TechUp grant of HKD 600,000 awarded in 2025 to support AI programme development.
+          </div>
+        </div>
+
+        <div class="cred-card">
+          <div class="cred-name">SED Registered</div>
+          <div class="cred-desc">
+            Carewells Limited registered in Hong Kong&rsquo;s Social Enterprise Directory under HKCSS.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Contact ─── -->
+  <section id="contact">
+    <h2>Enquiries Welcome</h2>
+    <p>For partnership, impact funding, and clinical deployment enquiries.</p>
+    <div class="contact-links">
+      <a class="contact-btn" href="/cdn-cgi/l/email-protection#9af2fff6f6f5daf9fbe8ffffe0b4f5e8fd"><span class="__cf_email__" data-cfemail="29414c454546694a485b4c4c5307465b4e">[email&#160;protected]</span></a>
+      <a class="contact-btn" href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a>
+    </div>
+    <div class="contact-people">
+      Contact: Karen Chan &middot; Raymond Chau &middot; Abellona U
+    </div>
+  </section>
+
+  </main><!-- /#main-content -->
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="/cdn-cgi/l/email-protection#0d65686161624d6e6c7f68687723627f6a"><span class="__cf_email__" data-cfemail="244c4148484b6447455641415e0a4b5643">[email&#160;protected]</span></a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/security">Security</a> &middot;
+        <a href="/changelog/">Changelog</a> &middot;
+        <a href="/compare/">Compare</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- Cloudflare Pages Analytics --><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

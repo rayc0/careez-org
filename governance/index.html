@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Governance — CareEZ | Carewells Limited</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="CareEZ data governance inversion: HKU Swallowing Research Laboratory + Full Linkage (s.88) co-steward the public clinical dataset. Apache-2.0 licensed. Not privatisable by Carewells." />
+
+  <link rel="canonical" href="https://careez.org/governance/" />
+  <link rel="alternate" hreflang="en" href="https://careez.org/governance/" />
+  <link rel="alternate" hreflang="zh-HK" href="https://careez.org/governance/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/governance/" />
+  <meta property="og:title" content="Data Governance — CareEZ" />
+  <meta property="og:description" content="HKU + Full Linkage (s.88) co-stewardship. The public clinical dataset cannot be privatised. Apache-2.0. Scope transferable to HKCSS or public custodian." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "CareEZ Data Governance",
+    "url": "https://careez.org/governance/",
+    "description": "CareEZ operates a governance inversion: the public clinical dataset is co-stewarded by HKU Swallowing Research Laboratory and Full Linkage Community Care Association (s.88 charity). Carewells Limited cannot privatise the public asset. Licensed Apache-2.0.",
+    "isPartOf": { "@type": "WebSite", "url": "https://careez.org/" },
+    "about": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "alternateName": "CareEZ"
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+      --cyan: #00E5FF; --cyan2: #29B6F6;
+      --white: #FFFFFF; --gray: #B0BEC5; --gray2: #78909C;
+      --yellow: #FFD43B; --green: #4CAF50;
+      --accent-bar: 5px; --max-w: 1100px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body {
+      background-color: var(--navy); color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: var(--accent-bar); height: 22px;
+      background: var(--cyan); border-radius: 2px; flex-shrink: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,20,40,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,229,255,0.12); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); text-decoration: none; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 0; }
+    .page-hero {
+      padding: 80px 24px 60px; background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero h1 span { color: var(--cyan); }
+    .page-hero .lead {
+      font-size: clamp(16px, 2vw, 18px); color: var(--gray);
+      max-width: 680px; line-height: 1.65;
+    }
+    .content-section { padding: 72px 24px; }
+    .content-section.alt { background: var(--navy2); }
+    .content-inner { max-width: var(--max-w); margin: 0 auto; }
+    .content-inner h2 {
+      font-size: clamp(24px, 3vw, 34px); font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 20px;
+    }
+    .content-inner p {
+      font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 20px; max-width: 800px;
+    }
+    .content-inner p:last-child { margin-bottom: 0; }
+    .content-inner h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
+      margin-top: 40px; margin-bottom: 12px; color: var(--white);
+    }
+    /* Two-layer diagram */
+    .layer-diagram { display: flex; flex-direction: column; gap: 16px; max-width: 820px; margin: 32px 0; }
+    .layer {
+      padding: 28px 28px; border-radius: 10px;
+      border: 1px solid; position: relative; overflow: hidden;
+    }
+    .layer-a {
+      background: rgba(0,229,255,0.04); border-color: rgba(0,229,255,0.25);
+    }
+    .layer-a::before {
+      content: 'LAYER A'; position: absolute; top: 14px; right: 18px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.2em; color: var(--cyan2); opacity: 0.6;
+    }
+    .layer-b {
+      background: rgba(255,212,59,0.03); border-color: rgba(255,212,59,0.2);
+    }
+    .layer-b::before {
+      content: 'LAYER B'; position: absolute; top: 14px; right: 18px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.2em; color: var(--yellow); opacity: 0.6;
+    }
+    .layer-title {
+      font-size: 16px; font-weight: 800; margin-bottom: 6px;
+    }
+    .layer-a .layer-title { color: var(--cyan); }
+    .layer-b .layer-title { color: var(--yellow); }
+    .layer p { font-size: 14px; color: var(--gray); line-height: 1.75; margin-bottom: 0; max-width: none; }
+    /* Steward boxes */
+    .steward-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; max-width: 820px; }
+    .steward-box {
+      padding: 24px 22px; background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.15); border-radius: var(--r);
+      border-top: 3px solid var(--cyan);
+    }
+    .steward-box h3, .steward-box h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .steward-box .steward-type {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cyan2); margin-bottom: 10px;
+    }
+    .steward-box p { font-size: 13px; color: var(--gray); line-height: 1.75; margin-bottom: 0; max-width: none; }
+    /* Prohibition list */
+    .prohibition-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 24px 0; max-width: 800px; }
+    .prohibition-list li {
+      display: grid; grid-template-columns: 36px 1fr;
+      gap: 14px; align-items: start; padding: 16px 18px;
+      background: rgba(0,229,255,0.03); border: 1px solid rgba(0,229,255,0.1); border-radius: var(--r);
+    }
+    .proh-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: var(--cyan); font-weight: 900; flex-shrink: 0; margin-top: 1px;
+    }
+    .proh-text strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .proh-text span { font-size: 13px; color: var(--gray); line-height: 1.6; }
+    /* License box */
+    .license-box {
+      padding: 28px 28px; background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.15); border-radius: 10px;
+      border-left: var(--accent-bar) solid var(--cyan);
+      max-width: 820px; margin: 28px 0;
+    }
+    .license-box h3, .license-box h4 { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--cyan); }
+    .license-box p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 14px; max-width: none; }
+    .license-box p:last-child { margin-bottom: 0; }
+    .license-box code {
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px;
+      font-size: 13px; color: #A8FF78;
+    }
+    /* Callout */
+    .callout {
+      padding: 22px 26px; background: rgba(0,229,255,0.04);
+      border-left: var(--accent-bar) solid rgba(0,229,255,0.35);
+      border-radius: 0 var(--r) var(--r) 0;
+      border: 1px solid rgba(0,229,255,0.12); border-left-width: var(--accent-bar);
+      margin: 28px 0; max-width: 800px;
+    }
+    .callout p { font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 0; max-width: none; }
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta { font-size: 12px; color: var(--gray2); text-align: right; }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .steward-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" aria-label="CareEZ home" href="/">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/" class="active">Governance</a></li>
+        <li><a href="/partners/">Partners</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/opensource/">Open Source</a></li>
+        <li><a href="/#live-api">Live API</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-label">Data Governance</div>
+      <h1>The public clinical asset<br><span>cannot be privatised.</span></h1>
+      <p class="lead">
+        CareEZ operates a governance inversion: the clinical dataset and derived models are co-stewarded by
+        HKU Swallowing Research Laboratory and Full Linkage Community Care Association (s.88 charity) —
+        neither of which is Carewells Limited.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Two-layer architecture -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">Architecture</div>
+      <h2>The governance inversion explained</h2>
+
+      <p>
+        Impact money in Hong Kong is rightly cautious about subsidising a private moat. The CareEZ
+        two-layer design removes that concern by separating the grant-funded public asset from the
+        commercial operations of Carewells Limited at the constitutional level — not just at the level
+        of accounting policy.
+      </p>
+
+      <div class="layer-diagram">
+        <div class="layer layer-a">
+          <div class="layer-title">Public Asset — Grant-Funded, Co-Governed</div>
+          <p>
+            Grant funds three things and only these three things: (i) a public clinical-data resource on
+            Hong Kong dysphagia and 照護食 adoption; (ii) the city's first Hong Kong 照護食 Adoption Index;
+            and (iii) the RCHE Adoption Acceleration Programme across 30 care homes. The data, the Index
+            methodology, the trained models, and the carer-facing knowledge hub produced under the grant
+            are co-governed by <strong>HKU Swallowing Research Laboratory</strong> and
+            <strong>Full Linkage Community Care Association</strong> — a Section 88 charity that is a
+            separate legal entity from Carewells. Carewells does not own this asset, cannot privatise it,
+            and cannot license it for exclusive commercial benefit.
+          </p>
+        </div>
+        <div class="layer layer-b">
+          <div class="layer-title">Commercial Layer — Carewells-Owned, Beside the Asset</div>
+          <p>
+            Carewells Limited's commercial operations — enterprise screening deployment for institutional
+            buyers, 照護食 certification and compliance tooling sold to private operators, B2B institutional
+            contracts, and downstream nutrition services — run on a separate corporate track. The commercial
+            layer never operates on grant-funded data and never inherits grant-funded IP. The public asset
+            is published under the co-governance protocol; Carewells builds its commercial tools against
+            the same public reference, exactly as any other vendor in Hong Kong may.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          The grant funds the public-good adoption layer. The commercial layer sustains operations and
+          is the post-grant engine. These two tracks do not cross.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Co-stewards -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">Co-Stewards</div>
+      <h2>HKU + Full Linkage: who holds the public asset</h2>
+
+      <p>
+        The co-steward structure is the data-governance answer to the most material objection an HKCSS
+        or research-ethics reviewer can raise: who owns the clinical dataset, and what stops the applicant
+        operator from privatising a public resource? Two independent institutions hold that answer.
+      </p>
+
+      <div class="steward-grid">
+        <div class="steward-box">
+          <div class="steward-type">Clinical Integrity</div>
+          <h3>HKU Swallowing Research Laboratory</h3>
+          <p>
+            Anchors the clinical-research integrity of the public dataset. Owns classifier validation
+            thresholds, voice-biomarker reference standards, and Adoption Index methodology. The
+            laboratory's standing in Hong Kong's clinical community makes data-quality standards
+            externally auditable and immune to commercial pressure from Carewells.
+          </p>
+        </div>
+        <div class="steward-box">
+          <div class="steward-type">Public-Interest Disposition</div>
+          <h3>Full Linkage Community Care Association</h3>
+          <p>
+            A registered Hong Kong s.88 charity — a separate legal entity with its own board, governance,
+            and audited accounts. Full Linkage's s.88 status anchors the public-interest disposition of
+            the data: its constitutional objects prohibit private benefit, making it structurally impossible
+            for the dataset to be redirected to commercial ends without breaching charity law.
+          </p>
+        </div>
+      </div>
+
+      <h3>What co-stewardship means in practice</h3>
+
+      <ul class="prohibition-list">
+        <li>
+          <div class="proh-icon">&#x2713;</div>
+          <div class="proh-text">
+            <strong>Published ethics and consent protocols</strong>
+            <span>Consent forms, ethics protocols, retention rules, and downstream re-use terms are published under a governance framework co-developed by Full Linkage and HKU Swallowing Research Lab — and audited by their respective compliance counsel.</span>
+          </div>
+        </li>
+        <li>
+          <div class="proh-icon">&#x2713;</div>
+          <div class="proh-text">
+            <strong>Data does not sit on Carewells' balance sheet</strong>
+            <span>The public clinical resource — the multilingual dysphagia / 照護食 dataset, and any voice-biomarker or screening model trained on it — is stewardship property of Full Linkage and HKU, not an asset of Carewells Limited.</span>
+          </div>
+        </li>
+        <li>
+          <div class="proh-icon">&#x2713;</div>
+          <div class="proh-text">
+            <strong>Carewells is the delivery vehicle, not the owner</strong>
+            <span>Carewells operates the programme infrastructure — carer-facing app, API endpoints, training materials. It does not own the underlying dataset or the derived models trained on it.</span>
+          </div>
+        </li>
+        <li>
+          <div class="proh-icon">&#x2713;</div>
+          <div class="proh-text">
+            <strong>Scope transferable to HKCSS or public custodian</strong>
+            <span>The programme's scope, data, and trained models are designed to be transferable to HKCSS or another public custodian without loss of continuity. No lock-in to Carewells' infrastructure. The public asset outlives any commercial arrangement.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Open source license -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">Open Source</div>
+      <h2>Apache-2.0 — no proprietary lock-in</h2>
+
+      <p>
+        All software infrastructure developed under the grant-funded public layer is released under the
+        Apache License 2.0. This is not a defensive PR choice — it is a structural requirement of the
+        public-asset commitment.
+      </p>
+
+      <div class="license-box">
+        <h3>Apache License 2.0</h3>
+        <p>
+          The CareEZ carer-facing AI assistant, the IDDSI classification engine, the 照護食 Adoption Index
+          methodology codebase, and all grant-funded training materials are published under
+          <code>Apache-2.0</code>. Any operator, regulator, or researcher in Hong Kong — or globally — may
+          inspect, fork, audit, or deploy the same infrastructure without requiring a Carewells licence or
+          commercial agreement.
+        </p>
+        <p>
+          The commercial layer (enterprise audit-log module, certification tooling, B2B compliance dashboards)
+          is separate Carewells IP and is not subject to this licence. The line between public and commercial
+          layers maps exactly to the two-layer architecture described above.
+        </p>
+        <p>
+          This means: HKCSS, the Hospital Authority, any NGO operator, or any future public custodian can
+          take the public-layer codebase and run it independently. Carewells is not a chokepoint.
+        </p>
+      </div>
+
+      <h3>Why this matters for Hong Kong's elderly care sector</h3>
+
+      <p>
+        Clinical AI for dysphagia screening is public-health infrastructure. If it is built as proprietary
+        software by a single vendor, the sector becomes dependent on that vendor's pricing, continuity, and
+        priorities. Apache-2.0 removes that dependency: the code is auditable by any clinical reviewer,
+        forkable by any public agency, and deployable by any qualified operator. The governance design
+        makes CareEZ's contribution durable beyond any single company's lifespan.
+      </p>
+
+      <p>
+        The broader clinical knowledge base at
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a>
+        (600+ structured IDDSI and 照護食 reference articles in four languages) is similarly published
+        as a free, open reference — no paywall, no login required.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Sustainability without second grant -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">Sustainability</div>
+      <h2>The public asset does not need a second grant to survive</h2>
+
+      <p>
+        After the grant closes (Month 24), the public asset continues under its co-governance protocol
+        with HKU and Full Linkage. Its recurring operational cost — model inference, hosting,
+        knowledge-hub maintenance, governance secretariat — totals under HK$300,000/year on conservative
+        projections.
+      </p>
+
+      <p>
+        That recurring envelope is covered, in full, by commercial-layer revenue from Year 2: powder-line
+        margin alone clears the public-asset hosting and inference bill; certification fees and NGO
+        licensing form the buffer. No further public funding is required to keep the asset alive.
+        The commercial layer is the post-grant engine; the public asset is the legacy.
+      </p>
+
+      <div class="callout">
+        <p>
+          The grant funds the public-good adoption layer. Once the 24-month grant closes, the public asset
+          continues under its co-governance protocol; the commercial layer continues under Carewells' own
+          P&amp;L; neither requires further public funding. This is structural sustainability, not aspirational.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" style="padding:32px 24px;">
+    <div class="content-inner">
+      <p style="font-size:13px;color:var(--gray2);max-width:700px;">
+        繁體版本籌備中 — Traditional Chinese version in preparation. For governance enquiries:
+        <a href="/cdn-cgi/l/email-protection#4028252c2c2f0023213225253a6e2f3227"><span class="__cf_email__" data-cfemail="5c34393030331c3f3d2e39392672332e3b">[email&#160;protected]</span></a>.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="/cdn-cgi/l/email-protection#274f424b4b486744465542425d09485540"><span class="__cf_email__" data-cfemail="0a626f6666654a696b786f6f702465786d">[email&#160;protected]</span></a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+  </main><!-- /#main-content -->
+
+<!-- Cloudflare Pages Analytics --><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

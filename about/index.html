@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About CareEZ — Dysphagia, 照護食 &amp; Clinical AI in Hong Kong</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="CareEZ (Carewells Limited) is a Hong Kong social enterprise addressing dysphagia for 640K untrained carers and 28–42K RCHE residents. Multimodal clinical AI aligned with HKCSS 護食標準 and IDDSI." />
+
+  <link rel="canonical" href="https://careez.org/about/" />
+
+  <link rel="alternate" hreflang="en" href="https://careez.org/about/" />
+  <link rel="alternate" hreflang="zh-HK" href="https://careez.org/about/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/about/" />
+  <meta property="og:title" content="About CareEZ — Dysphagia AI &amp; 照護食 in Hong Kong" />
+  <meta property="og:description" content="640K untrained carers, 28–42K RCHE residents with dysphagia, zero multilingual point-of-care tools. CareEZ closes that gap with multimodal clinical AI grounded in HKCSS 護食標準." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About CareEZ",
+    "url": "https://careez.org/about/",
+    "description": "CareEZ (Carewells Limited) is a Hong Kong social enterprise developing multimodal clinical AI for dysphagia management, aligned with HKCSS 護食標準 and the international IDDSI framework.",
+    "isPartOf": { "@type": "WebSite", "url": "https://careez.org/" },
+    "about": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "alternateName": "CareEZ",
+      "url": "https://careez.org/",
+      "foundingDate": "2023",
+      "address": { "@type": "PostalAddress", "addressLocality": "Hong Kong", "addressCountry": "HK" }
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+      --cyan: #00E5FF; --cyan2: #29B6F6;
+      --white: #FFFFFF; --gray: #B0BEC5; --gray2: #78909C;
+      --yellow: #FFD43B; --green: #4CAF50;
+      --accent-bar: 5px; --max-w: 1100px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body {
+      background-color: var(--navy); color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: var(--accent-bar); height: 22px;
+      background: var(--cyan); border-radius: 2px; flex-shrink: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,20,40,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,229,255,0.12); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); text-decoration: none; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 0; }
+    /* Page hero */
+    .page-hero {
+      padding: 80px 24px 60px; background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero h1 span { color: var(--cyan); }
+    .page-hero .lead {
+      font-size: clamp(16px, 2vw, 19px); color: var(--gray);
+      max-width: 680px; line-height: 1.65; font-weight: 400;
+    }
+    /* Content sections */
+    .content-section { padding: 72px 24px; }
+    .content-section.alt { background: var(--navy2); }
+    .content-inner { max-width: var(--max-w); margin: 0 auto; }
+    .content-inner h2 {
+      font-size: clamp(24px, 3vw, 34px); font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 20px;
+    }
+    .content-inner p {
+      font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 20px; max-width: 800px;
+    }
+    .content-inner p:last-child { margin-bottom: 0; }
+    .content-inner h3 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
+      margin-top: 40px; margin-bottom: 12px; color: var(--white);
+    }
+    /* Stat strip */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px; margin: 40px 0;
+    }
+    .stat-box {
+      padding: 24px 22px; background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-left: var(--accent-bar) solid var(--cyan); border-radius: var(--r);
+    }
+    .stat-box .num {
+      font-size: 34px; font-weight: 900; color: var(--cyan);
+      letter-spacing: -0.02em; line-height: 1; margin-bottom: 6px;
+    }
+    .stat-box .lbl { font-size: 13px; color: var(--gray); font-weight: 500; line-height: 1.4; }
+    /* Callout box */
+    .callout {
+      padding: 24px 28px; background: rgba(0,229,255,0.04);
+      border-left: var(--accent-bar) solid var(--cyan);
+      border-radius: 0 var(--r) var(--r) 0;
+      border: 1px solid rgba(0,229,255,0.15);
+      border-left-width: var(--accent-bar);
+      margin: 32px 0; max-width: 800px;
+    }
+    .callout p { color: var(--gray); font-size: 15px; line-height: 1.8; margin-bottom: 0; }
+    /* Population list */
+    .pop-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 24px 0; max-width: 760px; }
+    .pop-list li {
+      display: grid; grid-template-columns: 52px 1fr;
+      gap: 16px; align-items: start;
+      padding: 16px 20px; background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--r);
+    }
+    .pop-num {
+      font-size: 16px; font-weight: 900; color: var(--cyan);
+      line-height: 1.2; margin-top: 2px;
+    }
+    .pop-desc strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .pop-desc span { font-size: 13px; color: var(--gray); line-height: 1.6; }
+    /* Why now grid */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
+    .why-card {
+      padding: 24px 24px; background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r);
+      border-top: 3px solid var(--cyan);
+    }
+    .why-card h3, .why-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .why-card p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 0; }
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta { font-size: 12px; color: var(--gray2); text-align: right; }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" aria-label="CareEZ home" href="/">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/" class="active">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/">Governance</a></li>
+        <li><a href="/partners/">Partners</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/opensource/">Open Source</a></li>
+        <li><a href="/#live-api">Live API</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-label">About Care<span style="color:var(--cyan)">EZ</span></div>
+      <h1>Swallowing safety for <span>640,000</span> carers<br>who have no clinical backup</h1>
+      <p class="lead">
+        CareEZ is the multimodal clinical AI that puts Hong Kong's 照護食 standard into the hands of every
+        frontline carer — in their language, at the meal, before the harm is done.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Problem at scale -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">The Problem</div>
+      <h2>Dysphagia is Hong Kong's largest preventable nutrition emergency</h2>
+
+      <p>
+        Aspiration pneumonia — food, liquid, or saliva entering the airway — is a leading preventable cause
+        of death and hospitalisation among frail elderly in Hong Kong. It is the dominant infectious cause of
+        death in residential elderly care, and a top acute admission category in the 75+ cohort. Every case is
+        the end-point of a chain that began earlier: an undetected swallowing impairment, a meal texture wrong
+        for the person at the table.
+      </p>
+
+      <div class="stat-strip">
+        <div class="stat-box">
+          <div class="num">28–42K</div>
+          <div class="lbl">RCHE residents in Hong Kong with clinically meaningful dysphagia at any moment (SWD 2024 × IDDSI prevalence data)</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">150K</div>
+          <div class="lbl">Hong Kong elderly with confirmed dysphagia or chewing difficulty (C&amp;SD 2022; HKU Swallowing Research Laboratory)</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">640K</div>
+          <div class="lbl">Frontline carers making real-time meal-safety decisions every day — none with structured dysphagia training</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">HK$60–120K</div>
+          <div class="lbl">Estimated cost per aspiration pneumonia admission in the public hospital system — hundreds of millions annually in aggregate</div>
+        </div>
+      </div>
+
+      <p>
+        International prevalence studies place 40–60% of residential care residents on the swallowing-impaired
+        spectrum (Baijens et al., 2016, <em>European White Paper on Dysphagia</em>). Applied to Hong Kong's
+        70,000-resident RCHE population, this implies 28,000–42,000 RCHE residents with clinically meaningful
+        dysphagia at any moment. The economic and human cost runs into the hundreds of millions of dollars
+        annually — and most of it is preventable.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Decision point -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">The Decision Point</div>
+      <h2>The carer decides — not the clinician</h2>
+
+      <p>
+        The person who decides whether an elderly individual's next meal is safe is almost never a speech
+        therapist or doctor. It is a frontline carer making a real-time judgement in a kitchen, ward, or
+        living room. Three populations carry this decision, totalling approximately 640,000 people:
+      </p>
+
+      <ul class="pop-list">
+        <li>
+          <div class="pop-num">~5K</div>
+          <div class="pop-desc">
+            <strong>Frontline RCHE care staff</strong>
+            <span>Across 700+ registered residential care homes for the elderly (SWD 2024). Responsible for meal preparation and feeding at institutional scale — typically with no dysphagia screening qualification.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pop-num">~380K</div>
+          <div class="pop-desc">
+            <strong>Foreign domestic helpers (FDHs)</strong>
+            <span>Predominantly Tagalog- and Bahasa-speaking, a rapidly growing share of Hong Kong's elderly care workforce in private households (C&amp;SD 2024). Accessible only via mobile channels; cannot attend Cantonese-language classroom training during working hours.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pop-num">~260K</div>
+          <div class="pop-desc">
+            <strong>Family caregivers</strong>
+            <span>Primarily women who have reduced or exited paid employment for unpaid elder care. Motivated and present at every meal — but entirely untrained in dysphagia detection or safe texture selection.</span>
+          </div>
+        </li>
+      </ul>
+
+      <p>
+        None receive structured dysphagia screening training. None carry a clinician in their pocket. None
+        have a multilingual reference tool at the meal. They make the consequential call — <em>can this
+        person swallow rice tonight?</em> — without support.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- The structural gap -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">The Structural Gap</div>
+      <h2>The standard exists. The reach does not.</h2>
+
+      <p>
+        Since 2023, the <strong>HKCSS Care Food Working Group</strong> has built Hong Kong's 照護食 standard
+        into globally leading infrastructure: over HK$10M invested, 30+ staff, the 2023 <em>Guideline of
+        Care Food Standard</em>, the 照護食 product and service directory, seven annual Cooking Competitions,
+        and partnerships with Kerry Group, ZeShan Foundation, the CUHK Food Research Centre, and the HKU
+        Swallowing Research Laboratory. Since 2024, the Competition has included foreign domestic helpers; an
+        Indonesian-language summary of the Seven Key Elements has been published.
+      </p>
+
+      <p>
+        The standard, the clinical content, and the institutional ambition are all in place. What HKCSS did
+        not — and structurally cannot — operationalise is <strong>detection at the point of care</strong>:
+        a multilingual screening and guidance layer reaching every carer at every meal. The Working Group's
+        mandate is to set the standard and convene the sector. It is not a 24/7 deployment organisation,
+        does not staff a clinician at every kitchen, and operates principally in Cantonese and English while
+        the largest carer cohort speaks Tagalog or Bahasa Indonesia.
+      </p>
+
+      <div class="callout">
+        <p>
+          This is a structural gap in mandate, language, and channel — not a capability criticism of HKCSS.
+          HKCSS built the standard. Closing the carer-tier reach gap is a complementary task requiring a
+          different organisation type, delivery channel, and language portfolio.
+        </p>
+      </div>
+
+      <h3>Why prior solutions don't close the gap</h3>
+
+      <p>
+        <strong>Clinician-led screening</strong> (Hospital Authority speech therapy; HKU clinics) is rigorous
+        but scarce — it cannot scale to 640,000 untrained carers making meal decisions every day.
+        <strong>Classroom courses</strong> (HKUSPACE, VTC) operate in Cantonese, require time off work, and
+        are inaccessible to the 380,000 FDHs who cannot read Cantonese/English fluently and cannot leave their
+        employer's home for instruction. <strong>Standards alone</strong> (IDDSI; 照護食 Guideline) deliver the
+        <em>what</em> but not the <em>how-at-this-meal</em> — written for clinicians, not for a Filipino helper
+        preparing breakfast at 6am.
+      </p>
+
+      <p>
+        No existing tool combines vision + voice + multilingual delivery at the meal-preparation moment. The
+        carer needs an answer in her language, on a phone she already has, in the seconds before serving.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- What CareEZ does -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">What CareEZ Does</div>
+      <h2>Multimodal clinical AI — at the meal, in your language</h2>
+
+      <p>
+        CareEZ is the <strong>complementary infrastructure layer</strong> the 照護食 standard requires to
+        reach the 640,000 carers who implement it. It is not a competitor to HKCSS, to clinical providers,
+        or to existing carer training. The standard stays with HKCSS. Clinical authority stays with the
+        Hospital Authority, the HKU Swallowing Research Laboratory, and our clinical advisory team. CareEZ
+        funds and operates the delivery channel that lets the standard reach the meal.
+      </p>
+
+      <h3>Three integrated capabilities</h3>
+
+      <ul class="pop-list">
+        <li>
+          <div class="pop-num" style="font-size:22px;">&#x1F4F7;</div>
+          <div class="pop-desc">
+            <strong>Vision-based IDDSI food and liquid classification</strong>
+            <span>A carer photographs a dish or describes it in text; CareEZ returns the IDDSI level and 照護食 (護食標準) equivalent in real time. Deployed at <a href="https://demo.careez.org">demo.careez.org</a> and callable via the live public API at api.seniordeli.com.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pop-num" style="font-size:22px;">&#x1F3A4;</div>
+          <div class="pop-desc">
+            <strong>Voice-based aspiration risk screening</strong>
+            <span>Symptom-driven aspiration risk triage — carer selects observed signs; CareEZ returns a risk tier (low / medium / high) and recommended action. Designed for point-of-care use by untrained lay carers.</span>
+          </div>
+        </li>
+        <li>
+          <div class="pop-num" style="font-size:22px;">&#x1F310;</div>
+          <div class="pop-desc">
+            <strong>Multilingual deployment</strong>
+            <span>English, Traditional Chinese (繁體中文), Filipino (Tagalog), and Bahasa Indonesia. The language portfolio is designed around the actual workforce — not just the administrative language of Hong Kong's care system.</span>
+          </div>
+        </li>
+      </ul>
+
+      <h3>Delivery channels</h3>
+      <p>
+        Year 1: WhatsApp Business chatbot (the channel every FDH already uses) and browser-based care-home
+        tablets. Year 2: 30-site RCHE pilot with Adoption Champion certification cohorts and a facility-level
+        compliance dashboard. Year 3: Hong Kong's first public <strong>照護食 Adoption Index</strong> — measuring
+        standard uptake across facility types, geography, and carer populations.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Why now -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">Why Now</div>
+      <h2>LLMs make multilingual clinical AI feasible for the first time</h2>
+
+      <p>
+        The dysphagia problem in Hong Kong is not new. What changed in 2023–2025 is the feasibility of the
+        solution. Large language models now enable clinical-grade AI assistants that operate fluently across
+        Cantonese, English, Tagalog, and Bahasa Indonesia without requiring separate expert systems for each
+        language. Vision models can classify food texture from a smartphone photo. Voice models can screen
+        aspiration risk from described symptoms.
+      </p>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <h3>Multilingual at marginal cost</h3>
+          <p>LLM-based classification runs at under HK$0.50 per carer session. Reaching 150,000 caregivers in Year 2 costs under HK$75,000 in incremental AI inference — roughly 1/10th the cost of classroom-equivalent training per carer.</p>
+        </div>
+        <div class="why-card">
+          <h3>HKCSS standard is ready</h3>
+          <p>The 照護食 clinical standard, product directory, and institutional partnerships are fully built. CareEZ does not need to create the clinical content — it routes carers to what already exists, in their language.</p>
+        </div>
+        <div class="why-card">
+          <h3>WhatsApp is already in every FDH's pocket</h3>
+          <p>No app install required. No Cantonese literacy required. No workplace leave required. The delivery channel for the world's largest carer cohort is already deployed — CareEZ meets carers where they are.</p>
+        </div>
+        <div class="why-card">
+          <h3>Co-governance is structurally possible</h3>
+          <p>HKU Swallowing Research Laboratory and Full Linkage Community Care Association (s.88 charity) provide the clinical and data-governance anchors that make a public-asset commitment credible and auditable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CareEZ entity -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">Who We Are</div>
+      <h2>Carewells Limited, trading as CareEZ</h2>
+
+      <p>
+        Carewells Limited is a Hong Kong company registered in the HKCSS Social Enterprise Directory and
+        operating under the brand CareEZ. The social enterprise entity is the vehicle for the grant-funded
+        public-good layer; commercial operations — enterprise screening tooling, certification, and the
+        12-SKU SeniorDeli food-modification powder line — run on a separate commercial track beside, not
+        on top of, the public asset. See <a href="/governance/">Governance</a> for the full co-stewardship
+        structure.
+      </p>
+
+      <p>
+        CareEZ Senior Deli is registered on HK Tree Mark #83. The company is a HKSTP-affiliated tech startup
+        and holds a HKSAR TechUp grant of HKD 600,000 awarded in 2025 to accelerate AI programme development.
+        SeniorDeli is a co-drafting institution of T/SATA 094-2025 (Greater Bay Area group standard on
+        General Requirements for Dysphagia Foods for Elderly Care) and is named in companion standards
+        T/SATA 084-2025 and T/SATA 085-2025.
+      </p>
+
+      <p>
+        The broader knowledge base supporting this work is maintained at
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a> — a free multilingual
+        IDDSI and 照護食 reference resource of 600+ structured clinical articles, available in English,
+        Traditional Chinese, Tagalog, and Bahasa Indonesia.
+      </p>
+
+      <p style="margin-top:36px;">
+        <a href="/team/" style="display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:40px;font-size:14px;font-weight:700;background:var(--cyan);color:var(--navy);text-decoration:none;">Meet the team &rarr;</a>
+        &nbsp;&nbsp;
+        <a href="/governance/" style="display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:40px;font-size:14px;font-weight:600;border:1.5px solid var(--cyan);color:var(--cyan);text-decoration:none;">Data governance &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Note on TC -->
+  <section class="content-section alt" style="padding:32px 24px;">
+    <div class="content-inner">
+      <p style="font-size:13px;color:var(--gray2);max-width:700px;">
+        繁體版本籌備中 — Traditional Chinese version in preparation. Clinical reference content available now at
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a>.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="/cdn-cgi/l/email-protection#caa2afa6a6a58aa9abb8afafb0e4a5b8ad"><span class="__cf_email__" data-cfemail="741c1118181b3417150611110e5a1b0613">[email&#160;protected]</span></a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+  </main><!-- /#main-content -->
+
+<!-- Cloudflare Pages Analytics --><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

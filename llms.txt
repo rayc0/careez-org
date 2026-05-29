@@ -1,0 +1,52 @@
+# CareEZ — llms.txt
+# Per llmstxt.org specification — context for LLM crawlers and AI assistants
+
+## What is CareEZ?
+
+CareEZ is the operating social enterprise brand of **Carewells Limited**, a Hong Kong company registered in the Social Enterprise Directory (SED) under HKCSS. It delivers two complementary programmes:
+
+1. **Care-food products (照護食)** — texture-modified food and beverages aligned with the HKCSS 護食標準 (Care Food Standard) and the international IDDSI (International Dysphagia Diet Standardisation Initiative) framework, targeting older adults and care facilities with swallowing difficulties (dysphagia).
+
+2. **Clinical AI tools** — multimodal AI for dysphagia screening and IDDSI compliance, including a live REST API for IDDSI texture classification and thickener dosage calculation.
+
+## Key Facts
+
+- **Legal entity**: Carewells Limited (Hong Kong)
+- **Brand**: CareEZ
+- **Category**: Social Enterprise / HealthTech / ClinicalAI
+- **Founded**: 2023
+- **Founders**: Raymond Chau, Karen Chan, Abellona U
+- **Standards compliance**: IDDSI international framework, HKCSS 護食標準, T/SATA 094
+- **Government grant**: HKSAR TechUp Grant HKD 600,000 (2025)
+- **HK Tree Mark**: SED #83
+- **Funding context**: Applying to HKEX Foundation × HKCSS Impact Funding Scheme 2026
+
+## Key Concepts
+
+- **IDDSI**: International Dysphagia Diet Standardisation Initiative — a global clinical framework with 8 levels (0–7) classifying texture of food and thickness of liquids for people with swallowing difficulties.
+- **照護食 (Care Food / 護食)**: Japanese-origin concept adapted to HK context by HKCSS — food prepared to specific texture and nutritional standards for people with chewing/swallowing difficulties.
+- **HKCSS 護食標準**: Hong Kong Council of Social Service Care Food Working Group standard — the local clinical benchmark that CareEZ products and AI tools are grounded in.
+- **Dysphagia**: A medical condition characterised by difficulty or discomfort in swallowing; common among older adults and people with neurological conditions.
+
+## Key URLs
+
+- **Homepage**: https://careez.org/
+- **Live demo**: https://demo.careez.org
+- **API documentation**: https://seniordeli.com
+- **IDDSI reference resource**: https://dysphagia.cn
+- **Contact**: hello@careez.org
+
+## Live API Endpoints (publicly callable)
+
+- `POST https://www.seniordeli.com/api/iddsi-classify` — Returns IDDSI level and 照護食 equivalent for a food or liquid description.
+- `POST https://www.seniordeli.com/api/voice-aspiration-screen` — Voice-based aspiration risk screening (in development).
+
+## What CareEZ Is Not
+
+- Not a pharmaceutical company
+- Not a hospital or clinical provider
+- Not investor-controlled — clinical IP and pricing governance remain within the social enterprise structure
+
+## Language Support
+
+English and Traditional Chinese (繁體中文). The dysphagia.cn resource is multilingual (English, Traditional Chinese, Simplified Chinese).
