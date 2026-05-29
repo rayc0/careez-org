@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareEZ API Reference — Clinical AI Endpoints</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="Interactive API reference for CareEZ clinical AI endpoints: IDDSI food texture classification (text, image), aspiration risk screening, and audio analysis. Built by Carewells Limited." />
+  <link rel="canonical" href="https://careez.org/api-docs/" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/api-docs/" />
+  <meta property="og:title" content="CareEZ API Reference — Clinical AI Endpoints" />
+  <meta property="og:description" content="Live, callable REST endpoints for IDDSI food texture classification and aspiration risk screening. Try-it-now via Swagger UI." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+
+  <!-- JSON-LD: APIReference -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "APIReference",
+    "name": "CareEZ Clinical AI API",
+    "description": "Public REST API for IDDSI food texture classification (text and image input) and voice-based aspiration risk screening. Developed by Carewells Limited, Hong Kong.",
+    "url": "https://careez.org/api-docs/",
+    "documentation": "https://careez.org/api-docs/openapi.yaml",
+    "provider": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "alternateName": "CareEZ",
+      "url": "https://careez.org/",
+      "email": "hello@careez.org"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "CareEZ",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "url": "https://demo.careez.org"
+    },
+    "version": "1.0.0",
+    "programmingLanguage": "REST / JSON",
+    "availableLanguage": ["en", "zh-Hant", "zh-Hans"],
+    "license": "https://careez.org",
+    "keywords": ["IDDSI", "dysphagia", "aspiration", "care food", "clinical AI", "texture classification"]
+  }
+  </script>
+
+  <!-- Swagger UI CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+
+  <style>
+    /* ─── Reset & Base (matches careez.org palette) ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A1428;
+      --navy2:   #0E1C3A;
+      --navy3:   #132046;
+      --cyan:    #00E5FF;
+      --cyan2:   #29B6F6;
+      --white:   #FFFFFF;
+      --gray:    #B0BEC5;
+      --gray2:   #78909C;
+      --yellow:  #FFD43B;
+      --green:   #4CAF50;
+      --accent-bar: 5px;
+      --max-w:   1200px;
+      --r:       6px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body { overflow-x: hidden; }
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 20, 40, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+    .nav-links a.active { color: var(--cyan); }
+
+    /* ─── Page header ─── */
+    .page-header {
+      background: linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
+      border-bottom: 1px solid rgba(0,229,255,0.1);
+      padding: 56px 24px 48px;
+    }
+    .page-header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 20px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .page-header h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .page-header h1 .brand-cyan { color: var(--cyan); }
+    .page-header .subtitle {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .badge-cyan  { background: rgba(0,229,255,0.12); color: var(--cyan); border: 1px solid rgba(0,229,255,0.25); }
+    .badge-green { background: rgba(76,175,80,0.12); color: var(--green); border: 1px solid rgba(76,175,80,0.25); }
+    .badge-yellow{ background: rgba(255,212,59,0.12); color: var(--yellow); border: 1px solid rgba(255,212,59,0.25); }
+    .badge-gray  { background: rgba(176,190,197,0.1); color: var(--gray); border: 1px solid rgba(176,190,197,0.2); }
+
+    /* ─── Disclaimer banner ─── */
+    .disclaimer {
+      background: rgba(255,212,59,0.08);
+      border: 1px solid rgba(255,212,59,0.3);
+      border-radius: var(--r);
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--yellow);
+      max-width: var(--max-w);
+      margin: 24px auto 0;
+    }
+    .disclaimer strong { font-weight: 700; }
+
+    /* ─── Quick-ref cards ─── */
+    .quick-ref {
+      background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+      padding: 40px 24px;
+    }
+    .quick-ref-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 22px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .endpoint-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .endpoint-card {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: var(--r);
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .endpoint-card:hover { border-color: rgba(0,229,255,0.3); }
+    .endpoint-card .method {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: rgba(73,204,144,0.15);
+      color: #49cc90;
+      border: 1px solid rgba(73,204,144,0.3);
+      margin-bottom: 10px;
+    }
+    .endpoint-card .path {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      color: var(--cyan2);
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+    .endpoint-card .desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+    .endpoint-card .status-badge {
+      margin-top: 12px;
+    }
+
+    /* ─── Links row ─── */
+    .links-row {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 20px 24px 0;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .links-row a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cyan2);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ─── Swagger UI container ─── */
+    .swagger-section {
+      padding: 0 0 80px;
+      overflow-x: hidden;
+    }
+    #swagger-ui {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      overflow-x: hidden;
+    }
+    .swagger-ui .wrapper { overflow-x: hidden !important; }
+    .swagger-ui .servers-title, .swagger-ui .schemes { max-width: 100%; overflow-x: auto; }
+
+    /* ─── Swagger UI theming overrides ─── */
+    .swagger-ui .topbar { display: none !important; }
+
+    .swagger-ui .info { display: none !important; }  /* We have our own header */
+
+    .swagger-ui .scheme-container {
+      background: var(--navy2) !important;
+      border: 1px solid rgba(0,229,255,0.12) !important;
+      border-radius: var(--r) !important;
+      padding: 16px 20px !important;
+      margin: 24px 0 !important;
+      box-shadow: none !important;
+    }
+    .swagger-ui .scheme-container .schemes > label {
+      color: var(--gray) !important;
+      font-size: 12px !important;
+    }
+    .swagger-ui select {
+      background: var(--navy3) !important;
+      color: var(--white) !important;
+      border: 1px solid rgba(0,229,255,0.2) !important;
+    }
+
+    /* Operation blocks */
+    .swagger-ui .opblock {
+      background: var(--navy2) !important;
+      border: 1px solid rgba(0,229,255,0.1) !important;
+      border-radius: var(--r) !important;
+      margin-bottom: 12px !important;
+      box-shadow: none !important;
+    }
+    .swagger-ui .opblock:hover {
+      border-color: rgba(0,229,255,0.25) !important;
+    }
+    .swagger-ui .opblock.opblock-post .opblock-summary-method {
+      background: rgba(73,204,144,0.85) !important;
+    }
+    .swagger-ui .opblock-summary {
+      background: transparent !important;
+      border-bottom: none !important;
+    }
+    .swagger-ui .opblock-summary-path {
+      color: var(--white) !important;
+      font-family: 'SF Mono', 'Fira Code', monospace !important;
+    }
+    .swagger-ui .opblock-summary-description {
+      color: var(--gray) !important;
+    }
+    .swagger-ui .opblock-body {
+      background: var(--navy3) !important;
+    }
+    .swagger-ui .opblock-section-header {
+      background: rgba(0,229,255,0.04) !important;
+    }
+    .swagger-ui .opblock-section-header label {
+      color: var(--gray) !important;
+    }
+
+    /* Tags / sections */
+    .swagger-ui .opblock-tag {
+      border-bottom: 1px solid rgba(0,229,255,0.1) !important;
+      color: var(--cyan) !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.01em !important;
+    }
+    .swagger-ui .opblock-tag:hover {
+      background: rgba(0,229,255,0.04) !important;
+    }
+    .swagger-ui .opblock-tag-section h3 { color: var(--cyan) !important; }
+
+    /* Parameters & body */
+    .swagger-ui .parameters-col_description p,
+    .swagger-ui .parameter__name,
+    .swagger-ui .parameter__type,
+    .swagger-ui table.headers td,
+    .swagger-ui .response-col_status { color: var(--gray) !important; }
+    .swagger-ui .required { color: #ff6060 !important; }
+    .swagger-ui input[type=text], .swagger-ui textarea {
+      background: var(--navy) !important;
+      color: var(--white) !important;
+      border: 1px solid rgba(0,229,255,0.2) !important;
+    }
+    .swagger-ui input[type=text]:focus, .swagger-ui textarea:focus {
+      border-color: var(--cyan) !important;
+      outline: 2px solid var(--cyan) !important;
+      outline-offset: 2px !important;
+    }
+    .swagger-ui .btn {
+      border-radius: 4px !important;
+    }
+    .swagger-ui .btn.execute {
+      background: var(--cyan) !important;
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      border: none !important;
+    }
+    .swagger-ui .btn.execute:hover {
+      background: var(--cyan2) !important;
+    }
+    .swagger-ui .btn.cancel {
+      color: var(--gray) !important;
+      border-color: var(--gray2) !important;
+    }
+
+    /* Responses */
+    .swagger-ui .response-col_status { font-weight: 700 !important; }
+    .swagger-ui table.responses-table { background: transparent !important; }
+    .swagger-ui .highlight-code pre.microlight {
+      background: #060f20 !important;
+      color: #cdd6f4 !important;
+      border-radius: 4px !important;
+    }
+    .swagger-ui .markdown p, .swagger-ui .markdown li {
+      color: var(--gray) !important;
+    }
+    .swagger-ui .markdown a { color: var(--cyan) !important; }
+    .swagger-ui .markdown code {
+      background: rgba(0,229,255,0.08) !important;
+      color: var(--cyan2) !important;
+      padding: 1px 5px !important;
+      border-radius: 3px !important;
+    }
+    .swagger-ui .markdown strong { color: var(--white) !important; }
+    .swagger-ui .markdown table {
+      border-collapse: collapse !important;
+    }
+    .swagger-ui .markdown table td, .swagger-ui .markdown table th {
+      border: 1px solid rgba(0,229,255,0.15) !important;
+      padding: 6px 12px !important;
+      color: var(--gray) !important;
+    }
+    .swagger-ui .markdown table th {
+      background: rgba(0,229,255,0.07) !important;
+      color: var(--cyan) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Models section */
+    .swagger-ui section.models {
+      background: var(--navy2) !important;
+      border: 1px solid rgba(0,229,255,0.1) !important;
+      border-radius: var(--r) !important;
+    }
+    .swagger-ui section.models h4 { color: var(--cyan) !important; }
+    .swagger-ui .model-box { background: var(--navy3) !important; }
+    .swagger-ui .model { color: var(--gray) !important; }
+    .swagger-ui .prop-type { color: var(--cyan2) !important; }
+    .swagger-ui .prop-format { color: var(--gray2) !important; }
+
+    /* General text */
+    .swagger-ui, .swagger-ui * { color-scheme: dark; }
+    .swagger-ui .wrapper { padding: 0 !important; }
+    .swagger-ui .body-param-options label { color: var(--gray) !important; }
+    .swagger-ui label { color: var(--gray) !important; }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--navy2);
+      border-top: 1px solid rgba(0,229,255,0.08);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray2);
+    }
+    footer a { color: var(--gray); }
+    footer a:hover { color: var(--cyan); }
+    footer .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 12px; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .endpoint-cards { grid-template-columns: 1fr; }
+      .links-row { flex-direction: column; align-items: flex-start; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Nav ─── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="https://careez.org/">Care<span>EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="https://careez.org/#about">About</a></li>
+        <li><a href="https://careez.org/#live-api">Live API</a></li>
+        <li><a href="https://careez.org/#try-live">Try Live</a></li>
+        <li><a href="https://careez.org/api-docs/" class="active">API Docs</a></li>
+        <li><a href="https://demo.careez.org" target="_blank" rel="noopener">Demo &#8599;</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ─── Page Header ─── -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="eyebrow">CareEZ · API Reference</div>
+      <h1><span class="brand-cyan">Clinical AI</span> API Docs</h1>
+      <p class="subtitle">
+        Live, callable REST endpoints for IDDSI food texture classification and
+        aspiration risk screening. Built by <strong style="color:var(--white)">Carewells Limited</strong>,
+        Hong Kong social enterprise.
+      </p>
+      <div class="header-meta">
+        <span class="badge badge-green">&#x25CF; 3 Endpoints Live</span>
+        <span class="badge badge-cyan">OpenAPI 3.0</span>
+        <span class="badge badge-cyan">No Auth Required</span>
+        <span class="badge badge-cyan">CORS: *</span>
+        <span class="badge badge-gray">v1.0.0</span>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <strong>&#x26A0; Clinical Disclaimer:</strong>
+      Prototype rule-based classifiers — all outputs are decision-support tools only.
+      Clinical decisions require assessment by a qualified Speech-Language Pathologist (SLP).
+      Not approved for standalone clinical use.
+    </div>
+  </div>
+
+  <!-- ─── Quick Reference Cards ─── -->
+  <div class="quick-ref">
+    <div class="quick-ref-inner">
+      <div class="section-label">Endpoints at a glance</div>
+      <div class="endpoint-cards">
+
+        <div class="endpoint-card">
+          <div class="method">POST</div>
+          <div class="path">/api/iddsi-classify</div>
+          <div class="desc">
+            Classify a food or liquid from a text description.
+            Returns IDDSI Level 0–7 with confidence score and bilingual explanation.
+          </div>
+          <div class="status-badge"><span class="badge badge-green">Live</span></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="method">POST</div>
+          <div class="path">/api/iddsi-classify-image</div>
+          <div class="desc">
+            Upload a photo of a food or liquid.
+            Visual AI returns IDDSI level with confidence score.
+          </div>
+          <div class="status-badge"><span class="badge badge-green">Live</span></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="method">POST</div>
+          <div class="path">/api/voice-aspiration-screen</div>
+          <div class="desc">
+            Describe swallowing symptoms in free text.
+            Returns risk level (low / moderate / high), score 0–100, and clinical recommendation.
+          </div>
+          <div class="status-badge"><span class="badge badge-green">Live</span></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="method">POST</div>
+          <div class="path">/api/iddsi-classify-audio</div>
+          <div class="desc">
+            Swallowing audio → IDDSI inference via voice analysis.
+            Research-staged; coordinating with audio analysis agent.
+          </div>
+          <div class="status-badge"><span class="badge badge-yellow">Research-Staged</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Resource links ─── -->
+  <div class="links-row">
+    <a href="openapi.yaml" target="_blank" rel="noopener">
+      &#x2B07; Download OpenAPI YAML
+    </a>
+    <a href="CareEZ_Postman_Collection.json" download="CareEZ_Postman_Collection.json">
+      &#x2B07; Download Postman Collection
+    </a>
+    <a href="curl_examples_multilingual.md" target="_blank" rel="noopener">
+      &#x1F310; Multilingual Examples
+    </a>
+    <a href="https://demo.careez.org" target="_blank" rel="noopener">
+      Try the demo &#8599;
+    </a>
+    <a href="https://iddsi.org" target="_blank" rel="noopener">
+      IDDSI Framework &#8599;
+    </a>
+    <a href="/cdn-cgi/l/email-protection#e48c8188888ba487859681819eca8b9683">
+      &#x2709; API access enquiries
+    </a>
+  </div>
+
+  <!-- ─── Developer Resources section ─── -->
+  <div style="background:var(--navy2);border-bottom:1px solid rgba(0,229,255,0.08);padding:40px 24px;">
+    <div style="max-width:var(--max-w);margin:0 auto;">
+      <div class="section-label">Developer Resources</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+
+        <div class="endpoint-card">
+          <div style="font-size:22px;margin-bottom:10px;">&#x1F4E6;</div>
+          <div style="font-weight:700;color:var(--white);margin-bottom:8px;">Postman Collection</div>
+          <div class="desc" style="margin-bottom:16px;">
+            Postman v2.1 collection with all 10 requests, pre-request scripts, collection variables
+            (<code style="background:rgba(0,229,255,0.08);color:var(--cyan2);padding:1px 4px;border-radius:3px;">{{base_url}}</code>),
+            and automated tests. Import directly into Postman Desktop or VS Code.
+          </div>
+          <a href="CareEZ_Postman_Collection.json" download="CareEZ_Postman_Collection.json"
+             style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(0,229,255,0.12);border:1px solid rgba(0,229,255,0.3);border-radius:4px;font-size:13px;font-weight:600;color:var(--cyan);text-decoration:none;">
+            &#x2B07; Download JSON
+          </a>
+        </div>
+
+        <div class="endpoint-card">
+          <div style="font-size:22px;margin-bottom:10px;">&#x1F310;</div>
+          <div style="font-weight:700;color:var(--white);margin-bottom:8px;">Multilingual cURL Examples</div>
+          <div class="desc" style="margin-bottom:16px;">
+            cURL samples in 9 languages (en, zh-HK, zh-CN, ja, tl, id, vi, th, es) for
+            <code style="background:rgba(0,229,255,0.08);color:var(--cyan2);padding:1px 4px;border-radius:3px;">/api/iddsi-classify</code>
+            and 4-language examples for aspiration screening and image upload.
+          </div>
+          <a href="curl_examples_multilingual.md" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(0,229,255,0.12);border:1px solid rgba(0,229,255,0.3);border-radius:4px;font-size:13px;font-weight:600;color:var(--cyan);text-decoration:none;">
+            View Examples &#8599;
+          </a>
+        </div>
+
+        <div class="endpoint-card">
+          <div style="font-size:22px;margin-bottom:10px;">&#x1F4CB;</div>
+          <div style="font-weight:700;color:var(--white);margin-bottom:8px;">OpenAPI Specification</div>
+          <div class="desc" style="margin-bottom:16px;">
+            Full OpenAPI 3.0.3 YAML spec — import into any compatible tool (Insomnia, Stoplight,
+            Redoc). Includes all schemas, examples, and response definitions.
+          </div>
+          <a href="openapi.yaml" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(0,229,255,0.12);border:1px solid rgba(0,229,255,0.3);border-radius:4px;font-size:13px;font-weight:600;color:var(--cyan);text-decoration:none;">
+            &#x2B07; Download YAML
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Swagger UI ─── -->
+  <div class="swagger-section">
+    <div id="swagger-ui"></div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://careez.org/">careez.org</a>
+      <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a>
+      <a href="https://demo.careez.org" target="_blank" rel="noopener">demo.careez.org &#8599;</a>
+      <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a>
+      <a href="/changelog/">Changelog</a>
+      <a href="openapi.yaml">openapi.yaml</a>
+    </div>
+    <div>
+      &copy; 2026 Carewells Limited &mdash; CareEZ &middot; Hong Kong Social Enterprise (SED-registered)
+      &middot; <a href="/cdn-cgi/l/email-protection#29414c454546694a485b4c4c5307465b4e"><span class="__cf_email__" data-cfemail="fc9499909093bc9f9d8e999986d2938e9b">[email&#160;protected]</span></a>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:#546e7a;">
+      Prototype rule-based classifier &mdash; clinical decisions require a qualified Speech-Language Pathologist.
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ─── Inline OpenAPI spec (mirrors openapi.yaml) ───────────────────────────
+    const CAREEZ_SPEC = {
+      openapi: "3.0.3",
+      info: {
+        title: "CareEZ Clinical AI API",
+        version: "1.0.0",
+        description: "Public REST endpoints for **CareEZ** — IDDSI food texture classification and aspiration risk screening. Built by **Carewells Limited** (Hong Kong social enterprise).\n\n### IDDSI Levels\n| Level | Label | Type |\n|-------|-------|------|\n| 0 | Thin | Drink |\n| 1 | Slightly Thick | Drink |\n| 2 | Mildly Thick | Drink |\n| 3 | Moderately Thick / Liquidised | Drink / Food |\n| 4 | Extremely Thick / Puréed | Drink / Food |\n| 5 | Minced & Moist | Food |\n| 6 | Soft & Bite-Sized | Food |\n| 7 | Regular | Food |\n\n**CORS:** All endpoints respond with `Access-Control-Allow-Origin: *`. No API key required.",
+        contact: { name: "Carewells Limited", url: "https://careez.org", email: "hello@careez.org" }
+      },
+      "x-warning": "Prototype rule-based classifier — clinical decisions require qualified SLP",
+      servers: [
+        { url: "https://www.seniordeli.com/api", description: "Production (live)" }
+      ],
+      tags: [
+        { name: "IDDSI Classification", description: "Classify food or liquid texture level using the IDDSI framework (Levels 0–7)" },
+        { name: "Aspiration Screening", description: "Screen for aspiration risk via symptom description or voice analysis" }
+      ],
+      paths: {
+        "/iddsi-classify": {
+          post: {
+            operationId: "classifyTextIddsi",
+            summary: "Text → IDDSI Level (L0–7)",
+            description: "Classify a food or liquid item described in plain text. Returns IDDSI level 0–7, confidence score, and bilingual explanation (English + Traditional Chinese).\n\n**Supported input languages:** English, Traditional Chinese (zh-Hant), Simplified Chinese (zh-Hans)",
+            tags: ["IDDSI Classification"],
+            security: [],
+            requestBody: {
+              required: true,
+              content: {
+                "application/json": {
+                  schema: { "$ref": "#/components/schemas/TextClassifyRequest" },
+                  examples: {
+                    congee: {
+                      summary: "Congee (稀粥)",
+                      value: { text: "thick congee, soft, no lumps", language: "en" }
+                    },
+                    thickened_juice: {
+                      summary: "Mildly thickened apple juice",
+                      value: { text: "mildly thickened apple juice, pours slowly", language: "en" }
+                    },
+                    chinese_input: {
+                      summary: "Traditional Chinese input",
+                      value: { text: "免治豬肉，質地柔軟，有少量小粒", language: "zh-Hant" }
+                    }
+                  }
+                }
+              }
+            },
+            responses: {
+              "200": {
+                description: "Successful IDDSI classification",
+                content: {
+                  "application/json": {
+                    schema: { "$ref": "#/components/schemas/IddsiClassifyResponse" },
+                    examples: {
+                      congee_result: {
+                        summary: "Congee → IDDSI 4",
+                        value: {
+                          iddsi_level: 4,
+                          label: "Extremely Thick / Puréed",
+                          confidence: 0.87,
+                          explanation_en: "This food item matches IDDSI Level 4 (Extremely Thick / Puréed). It can be eaten with a spoon and does not require chewing.",
+                          explanation_zh_hant: "此食物符合IDDSI第4級（極稠/糊狀）。可用匙羹進食，無需咀嚼。",
+                          multilingual_explanation: "zh-Hant",
+                          warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": { description: "Invalid request", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } },
+              "500": { description: "Server error", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } }
+            }
+          }
+        },
+
+        "/iddsi-classify-image": {
+          post: {
+            operationId: "classifyImageIddsi",
+            summary: "Image → IDDSI Level",
+            description: "Upload a photo of a food or liquid. Visual AI analysis returns IDDSI level 0–7.\n\n**Accepts:** JPEG, PNG, WebP (max 10 MB). Side-view photo in transparent container recommended for liquids.",
+            tags: ["IDDSI Classification"],
+            security: [],
+            requestBody: {
+              required: true,
+              content: {
+                "multipart/form-data": {
+                  schema: { "$ref": "#/components/schemas/ImageClassifyRequest" }
+                }
+              }
+            },
+            responses: {
+              "200": {
+                description: "Successful image classification",
+                content: {
+                  "application/json": {
+                    schema: { "$ref": "#/components/schemas/IddsiClassifyResponse" },
+                    examples: {
+                      soup_result: {
+                        summary: "Pureed soup → IDDSI 4",
+                        value: {
+                          iddsi_level: 4,
+                          label: "Extremely Thick / Puréed",
+                          confidence: 0.79,
+                          explanation_en: "Visual analysis indicates a smooth, homogeneous purée consistent with IDDSI Level 4. No visible lumps detected.",
+                          explanation_zh_hant: "視覺分析顯示質地均勻，符合IDDSI第4級（糊狀）。未見可見顆粒。",
+                          multilingual_explanation: "zh-Hant",
+                          warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": { description: "Invalid or missing image", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } },
+              "413": { description: "Image exceeds 10 MB", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } },
+              "500": { description: "Server error", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } }
+            }
+          }
+        },
+
+        "/voice-aspiration-screen": {
+          post: {
+            operationId: "voiceAspirationScreen",
+            summary: "Symptoms → Aspiration Risk Score",
+            description: "Screen for aspiration risk from reported symptoms. Returns risk level (low / moderate / high), numeric score 0–100, and recommended clinical action.\n\n**Input:** Free-text symptom description or comma-separated symptom list. Optional: patient age, primary diagnosis.",
+            tags: ["Aspiration Screening"],
+            security: [],
+            requestBody: {
+              required: true,
+              content: {
+                "application/json": {
+                  schema: { "$ref": "#/components/schemas/AspirationScreenRequest" },
+                  examples: {
+                    caregiver_report: {
+                      summary: "Caregiver symptom report",
+                      value: { symptoms: "Patient coughs frequently during meals, has a wet/gurgly voice after swallowing, and has lost 3kg in the past month.", language: "en" }
+                    },
+                    structured: {
+                      summary: "With optional age + diagnosis",
+                      value: { symptoms: "coughing during meals, wet voice post-swallow, weight loss", age: 82, diagnosis: "stroke", language: "en" }
+                    }
+                  }
+                }
+              }
+            },
+            responses: {
+              "200": {
+                description: "Aspiration risk result",
+                content: {
+                  "application/json": {
+                    schema: { "$ref": "#/components/schemas/AspirationScreenResponse" },
+                    examples: {
+                      high_risk: {
+                        summary: "High risk result",
+                        value: {
+                          risk_level: "high",
+                          risk_score: 78,
+                          flags: ["wet/gurgly voice", "coughing during meals", "significant weight loss"],
+                          recommendation_en: "High aspiration risk detected. Refer to a Speech-Language Pathologist for formal swallowing assessment immediately. Consider NPO (nil per os) pending evaluation.",
+                          recommendation_zh_hant: "發現高度誤嚥風險。請立即轉介言語治療師進行正式吞嚥評估。評估前考慮禁食（NPO）。",
+                          warning: "Prototype rule-based classifier — clinical decisions require qualified SLP"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": { description: "Invalid request", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } },
+              "500": { description: "Server error", content: { "application/json": { schema: { "$ref": "#/components/schemas/ErrorResponse" } } } }
+            }
+          }
+        },
+
+        "/iddsi-classify-audio": {
+          post: {
+            operationId: "classifyAudioIddsi",
+            summary: "Audio → IDDSI (Research-Staged ⚠️)",
+            description: "**Research-staged — returns 501 in all environments.**\n\nPlanned: analyse swallowing/voice audio recordings to infer IDDSI-relevant swallowing function parameters. Ship timing coordinated with the audio analysis research agent.\n\n**Do not use in clinical workflows.**",
+            tags: ["Aspiration Screening"],
+            security: [],
+            requestBody: {
+              required: true,
+              content: {
+                "multipart/form-data": {
+                  schema: { "$ref": "#/components/schemas/AudioClassifyRequest" }
+                }
+              }
+            },
+            responses: {
+              "501": {
+                description: "Not implemented — research-staged",
+                content: {
+                  "application/json": {
+                    schema: { "$ref": "#/components/schemas/ErrorResponse" },
+                    examples: {
+                      stub: {
+                        value: {
+                          error: "not_implemented",
+                          message: "Audio classification is research-staged and not yet live. Coordinate with the audio analysis agent for ETA."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      components: {
+        schemas: {
+          TextClassifyRequest: {
+            type: "object",
+            required: ["text"],
+            properties: {
+              text: { type: "string", description: "Plain-text description of the food or liquid", example: "thick congee, soft, no lumps", minLength: 3, maxLength: 2000 },
+              language: { type: "string", description: "Preferred response language", enum: ["en", "zh-Hant", "zh-Hans"], default: "en", example: "en" }
+            }
+          },
+          ImageClassifyRequest: {
+            type: "object",
+            required: ["image"],
+            properties: {
+              image: { type: "string", format: "binary", description: "Food/liquid image (JPEG, PNG, WebP, max 10 MB)" },
+              language: { type: "string", enum: ["en", "zh-Hant", "zh-Hans"], default: "en" }
+            }
+          },
+          AudioClassifyRequest: {
+            type: "object",
+            required: ["audio"],
+            properties: {
+              audio: { type: "string", format: "binary", description: "Swallowing/voice audio (WAV or MP3, max 30 MB)" },
+              language: { type: "string", enum: ["en", "zh-Hant", "zh-Hans"], default: "en" }
+            }
+          },
+          AspirationScreenRequest: {
+            type: "object",
+            required: ["symptoms"],
+            properties: {
+              symptoms: { type: "string", description: "Free-text symptoms or comma-separated list", example: "coughing during meals, wet voice after swallowing", minLength: 5, maxLength: 3000 },
+              age: { type: "integer", description: "Patient age (optional, improves risk scoring)", minimum: 0, maximum: 130, example: 82 },
+              diagnosis: { type: "string", description: "Primary diagnosis (optional)", example: "stroke" },
+              language: { type: "string", enum: ["en", "zh-Hant", "zh-Hans"], default: "en" }
+            }
+          },
+          IddsiClassifyResponse: {
+            type: "object",
+            properties: {
+              iddsi_level: { type: "integer", description: "IDDSI level 0–7", minimum: 0, maximum: 7, example: 4 },
+              label: { type: "string", description: "IDDSI level label", example: "Extremely Thick / Puréed" },
+              confidence: { type: "number", format: "float", description: "Confidence score 0.0–1.0", minimum: 0, maximum: 1, example: 0.87 },
+              explanation_en: { type: "string", description: "English explanation" },
+              explanation_zh_hant: { type: "string", description: "Traditional Chinese explanation" },
+              multilingual_explanation: { type: "string", description: "Language of primary explanation", enum: ["en", "zh-Hant", "zh-Hans"] },
+              warning: { type: "string", description: "Clinical disclaimer", example: "Prototype rule-based classifier — clinical decisions require qualified SLP" }
+            }
+          },
+          AspirationScreenResponse: {
+            type: "object",
+            properties: {
+              risk_level: { type: "string", description: "Categorical risk", enum: ["low", "moderate", "high"], example: "high" },
+              risk_score: { type: "integer", description: "Numeric risk 0–100", minimum: 0, maximum: 100, example: 78 },
+              flags: { type: "array", items: { type: "string" }, description: "Identified risk flags", example: ["wet/gurgly voice", "coughing during meals"] },
+              recommendation_en: { type: "string", description: "English recommendation" },
+              recommendation_zh_hant: { type: "string", description: "Traditional Chinese recommendation" },
+              warning: { type: "string", description: "Clinical disclaimer" }
+            }
+          },
+          ErrorResponse: {
+            type: "object",
+            properties: {
+              error: { type: "string", description: "Machine-readable error code", example: "invalid_request" },
+              message: { type: "string", description: "Human-readable description", example: "The 'text' field is required." }
+            }
+          }
+        }
+      }
+    };
+
+    // ─── Swagger UI init ──────────────────────────────────────────────────────
+    window.onload = function () {
+      SwaggerUIBundle({
+        spec: CAREEZ_SPEC,
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout",
+        defaultModelsExpandDepth: 1,
+        defaultModelExpandDepth: 2,
+        docExpansion: "list",
+        filter: false,
+        showExtensions: true,
+        showCommonExtensions: true,
+        tryItOutEnabled: true,
+        requestSnippetsEnabled: true,
+        requestSnippets: {
+          generators: {
+            curl_bash: { title: "cURL (bash)", syntax: "bash" },
+            node_fetch: { title: "Node.js fetch", syntax: "javascript" }
+          },
+          defaultExpanded: true,
+          languages: null
+        }
+      });
+    };
+  </script>
+
+  </main><!-- /#main-content -->
+
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

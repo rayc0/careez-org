@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HK 照護食 Adoption Index · CareEZ</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="Hong Kong 照護食 Adoption Index — quarterly public metric tracking the rate at which Hong Kong's frail elderly receive Care Food-compliant meals. Baseline Q4 2026: 5%. Target Q4 2028: 50%. Open data, CC-BY-SA 4.0." />
+
+  <!-- ─── Canonical ─── -->
+  <link rel="canonical" href="https://careez.org/adoption-index/" />
+
+  <!-- ─── OpenGraph ─── -->
+  <meta property="og:type" content="dataset" />
+  <meta property="og:url" content="https://careez.org/adoption-index/" />
+  <meta property="og:title" content="HK 照護食 Adoption Index · Public Quarterly Metric · Baseline Q4 2026" />
+  <meta property="og:description" content="First-of-kind quarterly metric tracking 照護食 (Care Food) adoption among Hong Kong's ~150,000 elderly with dysphagia. Q4 2026 baseline: 5% (~7,500 beneficiaries). Target Q4 2028: 50% (~75,000)." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <!-- ─── JSON-LD: Dataset (open data) ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Hong Kong 照護食 Adoption Index",
+    "alternateName": "HK Care Food Adoption Index",
+    "description": "Quarterly public metric tracking the rate at which Hong Kong's frail elderly population receive meals prepared in compliance with the HKCSS Guideline of Care Food Standard 2023. Baseline Q4 2026: ~5% (~7,500 of 150,000 estimated denominator). Target Q4 2028: 50% (~75,000 beneficiaries). First-of-kind metric in IDDSI-implementing economies.",
+    "url": "https://careez.org/adoption-index/",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "temporalCoverage": "2026-10/2028-12",
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Hong Kong SAR, China"
+    },
+    "measurementTechnique": "Multi-source triangulation: HKCSS Care Food Directory (Track A), carer-verified AI Assistant compliance logs (Track B), family caregiver self-report weighted at 0.7 (Track C). Denominator: ~150,000 HK elderly with dysphagia (ICD-10 R13 or EAT-10 ≥ 3).",
+    "variableMeasured": [
+      {
+        "@type": "PropertyValue",
+        "name": "Adoption Rate",
+        "description": "Percentage of HK elderly with dysphagia receiving Care Food-compliant meals in the quarter",
+        "unitText": "percent"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Estimated Beneficiaries",
+        "description": "Absolute count of elderly receiving Care Food-compliant meals",
+        "unitText": "persons"
+      }
+    ],
+    "creator": [
+      {
+        "@type": "Organization",
+        "name": "Carewells Limited (CareEZ / SeniorDeli)",
+        "url": "https://careez.org/"
+      }
+    ],
+    "contributor": [
+      {
+        "@type": "Organization",
+        "name": "HKCSS Care Food Working Group",
+        "description": "Proposed co-steward — partnership pending HKEX IFS award"
+      },
+      {
+        "@type": "Organization",
+        "name": "HKU Swallowing Research Laboratory",
+        "description": "Proposed methodology co-author — partnership pending HKEX IFS award"
+      }
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "url": "https://careez.org/"
+    },
+    "distribution": [
+      {
+        "@type": "DataDownload",
+        "contentUrl": "https://careez.org/adoption-index/q1-2026",
+        "encodingFormat": "text/html",
+        "name": "Q1 2027 Quarterly Report (forthcoming)"
+      }
+    ],
+    "version": "v1.0-draft",
+    "datePublished": "2026-05-25",
+    "inLanguage": ["en", "zh-Hant"],
+    "keywords": ["照護食", "care food", "dysphagia", "IDDSI", "Hong Kong", "elderly care", "HKCSS", "swallowing", "open data", "adoption index"]
+  }
+  </script>
+
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A1428;
+      --navy2:   #0E1C3A;
+      --navy3:   #132046;
+      --cyan:    #00E5FF;
+      --cyan2:   #29B6F6;
+      --white:   #FFFFFF;
+      --gray:    #B0BEC5;
+      --gray2:   #78909C;
+      --yellow:  #FFD43B;
+      --green:   #4CAF50;
+      --green2:  #81C784;
+      --orange:  #FFA726;
+      --accent-bar: 5px;
+      --max-w:   1060px;
+      --r:       6px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body { overflow-x: hidden; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Section label ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 18px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 22px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 20, 40, 0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .nav-brand {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-brand span { color: var(--cyan); }
+    .nav-back {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray2);
+      letter-spacing: 0.02em;
+    }
+    .nav-back:hover { color: var(--white); text-decoration: none; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+    /* ─── Hero ─── */
+    #hero {
+      padding: 80px 24px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 60% at 80% 35%, rgba(0,229,255,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 45% at 15% 75%, rgba(76,175,80,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 20px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+    .hero-title {
+      font-size: clamp(34px, 5.5vw, 60px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .hero-title .hl { color: var(--cyan); }
+    .hero-subtitle {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--gray);
+      font-weight: 400;
+      max-width: 620px;
+      line-height: 1.55;
+      margin-bottom: 32px;
+    }
+    .hero-subtitle strong { color: var(--white); font-weight: 600; }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 36px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 13px;
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--cyan2);
+      background: rgba(0,229,255,0.05);
+      letter-spacing: 0.02em;
+    }
+    .badge-green {
+      border-color: rgba(76,175,80,0.35);
+      color: var(--green2);
+      background: rgba(76,175,80,0.06);
+    }
+    .badge-yellow {
+      border-color: rgba(255,212,59,0.35);
+      color: var(--yellow);
+      background: rgba(255,212,59,0.05);
+    }
+    .badge-notice {
+      border-color: rgba(255,167,38,0.35);
+      color: var(--orange);
+      background: rgba(255,167,38,0.06);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 0;
+    }
+
+    /* ─── Stat Bar ─── */
+    .stat-bar {
+      padding: 40px 24px;
+      background: var(--navy2);
+    }
+    .stat-bar-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(0,229,255,0.08);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .stat-cell {
+      background: var(--navy3);
+      padding: 24px 28px;
+      border-right: 1px solid rgba(0,229,255,0.08);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-num.green { color: var(--green2); }
+    .stat-label {
+      font-size: 12px;
+      color: var(--gray2);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    /* ─── Chart Section ─── */
+    #chart {
+      padding: 72px 24px;
+    }
+    .chart-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .chart-inner h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .chart-desc {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 640px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .chart-container {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-radius: 10px;
+      padding: 36px 32px 28px;
+      overflow-x: auto;
+    }
+    svg.adoption-chart {
+      width: 100%;
+      min-width: 540px;
+      height: auto;
+      display: block;
+    }
+    .chart-legend {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .chart-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--gray2);
+      font-style: italic;
+    }
+
+    /* ─── Target Trajectory Table ─── */
+    #trajectory {
+      padding: 64px 24px;
+      background: var(--navy2);
+    }
+    .traj-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .traj-inner h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .traj-desc {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 620px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .traj-table-wrap { overflow-x: auto; }
+    table.traj-table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .traj-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray2);
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .traj-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--gray);
+      vertical-align: top;
+    }
+    .traj-table tr:last-child td { border-bottom: none; }
+    .traj-table td:first-child { font-weight: 600; color: var(--white); }
+    .traj-rate {
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .traj-rate.baseline { color: var(--gray2); }
+    .traj-rate.y1 { color: var(--cyan2); }
+    .traj-rate.y2 { color: var(--green2); }
+    .row-highlight td { background: rgba(0,229,255,0.04); }
+    .row-baseline td { background: rgba(120,144,156,0.06); }
+
+    /* ─── Methodology Section ─── */
+    #methodology {
+      padding: 72px 24px;
+    }
+    .method-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .method-inner h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .method-intro {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 660px;
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    .method-card {
+      background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 28px 26px;
+      border-left: var(--accent-bar) solid rgba(0,229,255,0.3);
+    }
+    .method-card.track-a { border-left-color: var(--green2); }
+    .method-card.track-b { border-left-color: var(--cyan2); }
+    .method-card.track-c { border-left-color: var(--yellow); }
+    .method-card.denominator { border-left-color: var(--gray2); }
+    .method-track-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .track-a .method-track-badge { background: rgba(76,175,80,0.12); color: var(--green2); border: 1px solid rgba(76,175,80,0.3); }
+    .track-b .method-track-badge { background: rgba(41,182,246,0.12); color: var(--cyan2); border: 1px solid rgba(41,182,246,0.3); }
+    .track-c .method-track-badge { background: rgba(255,212,59,0.10); color: var(--yellow); border: 1px solid rgba(255,212,59,0.3); }
+    .denominator .method-track-badge { background: rgba(176,190,197,0.1); color: var(--gray); border: 1px solid rgba(176,190,197,0.2); }
+    .method-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .method-card p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .method-card p:last-child { margin-bottom: 0; }
+    .method-sources {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 10px;
+      padding: 28px 26px;
+      margin-bottom: 28px;
+    }
+    .method-sources h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+    .source-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .source-table th {
+      text-align: left;
+      color: var(--gray2);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .source-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--gray);
+      vertical-align: top;
+    }
+    .source-table tr:last-child td { border-bottom: none; }
+    .source-table td:first-child { color: var(--white); font-weight: 600; }
+
+    /* ─── Y1 Milestones ─── */
+    #milestones {
+      padding: 64px 24px;
+      background: var(--navy2);
+    }
+    .mile-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .mile-inner h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .mile-desc {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 580px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .mile-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .mile-item {
+      background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 24px 20px;
+      position: relative;
+    }
+    .mile-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+      border-radius: 10px 10px 0 0;
+    }
+    .mile-quarter {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan2);
+      margin-bottom: 8px;
+    }
+    .mile-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .mile-body {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── Governance / Partners ─── */
+    #governance {
+      padding: 64px 24px;
+    }
+    .gov-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .gov-inner h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .gov-desc {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 620px;
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+    .gov-partner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .gov-partner-card {
+      background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 24px 22px;
+    }
+    .gov-partner-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .gov-partner-role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray2);
+      margin-bottom: 10px;
+    }
+    .gov-partner-body {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .proposed-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: rgba(255,167,38,0.1);
+      border: 1px solid rgba(255,167,38,0.3);
+      color: var(--orange);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .notice-box {
+      background: rgba(255,167,38,0.06);
+      border: 1px solid rgba(255,167,38,0.25);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+    .notice-box strong { color: var(--orange); }
+
+    /* ─── Open Data Section ─── */
+    #open-data {
+      padding: 64px 24px;
+      background: var(--navy2);
+    }
+    .od-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .od-inner h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .od-desc {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 620px;
+      margin-bottom: 32px;
+      line-height: 1.75;
+    }
+    .od-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .od-link-card {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-radius: var(--r);
+      padding: 20px 22px;
+    }
+    .od-link-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan2);
+      margin-bottom: 6px;
+    }
+    .od-link-url {
+      font-size: 13px;
+      color: var(--cyan);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+    .od-link-desc {
+      font-size: 12px;
+      color: var(--gray2);
+      line-height: 1.5;
+    }
+    .cc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(76,175,80,0.08);
+      border: 1px solid rgba(76,175,80,0.25);
+      color: var(--green2);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 28px 24px;
+      background: var(--navy2);
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta {
+      font-size: 12px;
+      color: var(--gray2);
+      text-align: right;
+      line-height: 1.6;
+    }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 860px) {
+      .stat-bar-inner { grid-template-columns: 1fr 1fr; }
+      .stat-cell { border-right: none; border-bottom: 1px solid rgba(0,229,255,0.08); }
+      .stat-cell:nth-child(2n) { border-right: none; }
+      .method-grid { grid-template-columns: 1fr; }
+      .mile-timeline { grid-template-columns: 1fr 1fr; }
+      .gov-partner-grid { grid-template-columns: 1fr; }
+      .od-links { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .stat-bar-inner { grid-template-columns: 1fr 1fr; }
+      .mile-timeline { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Navigation ─── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <a href="/" class="nav-back">&#8592; Care<span>EZ</span></a>
+        <span style="color:var(--gray2);font-size:14px;font-weight:400;margin-left:4px;">/ 照護食 Adoption Index</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#chart">Chart</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#milestones">Milestones</a></li>
+        <li><a href="#governance">Partners</a></li>
+        <li><a href="#open-data">Open Data</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ─── Hero ─── -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Public Quarterly Metric &middot; Hong Kong</div>
+      <h1 class="hero-title">
+        Hong Kong 照護食<br>
+        <span class="hl">Adoption Index</span>
+      </h1>
+      <p class="hero-subtitle">
+        <strong>Tracking the fraction of Hong Kong's frail elderly who receive Care Food-compliant meals.</strong><br>
+        Q4 2026 baseline: <strong>~5%</strong> (~7,500 of 150,000 estimated). Target Q4 2028: <strong>50%</strong> (~75,000).
+      </p>
+      <div class="hero-badges">
+        <span class="badge badge-green">Open Data &middot; CC-BY-SA 4.0</span>
+        <span class="badge">Quarterly Publication</span>
+        <span class="badge">Baseline Q4 2026</span>
+        <span class="badge">HKCSS 照護食 Standard</span>
+        <span class="badge">IDDSI-aligned</span>
+        <span class="badge badge-notice">Partnerships proposed &mdash; pending HKEX IFS award</span>
+      </div>
+      <p style="font-size:13px;color:var(--gray2);max-width:580px;line-height:1.65;">
+        First-of-kind population adoption metric in IDDSI-implementing economies. Methodology co-designed with HKCSS Care Food Working Group and HKU Swallowing Research Laboratory (partnerships proposed, pending HKEX Foundation × HKCSS Impact Funding Scheme 2026 award). Governed as open data for the Hong Kong eldercare ecosystem.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── Stat Bar ─── -->
+  <div class="stat-bar">
+    <div class="stat-bar-inner">
+      <div class="stat-cell">
+        <div class="stat-num">~150K</div>
+        <div class="stat-label">Estimated denominator — HK elderly with dysphagia or chewing difficulty</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">5%</div>
+        <div class="stat-label">Q4 2026 baseline adoption rate (~7,500 beneficiaries)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">50%</div>
+        <div class="stat-label">Q4 2028 target adoption rate (~75,000 beneficiaries)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num green">10&times;</div>
+        <div class="stat-label">Target 24-month improvement — from baseline to Q4 2028</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ─── Chart ─── -->
+  <section id="chart">
+    <div class="chart-inner">
+      <div class="section-label">Adoption Trajectory</div>
+      <h2>Q4 2026 Baseline &rarr; Q4 2028 Target</h2>
+      <p class="chart-desc">
+        Quarterly target adoption rates (%) for the 24-month programme period. The baseline is set at 5% (Q4 2026), representing the pre-programme floor. Year 1 target is 25%; Year 2 target is 50%.
+      </p>
+      <div class="chart-container">
+
+        <!-- SVG Inline Chart — 9 data points: Q4 2026 through Q4 2028 -->
+        <!-- viewBox: 0 0 900 340 -->
+        <!-- Axes: Y=0..55% (left), X=time quarters -->
+        <svg class="adoption-chart" viewBox="0 0 900 340" role="img" aria-label="照護食 Adoption Index chart: Q4 2026 baseline 5% to Q4 2028 target 50%">
+          <defs>
+            <!-- Gradient for line fill area -->
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.01"/>
+            </linearGradient>
+            <!-- Glow filter for line -->
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- ─── Grid lines & Y-axis labels ─── -->
+          <!-- Y axis: 0%=330, 10%=275, 20%=220, 30%=165, 40%=110, 50%=55 -->
+          <!-- px per 10% = (330-55)/5 = 55 -->
+          <line x1="80" y1="330" x2="860" y2="330" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="80" y1="275" x2="860" y2="275" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="80" y1="220" x2="860" y2="220" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="80" y1="165" x2="860" y2="165" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="80" y1="110" x2="860" y2="110" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="80" y1="55"  x2="860" y2="55"  stroke="rgba(76,175,80,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
+
+          <!-- Y axis labels -->
+          <text x="70" y="334" text-anchor="end" font-size="11" fill="#78909C">0%</text>
+          <text x="70" y="279" text-anchor="end" font-size="11" fill="#78909C">10%</text>
+          <text x="70" y="224" text-anchor="end" font-size="11" fill="#78909C">20%</text>
+          <text x="70" y="169" text-anchor="end" font-size="11" fill="#78909C">30%</text>
+          <text x="70" y="114" text-anchor="end" font-size="11" fill="#78909C">40%</text>
+          <text x="70" y="59"  text-anchor="end" font-size="11" fill="#81C784">50%</text>
+
+          <!-- Y axis title -->
+          <text x="18" y="195" text-anchor="middle" font-size="11" fill="#78909C" transform="rotate(-90,18,195)">Adoption Rate</text>
+
+          <!-- ─── Data points: 9 quarters ─── -->
+          <!-- X positions: 80+col*(780/8) where col=0..8 -->
+          <!-- X: col0=80, col1=177.5, col2=275, col3=372.5, col4=470, col5=567.5, col6=665, col7=762.5, col8=860 -->
+          <!-- Y positions (px) = 330 - (rate/55)*275 ... using scale 330 - rate*5.5 -->
+          <!-- 5% → 330-27.5=302.5 -->
+          <!-- 10% → 330-55=275 -->
+          <!-- 15% → 330-82.5=247.5 -->
+          <!-- 20% → 330-110=220 -->
+          <!-- 25% → 330-137.5=192.5 -->
+          <!-- 30% → 330-165=165 -->
+          <!-- 35% → 330-192.5=137.5 -->
+          <!-- 42% → 330-231=99 -->
+          <!-- 50% → 330-275=55 -->
+
+          <!-- Area fill -->
+          <polygon
+            points="80,302.5 177.5,275 275,247.5 372.5,220 470,192.5 567.5,165 665,137.5 762.5,99 860,55 860,330 80,330"
+            fill="url(#areaGrad)"
+          />
+
+          <!-- Line path -->
+          <polyline
+            points="80,302.5 177.5,275 275,247.5 372.5,220 470,192.5 567.5,165 665,137.5 762.5,99 860,55"
+            fill="none"
+            stroke="var(--cyan)"
+            stroke-width="2.5"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            filter="url(#glow)"
+          />
+
+          <!-- Year 1 target line annotation (Q4 2027 = col4 = x470, y=192.5) -->
+          <line x1="470" y1="192.5" x2="470" y2="330" stroke="rgba(41,182,246,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="474" y="318" font-size="10" fill="var(--cyan2)">Y1 End</text>
+
+          <!-- Year 2 target line annotation (Q4 2028 = col8 = x860, y=55) -->
+          <line x1="860" y1="55" x2="860" y2="330" stroke="rgba(76,175,80,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+
+          <!-- Data point circles -->
+          <!-- Baseline: col0 -->
+          <circle cx="80" cy="302.5" r="6" fill="var(--navy)" stroke="var(--gray2)" stroke-width="2"/>
+          <text x="80" y="295" text-anchor="middle" font-size="10" fill="var(--gray2)">5%</text>
+
+          <!-- Q1 2027: col1 -->
+          <circle cx="177.5" cy="275" r="5" fill="var(--cyan)" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="177.5" y="268" text-anchor="middle" font-size="10" fill="var(--cyan2)">10%</text>
+
+          <!-- Q2 2027: col2 -->
+          <circle cx="275" cy="247.5" r="5" fill="var(--cyan)" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="275" y="240" text-anchor="middle" font-size="10" fill="var(--cyan2)">15%</text>
+
+          <!-- Q3 2027: col3 -->
+          <circle cx="372.5" cy="220" r="5" fill="var(--cyan)" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="372.5" y="213" text-anchor="middle" font-size="10" fill="var(--cyan2)">20%</text>
+
+          <!-- Q4 2027 (Y1 target): col4 — highlighted -->
+          <circle cx="470" cy="192.5" r="7" fill="var(--cyan2)" stroke="var(--white)" stroke-width="2"/>
+          <text x="470" y="184" text-anchor="middle" font-size="11" font-weight="700" fill="var(--white)">25%</text>
+
+          <!-- Q1 2028: col5 -->
+          <circle cx="567.5" cy="165" r="5" fill="var(--cyan)" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="567.5" y="158" text-anchor="middle" font-size="10" fill="var(--cyan2)">30%</text>
+
+          <!-- Q2 2028: col6 -->
+          <circle cx="665" cy="137.5" r="5" fill="var(--cyan)" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="665" y="130" text-anchor="middle" font-size="10" fill="var(--cyan2)">35%</text>
+
+          <!-- Q3 2028: col7 -->
+          <circle cx="762.5" cy="99" r="5" fill="var(--cyan)" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="762.5" y="92" text-anchor="middle" font-size="10" fill="var(--cyan2)">42%</text>
+
+          <!-- Q4 2028 (Y2 target): col8 — highlighted green -->
+          <circle cx="860" cy="55" r="8" fill="var(--green2)" stroke="var(--white)" stroke-width="2"/>
+          <text x="860" y="46" text-anchor="middle" font-size="12" font-weight="800" fill="var(--green2)">50%</text>
+
+          <!-- ─── X axis labels ─── -->
+          <text x="80"    y="349" text-anchor="middle" font-size="10" fill="#78909C">Q4 2026</text>
+          <text x="177.5" y="349" text-anchor="middle" font-size="10" fill="#78909C">Q1 2027</text>
+          <text x="275"   y="349" text-anchor="middle" font-size="10" fill="#78909C">Q2 2027</text>
+          <text x="372.5" y="349" text-anchor="middle" font-size="10" fill="#78909C">Q3 2027</text>
+          <text x="470"   y="349" text-anchor="middle" font-size="10" fill="var(--cyan2)">Q4 2027</text>
+          <text x="567.5" y="349" text-anchor="middle" font-size="10" fill="#78909C">Q1 2028</text>
+          <text x="665"   y="349" text-anchor="middle" font-size="10" fill="#78909C">Q2 2028</text>
+          <text x="762.5" y="349" text-anchor="middle" font-size="10" fill="#78909C">Q3 2028</text>
+          <text x="860"   y="349" text-anchor="middle" font-size="10" fill="var(--green2)">Q4 2028</text>
+
+        </svg>
+
+        <div class="chart-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:var(--gray2);border:2px solid var(--gray2);"></div>
+            Q4 2026 Baseline (5%) — pre-programme floor
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:var(--cyan2);border:2px solid white;"></div>
+            Q4 2027 Year 1 Target (25%)
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:var(--green2);border:2px solid white;"></div>
+            Q4 2028 Year 2 Target (50%)
+          </div>
+        </div>
+        <p class="chart-note">Chart shows quarterly targets. Actual quarterly reports publish at careez.org/adoption-index/q[n]-[yyyy] from Q1 2027 onwards. Intermediate quarterly values are programme targets, not forecasts; actuals will be published with 95% CI.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Target Trajectory Table ─── -->
+  <section id="trajectory">
+    <div class="traj-inner">
+      <div class="section-label">Target Trajectory</div>
+      <h2>Quarter-by-quarter targets</h2>
+      <p class="traj-desc">
+        Programme targets from Q4 2026 baseline through Q4 2028. Intermediate targets reflect AI Assistant deployment milestones, RCHE rollout cadence, and family caregiver certification scale. All rates are targets; actuals published quarterly with methodology notes and confidence intervals.
+      </p>
+      <div class="traj-table-wrap">
+        <table class="traj-table">
+          <thead>
+            <tr>
+              <th>Quarter</th>
+              <th>Target Rate</th>
+              <th>Est. Beneficiaries</th>
+              <th>Key Milestones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-baseline">
+              <td>Q4 2026 — Baseline</td>
+              <td><span class="traj-rate baseline">~5%</span></td>
+              <td>~7,500</td>
+              <td>Pre-programme floor. Track A ~3,500 + Track B ~2,500 + Track C ~1,500.</td>
+            </tr>
+            <tr>
+              <td>Q1 2027</td>
+              <td><span class="traj-rate y1">10%</span></td>
+              <td>~15,000</td>
+              <td>AI Assistant launch + first 10 RCHE deployments</td>
+            </tr>
+            <tr>
+              <td>Q2 2027</td>
+              <td><span class="traj-rate y1">15%</span></td>
+              <td>~22,500</td>
+              <td>Family caregiver rollout begins</td>
+            </tr>
+            <tr>
+              <td>Q3 2027</td>
+              <td><span class="traj-rate y1">20%</span></td>
+              <td>~30,000</td>
+              <td>30,000 family caregiver registrations</td>
+            </tr>
+            <tr class="row-highlight">
+              <td>Q4 2027 — Year 1 End</td>
+              <td><span class="traj-rate y1">25%</span></td>
+              <td>~37,500</td>
+              <td>30 RCHEs + 5,000 certified carers + 300 Champions</td>
+            </tr>
+            <tr>
+              <td>Q1 2028</td>
+              <td><span class="traj-rate y2">30%</span></td>
+              <td>~45,000</td>
+              <td>Cross-border FDH cert pilot begins</td>
+            </tr>
+            <tr>
+              <td>Q2 2028</td>
+              <td><span class="traj-rate y2">35%</span></td>
+              <td>~52,500</td>
+              <td>50 RCHEs cumulative</td>
+            </tr>
+            <tr>
+              <td>Q3 2028</td>
+              <td><span class="traj-rate y2">42%</span></td>
+              <td>~63,000</td>
+              <td>HKCSS–HKU outcome report published</td>
+            </tr>
+            <tr class="row-highlight">
+              <td>Q4 2028 — Year 2 End</td>
+              <td><span class="traj-rate y2">50%</span></td>
+              <td>~75,000</td>
+              <td>60 RCHEs + 5,500 certified carers + 500 Champions + 150,000 family registrations (subset complies)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Methodology ─── -->
+  <section id="methodology">
+    <div class="method-inner">
+      <div class="section-label">Methodology</div>
+      <h2>How the Index is calculated</h2>
+      <p class="method-intro">
+        The Hong Kong 照護食 Adoption Rate = (Number of HK frail elderly receiving Care Food-compliant meals in a given quarter) &divide; (Total HK elderly population with clinically indicated dysphagia or chewing difficulty). Reported as a percentage with 95% confidence intervals and disaggregation by setting (RCHE / community / home / hospital discharge).
+      </p>
+
+      <!-- Denominator + 3 tracks -->
+      <div class="method-grid">
+        <div class="method-card denominator">
+          <span class="method-track-badge">Denominator</span>
+          <h3>~150,000 HK elderly with dysphagia</h3>
+          <p>Population scope: aged 60+ with ICD-10 R13 dysphagia diagnosis, or aged 60+ with EAT-10 score &ge; 3.</p>
+          <p>Breakdown: ~28,000–42,000 RCHE residents with dysphagia (40–60% of 70,000+ RCHE residents, per Baijens et al. 2016) + ~100,000–140,000 community-dwelling elderly (8–12% prevalence among 1.6M aged 65+).</p>
+          <p>Denominator refinement is a Year 1 deliverable via Hospital Authority dysphagia screening data integration.</p>
+        </div>
+        <div class="method-card track-a">
+          <span class="method-track-badge">Track A</span>
+          <h3>Direct Certification</h3>
+          <p><strong>Highest evidence.</strong> Meal sourced from a HKCSS Care Food Directory vendor (Sections A or D) or carrying a current HKCSS 照護食標誌 mark.</p>
+          <p>Baseline estimate: ~3,500 elderly receiving directory-vendor meals.</p>
+        </div>
+        <div class="method-card track-b">
+          <span class="method-track-badge">Track B</span>
+          <h3>Carer-Verified Compliance</h3>
+          <p><strong>Operational evidence.</strong> Meal prepared by a carer with a current 照護食 Adoption Champion or AI Assistant-issued certificate; or prepared using Care Food Directory Section B products at recommended dosages; or verified by AI Assistant compliance check (image + texture analysis vs IDDSI).</p>
+          <p>Baseline estimate: ~2,500 elderly at programme-participating RCHEs.</p>
+        </div>
+        <div class="method-card track-c">
+          <span class="method-track-badge">Track C</span>
+          <h3>Self-Reported Family Compliance</h3>
+          <p><strong>Community-tier evidence.</strong> Meal prepared by a family caregiver who completed the AI Assistant cert pathway; self-reported via AI Assistant intake check-in.</p>
+          <p>Weighted at 0.7 of Track A/B evidence to account for self-report bias. Annual independent audit + HKU cross-validation.</p>
+          <p>Baseline estimate: ~1,500 community-dwelling elderly.</p>
+        </div>
+      </div>
+
+      <!-- Data sources table -->
+      <div class="method-sources">
+        <h3>Quarterly Data Sources</h3>
+        <div style="overflow-x:auto;">
+          <table class="source-table">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Track Contribution</th>
+                <th>Cadence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HKCSS Care Food Directory updates</td>
+                <td>Track A vendor coverage</td>
+                <td>Quarterly</td>
+              </tr>
+              <tr>
+                <td>照護食標誌 certified products in market</td>
+                <td>Track A coverage</td>
+                <td>Quarterly</td>
+              </tr>
+              <tr>
+                <td>SeniorDeli AI Assistant aggregate logs (anonymised)</td>
+                <td>Track B + Track C verification counts</td>
+                <td>Real-time → quarterly report</td>
+              </tr>
+              <tr>
+                <td>HKCSS partner RCHE programme outcomes</td>
+                <td>Track B RCHE coverage</td>
+                <td>Quarterly via HKCSS reporting</td>
+              </tr>
+              <tr>
+                <td>Hospital Authority dysphagia discharge data</td>
+                <td>Denominator refinement</td>
+                <td>Quarterly (if HA partnership confirmed)</td>
+              </tr>
+              <tr>
+                <td>HKU Swallowing Research Laboratory community studies</td>
+                <td>Methodology validation + denominator triangulation</td>
+                <td>Annual</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:var(--gray2);line-height:1.65;">
+        <strong style="color:var(--gray);">Privacy:</strong> All AI Assistant aggregate logs are anonymised at source. Individual carer or elderly data never leaves device-level or partner-operator boundaries. Only aggregate counts and demographic proportions are surfaced to the Index calculation, in alignment with HKMA Privacy Commissioner guidance for health-adjacent data. Methodology is versioned: v1.0 launches Q4 2026; v2.0 planned Q4 2027 with Year 1 outcome data integration.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Y1 Milestones ─── -->
+  <section id="milestones">
+    <div class="mile-inner">
+      <div class="section-label">Year 1 Milestones</div>
+      <h2>Index development roadmap — 2027</h2>
+      <p class="mile-desc">
+        Four milestones establish the Index's credibility and governance infrastructure in Year 1, ahead of programme-scale adoption measurements from Q2 2027.
+      </p>
+      <div class="mile-timeline">
+        <div class="mile-item">
+          <div class="mile-quarter">Q1 2027</div>
+          <div class="mile-title">Baseline Ratification</div>
+          <div class="mile-body">Q4 2026 baseline (5%) ratified jointly with HKCSS Care Food Working Group and HKU Swallowing Research Laboratory. Methodology v1.0 published as open white paper at this URL.</div>
+        </div>
+        <div class="mile-item">
+          <div class="mile-quarter">Q2 2027</div>
+          <div class="mile-title">First Quarterly Report</div>
+          <div class="mile-body">Q1 2027 report published at careez.org/adoption-index/q1-2027. Includes Track A/B/C breakdown, 95% CI, setting disaggregation. First live test of multi-source data feed.</div>
+        </div>
+        <div class="mile-item">
+          <div class="mile-quarter">Q3 2027</div>
+          <div class="mile-title">Expanded Methodology</div>
+          <div class="mile-body">Methodology v1.1 update if Hospital Authority partnership unlocks improved denominator data. Annual HKU community study cross-validation. Methodology Working Group formed.</div>
+        </div>
+        <div class="mile-item">
+          <div class="mile-quarter">Q4 2027</div>
+          <div class="mile-title">Year 1 Target: 25%</div>
+          <div class="mile-body">Year 1 outcome report co-authored with HKCSS and HKU. 30 RCHEs enrolled, 5,000 certified carers, 300 照護食 Adoption Champions. Q4 2027 report published and submitted to HKEX Foundation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Governance / Partners ─── -->
+  <section id="governance">
+    <div class="gov-inner">
+      <div class="section-label">Governance &amp; Partners</div>
+      <h2>Co-authored, multi-institution, open governance</h2>
+      <p class="gov-desc">
+        The Index is designed to outlive the 24-month programme and any single institution's involvement. Governance is open, reproducible methodology is published, and the data licence ensures any researcher or policy body can independently replicate the metric.
+      </p>
+
+      <div class="gov-partner-grid">
+        <div class="gov-partner-card">
+          <div class="gov-partner-name">SeniorDeli &middot; Carewells Limited</div>
+          <div class="gov-partner-role">Data Operator &middot; Index Publisher</div>
+          <div class="gov-partner-body">Owns and operates the AI Assistant aggregate log pipeline (Track B + C data feeds). Primary publisher and methodology lead. HKCSS SED-registered social enterprise. <a href="https://careez.org/">careez.org</a></div>
+        </div>
+        <div class="gov-partner-card">
+          <div class="proposed-tag">Partnership proposed</div>
+          <div class="gov-partner-name">HKCSS goodlife 樂活</div>
+          <div class="gov-partner-role">Track A Data Feed &middot; Co-Steward</div>
+          <div class="gov-partner-body">HKCSS Care Food Working Group manages the Care Food Directory and 照護食標誌 mark — the primary Track A data source. Proposed as Index co-steward pending HKEX IFS award confirmation.</div>
+        </div>
+        <div class="gov-partner-card">
+          <div class="proposed-tag">Partnership proposed</div>
+          <div class="gov-partner-name">HKU 吞嚥研究所</div>
+          <div class="gov-partner-role">Methodology Validator &middot; Academic Co-Author</div>
+          <div class="gov-partner-body">HKU Swallowing Research Laboratory provides annual community study data for denominator triangulation and independent methodology validation. Proposed as co-author of methodology white paper and annual outcome reports.</div>
+        </div>
+      </div>
+
+      <div class="notice-box">
+        <strong>Transparency notice:</strong> HKCSS goodlife and HKU Swallowing Research Laboratory partnerships are <strong>proposed and pending</strong> the HKEX Foundation &times; HKCSS Impact Funding Scheme 2026 award. The Index is publishable without these partnerships using SeniorDeli AI Assistant logs, HKCSS Directory public data, and HKU published studies as proxies. Confirmed partnerships upgrade methodology quality and governance credibility. Status will be updated on this page when confirmed.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ─── Open Data ─── -->
+  <section id="open-data">
+    <div class="od-inner">
+      <div class="section-label">Open Data</div>
+      <h2>Quarterly reports, open licence, reproducible methodology</h2>
+      <p class="od-desc">
+        All Index data is published under CC-BY-SA 4.0. Quarterly reports include the adoption rate, 95% confidence intervals, Track A/B/C breakdown, setting disaggregation, denominator basis, and a changelog of any methodology changes. Data files (CSV + JSON) accompany each HTML report.
+      </p>
+
+      <div class="od-links">
+        <div class="od-link-card">
+          <div class="od-link-label">Quarterly Reports</div>
+          <a class="od-link-url" href="/adoption-index/q1-2027">careez.org/adoption-index/q1-2027</a>
+          <div class="od-link-desc">Pattern: /adoption-index/q[1-4]-[yyyy]. Q1 2027 report publishes May 2027. Q2 2027 publishes August 2027. And so on quarterly.</div>
+        </div>
+        <div class="od-link-card">
+          <div class="od-link-label">Methodology White Paper</div>
+          <a class="od-link-url" href="/adoption-index/">careez.org/adoption-index/</a>
+          <div class="od-link-desc">This page is the living methodology white paper. Versioned (v1.0, v1.1, v2.0). Changes logged with rationale. Cite as: "HK 照護食 Adoption Index Methodology v1.0, Carewells Limited, 2026."</div>
+        </div>
+        <div class="od-link-card">
+          <div class="od-link-label">Data Licence</div>
+          <a class="od-link-url" href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>
+          <div class="od-link-desc">Attribution required: "Hong Kong 照護食 Adoption Index, Carewells Limited (CareEZ), careez.org/adoption-index/." Share-alike applies to derivative datasets.</div>
+        </div>
+        <div class="od-link-card">
+          <div class="od-link-label">Published Also At</div>
+          <a class="od-link-url" href="https://dysphagia.cn">dysphagia.cn</a>
+          <div class="od-link-desc">Quarterly Index data also cross-published on dysphagia.cn — the free multilingual IDDSI and 照護食 reference resource. HKCSS Care Food site (when partnership confirmed).</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span class="cc-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--green2)"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M9 9.5a3 3 0 114.12 2.76A3 3 0 019 9.5z"/></svg>
+          CC-BY-SA 4.0 Open Data
+        </span>
+        <span style="font-size:12px;color:var(--gray2);">First-of-kind public metric for 照護食 adoption in IDDSI-implementing economies</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">HK 照護食 Adoption Index &mdash; by Care<span>EZ</span> / Carewells Limited</div>
+      <div class="footer-meta">
+        Methodology v1.0 &middot; Published May 2026<br>
+        <a href="https://careez.org/">careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a> &middot;
+        <a href="/cdn-cgi/l/email-protection#a7cfc2cbcbc8e7c4c6d5c2c2dd89c8d5c0"><span class="__cf_email__" data-cfemail="761e131a1a193615170413130c58190411">[email&#160;protected]</span></a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+  </main><!-- /#main-content -->
+
+<!-- Cloudflare Pages Analytics --><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>
