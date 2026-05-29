@@ -1,0 +1,10 @@
+# Locale-prefix redirects — single canonical at /
+# Prevents "Alternate page with proper canonical tag" for bare locale paths
+/en           /   301
+/en/          /   301
+/zh-HK        /   301
+/zh-HK/       /   301
+/zh-CN        /   301
+/zh-CN/       /   301
+/zh-Hans      /   301
+/zh-Hans/     /   301
