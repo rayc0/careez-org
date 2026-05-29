@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+  CareEZ Social Card — LinkedIn Share (1200x627)
+  Render: google-chrome --headless=new --window-size=1200,627 --screenshot=out.png linkedin-1200x627.html
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+  --cyan: #00E5FF; --cyan2: #29B6F6;
+  --white: #FFFFFF; --gray: #B0BEC5;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  width: 1200px; height: 627px;
+  background: var(--navy); color: var(--white); overflow: hidden;
+}
+.card {
+  width: 1200px; height: 627px;
+  display: flex;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 70%, var(--navy3) 100%);
+  position: relative;
+}
+.left {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 60px 70px;
+}
+.right {
+  width: 420px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  background: rgba(0,229,255,0.03);
+  border-left: 2px solid rgba(0,229,255,0.15);
+  padding: 40px;
+  gap: 20px;
+}
+.glow {
+  position: absolute; bottom: -80px; right: 200px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.logo { font-size: 60px; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 20px; }
+.care { color: var(--white); }
+.ez   { color: var(--cyan); }
+.accent-bar {
+  width: 120px; height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+  margin-bottom: 30px;
+}
+.title   { font-size: 30px; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
+.subtitle { font-size: 20px; color: var(--gray); line-height: 1.5; margin-bottom: 32px; }
+.domain  { color: var(--cyan); font-size: 20px; font-weight: 600; }
+.feat-label { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+.feat {
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.2);
+  border-radius: 8px; padding: 12px 20px;
+  font-size: 16px; font-weight: 600; color: var(--cyan);
+  width: 100%; text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="left">
+    <div class="logo"><span class="care">Care</span><span class="ez">EZ</span></div>
+    <div class="accent-bar"></div>
+    <!-- EDIT BELOW -->
+    <div class="title">Multimodal Clinical AI for Dysphagia</div>
+    <div class="subtitle">Real-time VFSS / FEES analysis · Clinical NLP<br>Trusted by speech-language pathologists</div>
+    <div class="domain">careez.org</div>
+    <!-- EDIT ABOVE -->
+  </div>
+  <div class="right">
+    <div class="feat-label">Capabilities</div>
+    <!-- EDIT BADGES -->
+    <div class="feat">VFSS Analysis</div>
+    <div class="feat">FEES Review</div>
+    <div class="feat">Clinical NLP</div>
+    <div class="feat">Free Beta Access</div>
+    <!-- EDIT BADGES -->
+  </div>
+</div>
+</body>
+</html>

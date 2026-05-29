@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>CareEZ</ShortName>
+  <Description>Multimodal clinical AI for dysphagia / 護食標準 standard adoption</Description>
+  <Tags>dysphagia iddsi careez 護食標準 elderly care</Tags>
+  <Contact>hello@careez.org</Contact>
+  <Url type="text/html" method="get" template="https://careez.org/?q={searchTerms}"/>
+  <Url type="application/x-suggestions+json" template="https://www.seniordeli.com/api/clinical-qa?question={searchTerms}&amp;format=opensearch"/>
+  <Image height="16" width="16" type="image/png">https://careez.org/favicon-16.png</Image>
+  <Image height="32" width="32" type="image/png">https://careez.org/favicon-32.png</Image>
+  <Image height="64" width="64" type="image/png">https://careez.org/favicon-96.png</Image>
+  <Image height="180" width="180" type="image/png">https://careez.org/apple-touch-icon.png</Image>
+  <Language>en-us</Language>
+  <Language>zh-Hant-HK</Language>
+  <Language>zh-Hans</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Developer>Carewells Limited / SeniorDeli</Developer>
+  <moz:SearchForm xmlns:moz="http://www.mozilla.org/2006/browser/search/">https://careez.org/</moz:SearchForm>
+</OpenSearchDescription>

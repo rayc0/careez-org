@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareEZ Security Disclosure Policy</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="CareEZ responsible disclosure policy — how to report security vulnerabilities in CareEZ and SeniorDeli services." />
+  <link rel="canonical" href="https://careez.org/security" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/security" />
+  <meta property="og:title" content="CareEZ Security Disclosure Policy" />
+  <meta property="og:description" content="Responsible disclosure policy for CareEZ and SeniorDeli services." />
+  <meta property="og:site_name" content="CareEZ" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A1428;
+      --navy2:   #0E1C3A;
+      --navy3:   #132046;
+      --cyan:    #00E5FF;
+      --cyan2:   #29B6F6;
+      --white:   #FFFFFF;
+      --gray:    #B0BEC5;
+      --gray2:   #78909C;
+      --yellow:  #FFD43B;
+      --green:   #4CAF50;
+      --accent-bar: 5px;
+      --max-w:   860px;
+      --r:       6px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 20, 40, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+    /* ─── Section label ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 22px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Hero ─── */
+    .page-hero {
+      padding: 72px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 70% 40%, rgba(0,229,255,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 70%, rgba(41,182,246,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: var(--max-w); margin: 0 auto; position: relative; }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 20px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+    .hero-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--cyan); }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 620px;
+      margin-bottom: 12px;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--gray2);
+    }
+
+    /* ─── Main content ─── */
+    .content-wrap {
+      padding: 48px 24px 80px;
+    }
+    .content-wrap .container {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ─── Cards ─── */
+    .policy-card {
+      background: var(--navy2);
+      border: 1px solid rgba(0, 229, 255, 0.10);
+      border-radius: var(--r);
+      padding: 32px 36px;
+    }
+    .policy-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .policy-card h2 .icon {
+      font-size: 20px;
+    }
+    .policy-card p {
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+    .policy-card p:last-child { margin-bottom: 0; }
+    .policy-card ul, .policy-card ol {
+      color: var(--gray);
+      padding-left: 20px;
+    }
+    .policy-card li { margin-bottom: 6px; }
+    .policy-card li:last-child { margin-bottom: 0; }
+
+    /* ─── SLA table ─── */
+    .sla-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    .sla-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--navy3);
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(0,229,255,0.12);
+    }
+    .sla-table td {
+      padding: 10px 14px;
+      color: var(--gray);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: top;
+    }
+    .sla-table tr:last-child td { border-bottom: none; }
+    .sla-table .sev-critical { color: #ef5350; font-weight: 700; }
+    .sla-table .sev-high { color: var(--yellow); font-weight: 700; }
+    .sla-table .sev-medium { color: var(--cyan2); font-weight: 700; }
+    .sla-table .sev-low { color: var(--gray); font-weight: 700; }
+
+    /* ─── Scope tags ─── */
+    .scope-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .scope-tag {
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.20);
+      color: var(--cyan);
+      font-size: 13px;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+    .scope-tag.out {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+      color: var(--gray2);
+    }
+
+    /* ─── Contact highlight ─── */
+    .contact-highlight {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.20);
+      border-radius: var(--r);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .contact-highlight .addr {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .contact-highlight .note {
+      font-size: 13px;
+      color: var(--gray2);
+      margin-top: 2px;
+    }
+
+    /* ─── Safe harbor ─── */
+    .safe-harbor-text {
+      font-size: 14px;
+      color: var(--gray2);
+      line-height: 1.8;
+    }
+
+    /* ─── Ack placeholder ─── */
+    .ack-empty {
+      font-size: 14px;
+      color: var(--gray2);
+      font-style: italic;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--navy2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray2);
+    }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta {
+      font-size: 13px;
+      color: var(--gray2);
+      text-align: right;
+    }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .policy-card { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+      .contact-highlight { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Nav ─── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" aria-label="CareEZ home" href="https://careez.org/">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="https://careez.org/#about">About</a></li>
+        <li><a href="https://careez.org/#api">API</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/security" style="color: var(--cyan);">Security</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ─── Hero ─── -->
+  <div class="page-hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Security</div>
+      <h1 class="hero-title">Security <span>Disclosure</span> Policy</h1>
+      <p class="hero-sub">We take the security of CareEZ and SeniorDeli services seriously. If you discover a vulnerability, we want to hear from you.</p>
+      <div class="hero-meta">Last updated: 2026-05-25 &nbsp;&middot;&nbsp; RFC 9116 compliant &nbsp;&middot;&nbsp; <a href="/.well-known/security.txt">security.txt</a></div>
+    </div>
+  </div>
+
+  <!-- ─── Content ─── -->
+  <div class="content-wrap">
+    <div class="container">
+
+      <!-- Reporting -->
+      <div class="policy-card">
+        <h2><span class="icon">📬</span> How to Report</h2>
+        <p>Send vulnerability reports by email. Please include a clear description, reproduction steps, affected component, and potential impact. We do not offer a public bug bounty programme at this time, but we will acknowledge your contribution in our <a href="#acknowledgments">Acknowledgments</a> section with your permission.</p>
+        <div class="contact-highlight">
+          <div>
+            <div class="addr"><a href="mailto:security@careez.org">security@careez.org</a></div>
+            <div class="note">Email routing pending Cloudflare Email Routing dashboard configuration. Reports will be received once routing is active.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coverage -->
+      <div class="policy-card">
+        <h2><span class="icon">🎯</span> Coverage</h2>
+        <p>This policy covers all production services operated by Carewells Limited under the CareEZ brand:</p>
+        <div class="scope-list">
+          <span class="scope-tag">careez.org</span>
+          <span class="scope-tag">demo.careez.org</span>
+          <span class="scope-tag">api.seniordeli.com/v1/classify</span>
+          <span class="scope-tag">api.seniordeli.com/v1/thickener</span>
+          <span class="scope-tag">api.seniordeli.com/v1/aspiration-risk</span>
+          <span class="scope-tag">api.seniordeli.com/v1/compliance</span>
+        </div>
+      </div>
+
+      <!-- Scope -->
+      <div class="policy-card">
+        <h2><span class="icon">✅</span> In Scope</h2>
+        <ul>
+          <li>Authentication and authorization flaws on any covered endpoint</li>
+          <li>Injection vulnerabilities (SQL, command, prompt injection with security impact)</li>
+          <li>Sensitive data exposure or insecure storage</li>
+          <li>Server-side request forgery (SSRF)</li>
+          <li>Broken access control or privilege escalation</li>
+          <li>Security misconfigurations with exploitable impact</li>
+          <li>Cross-site scripting (XSS) with meaningful impact</li>
+        </ul>
+        <h2 style="margin-top: 24px;"><span class="icon">🚫</span> Out of Scope</h2>
+        <ul>
+          <li>Third-party services and infrastructure not controlled by Carewells Limited</li>
+          <li>Denial-of-service attacks</li>
+          <li>Social engineering of Carewells staff</li>
+          <li>Physical security</li>
+          <li>Findings from automated scanners without demonstrated exploitability</li>
+          <li>Missing security headers with no exploitable path</li>
+          <li>Email spoofing / SPF / DMARC issues on non-covered domains</li>
+        </ul>
+      </div>
+
+      <!-- Response SLA -->
+      <div class="policy-card">
+        <h2><span class="icon">⏱</span> Response SLA</h2>
+        <p>We aim to respond to all reports within the following timelines:</p>
+        <table class="sla-table">
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Acknowledgment</th>
+              <th>Triage</th>
+              <th>Fix Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sev-critical">Critical</td>
+              <td>48 hours</td>
+              <td>7 days</td>
+              <td>30 days</td>
+            </tr>
+            <tr>
+              <td class="sev-high">High</td>
+              <td>48 hours</td>
+              <td>7 days</td>
+              <td>60 days</td>
+            </tr>
+            <tr>
+              <td class="sev-medium">Medium</td>
+              <td>48 hours</td>
+              <td>14 days</td>
+              <td>90 days</td>
+            </tr>
+            <tr>
+              <td class="sev-low">Low / Info</td>
+              <td>48 hours</td>
+              <td>30 days</td>
+              <td>Best effort</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 16px; font-size: 14px;">We will keep you informed of progress and notify you when the issue is resolved. We request a 90-day coordinated disclosure window before public disclosure.</p>
+      </div>
+
+      <!-- Safe Harbor -->
+      <div class="policy-card">
+        <h2><span class="icon">🛡</span> Safe Harbor</h2>
+        <p class="safe-harbor-text">
+          Carewells Limited will not pursue legal action against researchers who discover and report security vulnerabilities in good faith, provided that:
+        </p>
+        <ul style="margin-top: 12px; font-size: 14px; color: var(--gray2);">
+          <li>You do not access, modify, or destroy data that is not yours</li>
+          <li>You do not disrupt production services or degrade service quality</li>
+          <li>You do not exploit the vulnerability beyond what is necessary to demonstrate it</li>
+          <li>You report the vulnerability to us promptly and do not disclose it publicly before we have had a reasonable opportunity to address it</li>
+          <li>You act in good faith and in compliance with applicable laws</li>
+        </ul>
+        <p class="safe-harbor-text" style="margin-top: 16px;">
+          We consider responsible security research a valuable contribution to the safety of our users. We will work with you to understand and address issues promptly.
+        </p>
+      </div>
+
+      <!-- PGP -->
+      <div class="policy-card">
+        <h2><span class="icon">🔑</span> PGP Key</h2>
+        <p style="color: var(--gray2); font-size: 14px;">A PGP key for encrypted communication with <code style="color: var(--cyan); font-family: monospace;">security@careez.org</code> will be published here. In the interim, please submit reports via email and we will follow up securely.</p>
+      </div>
+
+      <!-- Acknowledgments -->
+      <div class="policy-card" id="acknowledgments">
+        <h2><span class="icon">🏅</span> Acknowledgments</h2>
+        <p class="ack-empty">No acknowledgments yet. Be the first to responsibly disclose a vulnerability and we will thank you here.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="/.well-known/security.txt">security.txt</a> &middot;
+        <a href="https://careez.org/">careez.org</a>
+      </div>
+    </div>
+  </footer>
+
+  </main><!-- /#main-content -->
+
+</body>
+</html>

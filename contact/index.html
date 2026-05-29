@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — CareEZ | Carewells Limited</title>
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="Contact CareEZ (Carewells Limited) for press enquiries, RCHE pilot applications, partnerships, security disclosures, or general questions. Hong Kong clinical AI for dysphagia." />
+
+  <link rel="canonical" href="https://careez.org/contact/" />
+  <link rel="alternate" hreflang="en" href="https://careez.org/contact/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/contact/" />
+  <meta property="og:title" content="Contact — CareEZ | Carewells Limited" />
+  <meta property="og:description" content="Reach CareEZ for press, pilot RCHE programmes, partnerships, or security disclosures. Hong Kong social enterprise developing AI swallowing-safety solutions." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact CareEZ",
+    "url": "https://careez.org/contact/",
+    "description": "Contact page for CareEZ (Carewells Limited). Reach the team for press, pilot programmes, clinical partnerships, or security disclosures.",
+    "isPartOf": { "@type": "WebSite", "url": "https://careez.org/", "name": "CareEZ" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "CareEZ", "item": "https://careez.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://careez.org/contact/" }
+      ]
+    },
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Carewells Limited",
+      "alternateName": "CareEZ",
+      "url": "https://careez.org/",
+      "email": "hello@careez.org",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hong Kong",
+        "addressCountry": "HK"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+      --cyan: #00E5FF; --cyan2: #29B6F6;
+      --white: #FFFFFF; --gray: #B0BEC5; --gray2: #78909C;
+      --yellow: #FFD43B; --green: #69F0AE; --red: #FF5252;
+      --accent-bar: 5px; --max-w: 1100px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--navy); color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: var(--accent-bar); height: 22px;
+      background: var(--cyan); border-radius: 2px; flex-shrink: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,20,40,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,229,255,0.12); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); text-decoration: none; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 0; }
+    /* Page hero */
+    .page-hero {
+      padding: 80px 24px 60px; background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero h1 span { color: var(--cyan); }
+    .page-hero .lead {
+      font-size: clamp(16px, 2vw, 18px); color: var(--gray);
+      max-width: 680px; line-height: 1.65; font-weight: 400;
+    }
+    /* Sections */
+    .content-section { padding: 72px 24px; }
+    .content-section.alt { background: var(--navy2); }
+    .content-inner { max-width: var(--max-w); margin: 0 auto; }
+    .content-inner h2 {
+      font-size: clamp(24px, 3vw, 34px); font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 32px;
+    }
+    .content-inner p {
+      font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 20px; max-width: 800px;
+    }
+    /* Contact cards grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .contact-card {
+      background: var(--navy3);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-radius: 12px;
+      padding: 28px 26px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .contact-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); }
+    .contact-card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--cyan2);
+    }
+    .contact-card h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 16px; font-weight: 700; color: var(--cyan);
+      border-bottom: 1px solid rgba(0,229,255,0.3); padding-bottom: 2px;
+      width: fit-content;
+    }
+    .contact-email:hover { text-decoration: none; opacity: 0.85; }
+    .contact-card-links { display: flex; flex-direction: column; gap: 6px; }
+    .contact-card-links a {
+      font-size: 13px; color: var(--cyan2);
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .contact-card p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 0; max-width: none; }
+    .routing-note {
+      font-size: 11px; color: var(--gray2);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px; padding: 7px 10px; margin-top: 2px;
+      line-height: 1.55;
+    }
+    .pilot-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--green);
+      background: rgba(105,240,174,0.08); border: 1px solid rgba(105,240,174,0.25);
+      border-radius: 20px; padding: 3px 10px; width: fit-content;
+    }
+    .pilot-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+    /* Contact form */
+    .form-wrap {
+      background: var(--navy3); border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 12px; padding: 40px 36px; max-width: 680px;
+    }
+    .form-wrap h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--gray); letter-spacing: 0.02em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--r); color: var(--white); font-family: inherit;
+      font-size: 15px; padding: 12px 14px;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+      border-color: var(--cyan);
+    }
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-group select option { background: var(--navy2); color: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--cyan); color: var(--navy); font-weight: 800;
+      font-size: 15px; letter-spacing: 0.01em; padding: 14px 28px;
+      border-radius: 8px; border: none; cursor: pointer;
+      transition: opacity 0.15s; font-family: inherit;
+    }
+    .form-submit:hover { opacity: 0.9; }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-status {
+      margin-top: 16px; font-size: 14px; line-height: 1.6;
+      padding: 12px 16px; border-radius: var(--r); display: none;
+    }
+    .form-status.success {
+      display: block; background: rgba(105,240,174,0.08);
+      border: 1px solid rgba(105,240,174,0.3); color: var(--green);
+    }
+    .form-status.error {
+      display: block; background: rgba(255,82,82,0.08);
+      border: 1px solid rgba(255,82,82,0.3); color: var(--red);
+    }
+    /* Honeypot */
+    .hp-field { display: none !important; }
+    /* Office + boilerplate */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 8px; }
+    .info-card {
+      background: var(--navy3); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 28px 26px;
+    }
+    .info-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+    .info-card p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 0; max-width: none; }
+    .boilerplate-box {
+      background: var(--navy3); border: 1px solid rgba(0,229,255,0.12);
+      border-left: var(--accent-bar) solid var(--cyan);
+      border-radius: 0 var(--r) var(--r) 0; padding: 28px 32px; max-width: 860px;
+    }
+    .boilerplate-box p {
+      font-size: 14px; color: var(--gray); line-height: 1.85; margin-bottom: 16px; max-width: none;
+    }
+    .boilerplate-box p:last-child { margin-bottom: 0; }
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta { font-size: 12px; color: var(--gray2); text-align: right; }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+      .form-wrap { padding: 28px 20px; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">Care<span>EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/">Governance</a></li>
+        <li><a href="/partners/">Partners</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/#live-api">Live API</a></li>
+        <li><a href="/contact/" class="active">Contact</a></li>
+        <li><a href="/press/">Press</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ─── Hero ─── -->
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="section-label">Get in touch</div>
+        <h1>Contact <span>CareEZ</span></h1>
+        <p class="lead">
+          Reach the right team directly — whether you're a journalist, an RCHE considering a pilot,
+          a potential clinical partner, or reporting a security issue.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── Contact by purpose ─── -->
+    <section class="content-section">
+      <div class="content-inner">
+        <div class="section-label">Contact by purpose</div>
+        <h2>Who do you need to reach?</h2>
+
+        <div class="contact-grid">
+
+          <!-- Press / Media -->
+          <div class="contact-card">
+            <div class="contact-card-label">Press / Media</div>
+            <h3>Journalists &amp; media</h3>
+            <a class="contact-email" href="mailto:hello@careez.org">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+              hello@careez.org
+            </a>
+            <p class="routing-note">&#9888;&#65039; press@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <p>For interviews, include your outlet name, deadline, and preferred language (EN/繁/简).</p>
+            <div class="contact-card-links">
+              <a href="/press/">&#8594; Full press kit &amp; boilerplate</a>
+            </div>
+          </div>
+
+          <!-- Pilot RCHEs / NGOs -->
+          <div class="contact-card">
+            <div class="contact-card-label">Pilot RCHEs / NGOs</div>
+            <h3>Care homes &amp; NGOs</h3>
+            <div class="pilot-badge">3 active slots — Y1 Q1</div>
+            <a class="contact-email" href="mailto:hello@careez.org">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+              hello@careez.org
+            </a>
+            <p class="routing-note">&#9888;&#65039; pilot@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <p>Tier-A pilots: 3 active slots available in Y1 Q1. Priority to accredited RCHEs and HKCSS members.</p>
+            <div class="contact-card-links">
+              <a href="/trial/">&#8594; View pilot application</a>
+            </div>
+          </div>
+
+          <!-- Partners -->
+          <div class="contact-card">
+            <div class="contact-card-label">Partners</div>
+            <h3>HKCSS, HKU &amp; clinical advisors</h3>
+            <a class="contact-email" href="mailto:hello@careez.org">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+              hello@careez.org
+            </a>
+            <p class="routing-note">&#9888;&#65039; partner@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <p>Open to additional clinical advisors, institutional partners, and MOU discussions.</p>
+            <div class="contact-card-links">
+              <a href="/partners/">&#8594; View current MOUs</a>
+            </div>
+          </div>
+
+          <!-- Security -->
+          <div class="contact-card">
+            <div class="contact-card-label">Security disclosure</div>
+            <h3>Report a vulnerability</h3>
+            <a class="contact-email" href="mailto:hello@careez.org">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+              hello@careez.org
+            </a>
+            <p class="routing-note">&#9888;&#65039; security@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <p>48-hour acknowledgment. 7-day triage. We follow responsible disclosure practices.</p>
+            <div class="contact-card-links">
+              <a href="/security/">&#8594; Full security policy</a>
+            </div>
+          </div>
+
+          <!-- General -->
+          <div class="contact-card">
+            <div class="contact-card-label">General</div>
+            <h3>Everything else</h3>
+            <a class="contact-email" href="mailto:hello@careez.org">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+              hello@careez.org
+            </a>
+            <p>Or use the enquiry form below — we read every submission.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── Contact Form ─── -->
+    <section class="content-section alt" id="form">
+      <div class="content-inner">
+        <div class="section-label">Enquiry form</div>
+
+        <div class="form-wrap">
+          <h2>Send us a message</h2>
+
+          <form id="contact-form" novalidate>
+            <!-- Honeypot anti-spam -->
+            <div class="hp-field" aria-hidden="true">
+              <input type="text" name="_hp_name" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-name">Name *</label>
+                <input type="text" id="f-name" name="name" required placeholder="Your name" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="f-email">Email *</label>
+                <input type="email" id="f-email" name="email" required placeholder="you@example.com" autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="f-purpose">Purpose *</label>
+              <select id="f-purpose" name="purpose" required>
+                <option value="" disabled selected>Select a topic&hellip;</option>
+                <option value="press">Press / Media</option>
+                <option value="pilot">Pilot RCHE / NGO</option>
+                <option value="partner">Partnership enquiry</option>
+                <option value="security">Security disclosure</option>
+                <option value="general">General</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="f-message">Message *</label>
+              <textarea id="f-message" name="message" required placeholder="Tell us what you need&hellip;"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit" id="submit-btn">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+              Send message
+            </button>
+
+            <div class="form-status" id="form-status" role="alert"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── Office ─── -->
+    <section class="content-section">
+      <div class="content-inner">
+        <div class="section-label">Office</div>
+        <h2>Carewells Limited</h2>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>Registered address</h3>
+            <p>
+              Carewells Limited (t/a SeniorDeli)<br>
+              Unit X, [Address &mdash; placeholder]<br>
+              Hong Kong<br>
+              +852 [Phone &mdash; placeholder]
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>Entity details</h3>
+            <p>
+              Registered in Hong Kong SAR<br>
+              Social Enterprise Directory (SED) registered<br>
+              Operating brands: CareEZ, SeniorDeli, dysphagia.cn
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ─── Press boilerplate ─── -->
+    <section class="content-section alt">
+      <div class="content-inner">
+        <div class="section-label">Press boilerplate</div>
+        <h2>About CareEZ &amp; Carewells</h2>
+        <div class="boilerplate-box">
+          <p>
+            CareEZ is a clinical AI platform developed by Carewells Limited, a Hong Kong social enterprise
+            (SED-registered) founded to advance dysphagia management and texture-modified food safety for older
+            adults and residential care home for the elderly (RCHE) operators. The platform combines multimodal AI
+            swallowing assessment with real-time IDDSI-level classification, enabling care teams to identify
+            aspiration risk, generate structured clinical reports, and match residents to appropriate texture-modified
+            diets aligned with the HKCSS 護食標準 (Hong Kong Care-Food Standard).
+          </p>
+          <p>
+            Carewells operates under a social enterprise model — reinvesting commercial revenue into subsidised
+            access for smaller NGO-run care homes and community nutrition programmes. The company works with clinical
+            advisors from Hong Kong's tertiary healthcare sector and holds partnership discussions with the Hong Kong
+            Council of Social Service (HKCSS) and academic institutions including the University of Hong Kong (HKU).
+            In addition to the CareEZ AI platform, Carewells produces care-food products under the SeniorDeli brand
+            and maintains dysphagia.cn as a Mandarin clinical resource for the broader Greater China care sector.
+          </p>
+          <p>
+            For press enquiries, interviews, or asset requests, contact
+            <a href="mailto:hello@careez.org">hello@careez.org</a>
+            or visit <a href="/press/">careez.org/press/</a> for the full press kit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      var btn  = document.getElementById('submit-btn');
+      var status = document.getElementById('form-status');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        status.className = 'form-status';
+        status.textContent = '';
+
+        // Honeypot check
+        var hp = form.querySelector('[name="_hp_name"]');
+        if (hp && hp.value) return; // bot detected, silently drop
+
+        // Basic validation
+        var name    = form.querySelector('[name="name"]').value.trim();
+        var email   = form.querySelector('[name="email"]').value.trim();
+        var purpose = form.querySelector('[name="purpose"]').value;
+        var message = form.querySelector('[name="message"]').value.trim();
+
+        if (!name || !email || !purpose || !message) {
+          status.className = 'form-status error';
+          status.textContent = 'Please fill in all required fields.';
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        try {
+          var res = await fetch('https://www.seniordeli.com/api/leads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, email: email, purpose: purpose, message: message, source: 'careez.org/contact' })
+          });
+
+          if (res.ok) {
+            status.className = 'form-status success';
+            status.textContent = 'Message sent — thank you! We’ll be in touch within 2–3 business days.';
+            form.reset();
+          } else {
+            throw new Error('HTTP ' + res.status);
+          }
+        } catch (err) {
+          status.className = 'form-status error';
+          status.textContent = 'Something went wrong. Please email hello@careez.org directly.';
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg> Send message';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

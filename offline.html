@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareEZ — You're offline</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0a1428">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0e1c3a;
+      color: #e8edf8;
+      text-align: center;
+      padding: 2rem;
+    }
+    img { width: 72px; height: 72px; border-radius: 16px; }
+    h1 { font-size: 1.6rem; font-weight: 700; }
+    p  { font-size: 1rem; color: #8fa4cc; max-width: 34ch; line-height: 1.6; }
+    a  {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.65rem 1.6rem;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    a:hover { background: #1d4ed8; }
+  </style>
+</head>
+<body>
+  <img src="/android-chrome-192.png" alt="CareEZ logo">
+  <h1>You're offline</h1>
+  <p>No internet connection detected. Please check your network and try again.</p>
+  <a href="/">Try again</a>
+</body>
+</html>

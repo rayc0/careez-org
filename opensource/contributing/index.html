@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing — CareEZ Open Source</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <meta name="description" content="How to contribute to CareEZ open source — PR process, commit format, test requirements, and Code of Conduct." />
+  <link rel="canonical" href="https://careez.org/opensource/contributing/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/opensource/contributing/" />
+  <meta property="og:title" content="Contributing — CareEZ Open Source" />
+  <meta property="og:description" content="How to contribute to CareEZ open source — PR process, commit format, test requirements, and Code of Conduct." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+      --cyan: #00E5FF; --cyan2: #29B6F6;
+      --white: #FFFFFF; --gray: #B0BEC5; --gray2: #78909C;
+      --yellow: #FFD43B; --green: #4CAF50;
+      --accent-bar: 5px; --max-w: 1100px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--navy); color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: var(--accent-bar); height: 22px;
+      background: var(--cyan); border-radius: 2px; flex-shrink: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,20,40,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,229,255,0.12); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); text-decoration: none; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 0; }
+    .page-hero {
+      padding: 80px 24px 60px; background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(32px, 4.5vw, 52px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero h1 span { color: var(--cyan); }
+    .page-hero .lead {
+      font-size: clamp(15px, 2vw, 18px); color: var(--gray);
+      max-width: 660px; line-height: 1.65; font-weight: 400;
+    }
+    .content-section { padding: 64px 24px; }
+    .content-section.alt { background: var(--navy2); }
+    .content-inner { max-width: 860px; margin: 0 auto; }
+    .content-inner h2 {
+      font-size: clamp(22px, 2.8vw, 30px); font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    .content-inner h3 {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+      margin-top: 36px; margin-bottom: 10px; color: var(--white);
+    }
+    .content-inner p {
+      font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 18px;
+    }
+    .content-inner p:last-child { margin-bottom: 0; }
+    /* Steps */
+    .steps { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .steps li {
+      display: grid; grid-template-columns: 36px 1fr;
+      gap: 16px; align-items: start;
+      padding: 16px 20px; background: var(--navy3);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r);
+    }
+    .step-n {
+      font-size: 14px; font-weight: 900; color: var(--cyan);
+      line-height: 1.5; margin-top: 1px;
+    }
+    .step-body strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .step-body span { font-size: 13px; color: var(--gray); line-height: 1.6; }
+    /* Code block */
+    pre {
+      background: var(--navy3); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r); padding: 20px 24px; overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 13px; line-height: 1.65; color: var(--gray); margin: 20px 0;
+    }
+    pre .comment { color: var(--gray2); }
+    pre .kw { color: var(--cyan); }
+    pre .str { color: var(--green); }
+    /* Callout */
+    .callout {
+      padding: 20px 24px; background: rgba(0,229,255,0.04);
+      border-left: var(--accent-bar) solid var(--cyan);
+      border-radius: 0 var(--r) var(--r) 0;
+      border: 1px solid rgba(0,229,255,0.15); border-left-width: var(--accent-bar);
+      margin: 24px 0;
+    }
+    .callout p { font-size: 14px; color: var(--gray); margin-bottom: 0; }
+    /* Checklist */
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .checklist li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 14px; color: var(--gray); line-height: 1.6;
+      padding: 10px 16px; background: rgba(0,229,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: var(--r);
+    }
+    .checklist li::before { content: '☐'; color: var(--cyan2); font-size: 16px; line-height: 1.2; flex-shrink: 0; }
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta { font-size: 12px; color: var(--gray2); text-align: right; }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">Care<span>EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/">Governance</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/opensource/" class="active">Open Source</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-label">Contributing</div>
+      <h1>How to <span>contribute</span><br>to CareEZ</h1>
+      <p class="lead">
+        Bug reports, translations, clinical accuracy review, and docs all welcome.
+        This guide covers the PR process, commit format, and test requirements.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Getting Started -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">Getting Started</div>
+      <h2>PR process — step by step</h2>
+
+      <ul class="steps">
+        <li>
+          <div class="step-n">1</div>
+          <div class="step-body">
+            <strong>Fork and clone</strong>
+            <span>Fork the relevant repo on GitHub, then clone your fork. Keep <code style="color:var(--cyan2);font-size:12px;">main</code> in sync with upstream — <code style="color:var(--cyan2);font-size:12px;">git fetch upstream &amp;&amp; git rebase upstream/main</code> before starting any branch.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-n">2</div>
+          <div class="step-body">
+            <strong>Create a feature branch</strong>
+            <span>Branch from <code style="color:var(--cyan2);font-size:12px;">main</code>. Name it <code style="color:var(--cyan2);font-size:12px;">type/short-description</code> — e.g. <code style="color:var(--cyan2);font-size:12px;">fix/tagalog-level-3-label</code> or <code style="color:var(--cyan2);font-size:12px;">feat/vietnamese-delivery</code>.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-n">3</div>
+          <div class="step-body">
+            <strong>Make changes with passing tests</strong>
+            <span>All tests must pass before opening a PR. For clinical content changes, include a note on which IDDSI levels or clinical rules are affected and link the relevant IDDSI 2019 framework reference.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-n">4</div>
+          <div class="step-body">
+            <strong>Open a PR against <code style="color:var(--cyan2);font-size:13px;">main</code></strong>
+            <span>Fill in the PR template. One reviewer required for non-clinical changes; two reviewers (one must be a clinical contributor) for any change touching triage logic, IDDSI levels, or escalation rules.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-n">5</div>
+          <div class="step-body">
+            <strong>Address review feedback, then squash-merge</strong>
+            <span>PRs are merged via squash to keep the commit history clean. The squash commit title follows the commit format below.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="callout">
+        <p>
+          <strong style="color:var(--white);">Clinical changes require extra care.</strong>
+          Any PR that modifies triage logic, IDDSI level classification, aspiration risk scoring, or
+          escalation thresholds must include a <em>Clinical Impact</em> section in the PR description.
+          Tag <code style="color:var(--cyan2);">@careez-clinical</code> for mandatory review.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Commit Format -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">Commit Format</div>
+      <h2>Conventional Commits — required</h2>
+
+      <p>
+        All commits must follow <a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">Conventional Commits 1.0</a>.
+        The format is <code style="color:var(--cyan2);font-size:14px;">&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;</code>.
+      </p>
+
+      <pre><span class="comment"># Types</span>
+feat      <span class="comment"># new feature or capability</span>
+fix       <span class="comment"># bug fix</span>
+docs      <span class="comment"># documentation only</span>
+i18n      <span class="comment"># translation or locale change</span>
+clinical  <span class="comment"># clinical content, triage logic, IDDSI rules</span>
+refactor  <span class="comment"># code change — no behaviour change</span>
+test      <span class="comment"># adding or fixing tests</span>
+chore     <span class="comment"># build, deps, config — no production code</span>
+
+<span class="comment"># Scope (optional but encouraged)</span>
+api       <span class="comment"># Cloudflare Worker / API layer</span>
+assessor  <span class="comment"># care-food-assessor package</span>
+screener  <span class="comment"># dysphagia-screener package</span>
+recipe    <span class="comment"># recipe-modifier package</span>
+cantonese | tagalog | bahasa | vietnamese | thai
+
+<span class="comment"># Examples</span>
+<span class="kw">feat</span>(tagalog): add IDDSI level 4 descriptor translations
+<span class="kw">fix</span>(assessor): correct minced-moist boundary check for level 5
+<span class="kw">clinical</span>(screener): update aspiration risk threshold per FEES 2024 study
+<span class="kw">i18n</span>(vietnamese): initial locale scaffolding
+<span class="kw">docs</span>: add IDDSI framework reference links to README</pre>
+
+      <p>
+        Breaking changes: append <code style="color:var(--cyan2);font-size:14px;">!</code> after the type and add a
+        <code style="color:var(--cyan2);font-size:14px;">BREAKING CHANGE:</code> footer in the commit body.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Test Requirements -->
+  <section class="content-section">
+    <div class="content-inner">
+      <div class="section-label">Test Requirements</div>
+      <h2>What must pass before merging</h2>
+
+      <h3>General (all PRs)</h3>
+      <ul class="checklist">
+        <li>CI passes — <code style="color:var(--cyan2);font-size:12px;">npm test</code> (or equivalent) exits 0</li>
+        <li>No new TypeScript errors — <code style="color:var(--cyan2);font-size:12px;">tsc --noEmit</code> clean</li>
+        <li>Lint passes — <code style="color:var(--cyan2);font-size:12px;">eslint</code> with project config</li>
+        <li>No regression in existing test suite (snapshot or unit)</li>
+      </ul>
+
+      <h3>Clinical content changes</h3>
+      <ul class="checklist">
+        <li>IDDSI level classification tests updated to cover the changed logic</li>
+        <li>All 7 IDDSI levels tested for the affected food/liquid path</li>
+        <li>Escalation rule tests pass with the new threshold</li>
+        <li>PR description includes a <em>Clinical Impact</em> section citing the source (IDDSI 2019, FEES study, HKCSS 護食標準, etc.)</li>
+        <li>Tagged <code style="color:var(--cyan2);">@careez-clinical</code> — two-reviewer approval required</li>
+      </ul>
+
+      <h3>Translation / i18n PRs</h3>
+      <ul class="checklist">
+        <li>All locale keys present — no missing keys vs. the <code style="color:var(--cyan2);font-size:12px;">en</code> base</li>
+        <li>Clinical terminology reviewed by a native speaker with care-sector background where possible — note in PR if reviewed</li>
+        <li>Rendered output spot-checked for character encoding (Cantonese, Tagalog, Bahasa diacritics)</li>
+      </ul>
+
+      <h3>API / Worker changes</h3>
+      <ul class="checklist">
+        <li>Wrangler local dev passes — <code style="color:var(--cyan2);font-size:12px;">wrangler dev</code> starts without errors</li>
+        <li>Affected API endpoints have integration tests</li>
+        <li>No secrets or credentials committed — CI secret-scan must pass</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Code of Conduct -->
+  <section class="content-section alt">
+    <div class="content-inner">
+      <div class="section-label">Code of Conduct</div>
+      <h2>Contributor Covenant 2.1</h2>
+
+      <p>
+        CareEZ repositories are governed by the
+        <a href="https://www.contributor-covenant.org/version/2/1/code_of_conduct/" target="_blank" rel="noopener">Contributor Covenant 2.1</a>.
+        All contributors, maintainers, and community members are expected to uphold it.
+      </p>
+
+      <p>
+        Instances of unacceptable behaviour may be reported to
+        <a href="mailto:hello@careez.org">hello@careez.org</a>. All reports are reviewed confidentially.
+        Maintainers are obligated to respect the privacy and security of reporters.
+      </p>
+
+      <p style="margin-top:36px;">
+        <a href="/opensource/"
+           style="display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:40px;font-size:14px;font-weight:600;border:1.5px solid var(--cyan);color:var(--cyan);text-decoration:none;">
+          &larr; Back to Open Source
+        </a>
+        &nbsp;&nbsp;
+        <a href="https://github.com/rayc0/seniordeli-website/discussions" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:40px;font-size:14px;font-weight:700;background:var(--cyan);color:var(--navy);text-decoration:none;">
+          Join Discussions &#8599;
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

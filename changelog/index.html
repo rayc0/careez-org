@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog — CareEZ | Carewells Limited</title>
+  <meta name="description" content="CareEZ version history: all shipped releases, API milestones, site expansions, and roadmap. Hong Kong clinical AI for dysphagia and 照護食." />
+
+  <link rel="canonical" href="https://careez.org/changelog/" />
+  <link rel="alternate" hreflang="en" href="https://careez.org/changelog/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/changelog/" />
+  <meta property="og:title" content="Changelog — CareEZ | Carewells Limited" />
+  <meta property="og:description" content="CareEZ version history: all shipped releases, API milestones, site expansions, and roadmap." />
+  <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta property="og:locale" content="en_HK" />
+  <meta property="og:site_name" content="CareEZ" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "CareEZ Changelog",
+    "url": "https://careez.org/changelog/",
+    "description": "Full version history and release notes for CareEZ — the Hong Kong clinical AI for dysphagia and 照護食 standard adoption. Covers all API milestones, site expansions, and infrastructure shipped by Carewells Limited.",
+    "dateModified": "2026-05-25",
+    "isPartOf": { "@type": "WebSite", "url": "https://careez.org/", "name": "CareEZ" },
+    "mainContentOfPage": {
+      "@type": "WebPageElement",
+      "cssSelector": "main"
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "CareEZ",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "url": "https://demo.careez.org"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "CareEZ", "item": "https://careez.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Changelog", "item": "https://careez.org/changelog/" }
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0A1428; --navy2: #0E1C3A; --navy3: #132046;
+      --cyan: #00E5FF; --cyan2: #29B6F6;
+      --white: #FFFFFF; --gray: #B0BEC5; --gray2: #78909C;
+      --yellow: #FFD43B; --green: #69F0AE; --orange: #FFAB40;
+      --accent-bar: 5px; --max-w: 1100px; --r: 6px;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body {
+      background-color: var(--navy); color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: var(--accent-bar); height: 22px;
+      background: var(--cyan); border-radius: 2px; flex-shrink: 0;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,20,40,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,229,255,0.12); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); text-decoration: none; }
+
+    /* Page hero */
+    .page-hero {
+      padding: 80px 24px 60px; background: var(--navy2);
+      border-bottom: 1px solid rgba(0,229,255,0.08);
+    }
+    .page-hero-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-hero h1 {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px;
+    }
+    .page-hero h1 span { color: var(--cyan); }
+    .page-hero .lead {
+      font-size: clamp(16px, 2vw, 18px); color: var(--gray);
+      max-width: 680px; line-height: 1.65; font-weight: 400;
+    }
+
+    /* Main layout */
+    .changelog-layout {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 64px 24px 80px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Sticky sidebar TOC */
+    .toc {
+      position: sticky; top: 80px;
+    }
+    .toc-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gray2); margin-bottom: 14px;
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .toc-list a {
+      font-size: 13px; font-weight: 500; color: var(--gray2);
+      padding: 5px 10px; border-radius: var(--r);
+      display: block; transition: color 0.2s, background 0.2s;
+      border-left: 2px solid transparent;
+    }
+    .toc-list a:hover { color: var(--white); background: rgba(255,255,255,0.04); text-decoration: none; }
+    .toc-list a.current { color: var(--cyan); border-left-color: var(--cyan); background: rgba(0,229,255,0.05); }
+    .toc-list .toc-sub a { font-size: 12px; padding-left: 20px; }
+
+    /* Release entries */
+    .release-list { display: flex; flex-direction: column; gap: 56px; }
+    .release {
+      position: relative;
+    }
+    .release-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .release-badge {
+      flex-shrink: 0; display: inline-flex; align-items: center;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+      margin-top: 4px;
+    }
+    .badge-latest {
+      background: rgba(0,229,255,0.12); color: var(--cyan);
+      border: 1px solid rgba(0,229,255,0.35);
+    }
+    .badge-stable {
+      background: rgba(105,240,174,0.1); color: var(--green);
+      border: 1px solid rgba(105,240,174,0.3);
+    }
+    .badge-deprecated {
+      background: rgba(255,255,255,0.05); color: var(--gray2);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .release-title-block h2 {
+      font-size: clamp(22px, 3vw, 30px); font-weight: 900;
+      letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 6px;
+    }
+    .release-title-block h2 .ver { color: var(--cyan); }
+    .release-date {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray2);
+    }
+
+    /* Category groups within a release */
+    .change-groups { display: flex; flex-direction: column; gap: 28px; }
+    .change-group {
+      background: var(--navy3); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; overflow: hidden;
+    }
+    .change-group-header {
+      padding: 14px 22px; background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .change-group-icon { font-size: 16px; }
+    .change-group-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--cyan2);
+    }
+    .change-group ul {
+      list-style: none; padding: 18px 22px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .change-group ul li {
+      font-size: 14px; color: var(--gray); line-height: 1.75;
+      padding-left: 18px; position: relative;
+    }
+    .change-group ul li::before {
+      content: '–'; position: absolute; left: 0; color: var(--cyan2); font-weight: 700;
+    }
+    .change-group ul li strong { color: var(--white); font-weight: 600; }
+    .change-group ul li code {
+      font-size: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      background: rgba(0,229,255,0.08); color: var(--cyan2);
+      padding: 1px 6px; border-radius: 3px;
+    }
+
+    /* Roadmap */
+    .roadmap-section {
+      padding: 64px 24px 80px; background: var(--navy2);
+      border-top: 1px solid rgba(0,229,255,0.08);
+    }
+    .roadmap-inner { max-width: var(--max-w); margin: 0 auto; }
+    .roadmap-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 32px;
+    }
+    .roadmap-card {
+      background: var(--navy3); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 28px 26px;
+    }
+    .roadmap-card-period {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 10px;
+    }
+    .roadmap-card h3 {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.01em;
+      margin-bottom: 16px; color: var(--white);
+    }
+    .roadmap-card ul {
+      list-style: none; display: flex; flex-direction: column; gap: 9px;
+    }
+    .roadmap-card ul li {
+      font-size: 13px; color: var(--gray); line-height: 1.65;
+      padding-left: 16px; position: relative;
+    }
+    .roadmap-card ul li::before {
+      content: '›'; position: absolute; left: 0; color: var(--cyan2); font-weight: 700;
+    }
+    .roadmap-cta {
+      margin-top: 16px;
+    }
+    .roadmap-cta a {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--cyan);
+      border-bottom: 1px solid rgba(0,229,255,0.3); padding-bottom: 1px;
+    }
+
+    /* Section divider */
+    .release-divider {
+      border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 0;
+    }
+
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 24px; background: var(--navy2); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-brand { font-size: 15px; font-weight: 700; color: var(--white); }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta { font-size: 12px; color: var(--gray2); text-align: right; }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+
+    @media (max-width: 860px) {
+      .changelog-layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+      .release-header { flex-direction: column; gap: 10px; }
+    }
+  
+    /* ─── A11y: underline in-text links for WCAG 1.4.1 (non-color-alone) ─── */
+    .content-inner a,
+    .content-section a,
+    p a,
+    li a,
+    .api-note a,
+    .form-card a,
+    .disclaimer a {
+      text-decoration: underline;
+    }
+    .content-inner a:hover,
+    .content-section a:hover,
+    p a:hover,
+    li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+  <!-- ─── Service Worker (PWA offline support) ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" aria-label="CareEZ home" href="/">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/governance/">Governance</a></li>
+        <li><a href="/partners/">Partners</a></li>
+        <li><a href="/standards/">Standards</a></li>
+        <li><a href="/#live-api">Live API</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/roadmap/">Roadmap</a></li>
+        <li><a href="/changelog/" class="active">Changelog</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="section-label">Release History</div>
+        <h1>Care<span>EZ</span> Changelog</h1>
+        <p class="lead">All shipped versions, API milestones, site expansions, and infrastructure updates for CareEZ — Hong Kong's clinical AI for dysphagia and 照護食.</p>
+      </div>
+    </section>
+
+    <!-- Changelog + TOC -->
+    <div class="changelog-layout">
+
+      <!-- Sidebar TOC -->
+      <aside class="toc" aria-label="Table of contents">
+        <div class="toc-label">Jump to</div>
+        <ul class="toc-list">
+          <li><a href="#v1-1" class="current">v1.1 — 2026-05-25</a></li>
+          <li><a href="#v1-0">v1.0 — 2026-05-24</a></li>
+          <li><a href="#v0-x">v0.x — Pre-launch</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+        </ul>
+      </aside>
+
+      <!-- Release entries -->
+      <div class="release-list">
+
+        <!-- ─── v1.1 ─── -->
+        <article class="release" id="v1-1">
+          <div class="release-header">
+            <span class="release-badge badge-latest">Latest</span>
+            <div class="release-title-block">
+              <h2><span class="ver">v1.1</span> — Final pre-HKEX-submission state</h2>
+              <div class="release-date">2026-05-25</div>
+            </div>
+          </div>
+
+          <div class="change-groups">
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">⚡</span>
+                <span class="change-group-label">Live API Endpoints</span>
+              </div>
+              <ul>
+                <li><strong>Vision endpoint activated</strong> — <code>claude-vision</code> model live; photograph-to-IDDSI classification in production</li>
+                <li><strong>Recipe-modify</strong> — texture-modification recipe suggestions via API</li>
+                <li><strong>IDDSI-batch</strong> — bulk food-item classification endpoint</li>
+                <li><strong>Clinical-QA RAG</strong> — retrieval-augmented clinical Q&amp;A grounded in IDDSI + 護食標準 corpus</li>
+                <li><strong>Voice-biomarker-cantonese</strong> — Whisper-backed Cantonese aspiration-risk voice screen</li>
+                <li><strong>Audio stub</strong> — placeholder endpoint for future acoustic biomarker models</li>
+                <li><strong>WhatsApp webhook skeleton</strong> — inbound message routing scaffold ready for carer deployment</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🌐</span>
+                <span class="change-group-label">Multilingual API</span>
+              </div>
+              <ul>
+                <li>Vietnamese, Thai, and Spanish added — API responses now available in <strong>7 languages</strong> (EN / 繁中 / 简中 / VI / TH / ES + existing)</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🌍</span>
+                <span class="change-group-label">careez.org — New Pages</span>
+              </div>
+              <ul>
+                <li><a href="/trial/">/trial/</a> — public API trial widget</li>
+                <li><a href="/press/">/press/</a> — press kit, team bios, boilerplate</li>
+                <li><a href="/status/">/status/</a> — live status page with 5-minute cron uptime checks</li>
+                <li><a href="/api-docs/">/api-docs/</a> — full public API reference</li>
+                <li><a href="/research/voice-biomarker-protocol/">/research/voice-biomarker-protocol/</a> — clinical voice biomarker research protocol</li>
+                <li><code>/security</code>, <code>/changelog</code>, <code>/compare</code> — policy and comparison pages</li>
+                <li><a href="/about/">/about/</a>, <a href="/team/">/team/</a>, <a href="/governance/">/governance/</a>, <a href="/standards/">/standards/</a> — company and governance pages</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">📰</span>
+                <span class="change-group-label">softmeal.org — Content Expansion</span>
+              </div>
+              <ul>
+                <li>+54 new articles across <strong>4 locales</strong> — total <strong>1,689 published pages</strong></li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🏥</span>
+                <span class="change-group-label">dysphagia.cn — Content Expansion</span>
+              </div>
+              <ul>
+                <li>+60 clinical articles across <strong>3 locales</strong></li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">📦</span>
+                <span class="change-group-label">HKEX Submission Bundle</span>
+              </div>
+              <ul>
+                <li><strong>Y1 Q1 sprint plan</strong> — Nov 2026 – Jan 2027 milestone schedule</li>
+                <li><strong>Clinical safety protocol</strong> — AI output disclaimer + clinician override framework</li>
+                <li><strong>IDDSI certification curriculum</strong> — structured carer training pathway</li>
+                <li><strong>Voice biomarker research protocol</strong> — IRB-ready methodology for HKU partnership</li>
+                <li><strong>Snap-to-IDDSI golden dataset</strong> — 50 annotated food-photo examples with ground-truth labels</li>
+                <li><strong>12 LinkedIn launch posts</strong> — pre-scheduled founder + product announcement series</li>
+                <li><strong>Brand kit</strong> — logo files, color tokens, usage guidelines</li>
+                <li><strong>Glossary</strong> — 65 dysphagia / 照護食 / IDDSI terms (EN / 繁中 / 简中)</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🔧</span>
+                <span class="change-group-label">Infrastructure</span>
+              </div>
+              <ul>
+                <li><strong>Bundle integrity verifier</strong> — automated hash-check on all HKEX submission artifacts</li>
+                <li><strong>Cloudflare Web Analytics</strong> — privacy-first analytics deployed across careez.org, softmeal.org, dysphagia.cn</li>
+                <li><strong>Status page</strong> — 5-minute cron monitoring for all public endpoints; public at <a href="/status/">/status/</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </article>
+
+        <hr class="release-divider">
+
+        <!-- ─── v1.0 ─── -->
+        <article class="release" id="v1-0">
+          <div class="release-header">
+            <span class="release-badge badge-stable">Stable</span>
+            <div class="release-title-block">
+              <h2><span class="ver">v1.0</span> — Initial post-rebrand launch</h2>
+              <div class="release-date">2026-05-24</div>
+            </div>
+          </div>
+
+          <div class="change-groups">
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🚀</span>
+                <span class="change-group-label">careez.org Launch</span>
+              </div>
+              <ul>
+                <li><strong>CareForge → CareEZ rebrand live</strong> — rename banner deployed site-wide</li>
+                <li>HKCSS 護食標準 references and alignment language added throughout</li>
+                <li>JSON-LD <code>Organization</code> schema with SED-registration, founders, and sameAs links</li>
+                <li><strong>Try CareEZ Live widget</strong> — inline API demo on homepage</li>
+                <li><strong>HKEX IFS Applicant credential</strong> — prominently surfaced on homepage hero</li>
+                <li><a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a> cross-link integrated</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">⚡</span>
+                <span class="change-group-label">4 Live API Endpoints</span>
+              </div>
+              <ul>
+                <li><code>POST /api/classify-text</code> — text-based IDDSI food-level classifier</li>
+                <li><code>POST /api/voice-screen</code> — voice aspiration-risk screen (English)</li>
+                <li><code>POST /api/classify-image</code> — image-based IDDSI food classifier (stub → live in v1.1)</li>
+                <li><code>POST /api/audio-stub</code> — acoustic biomarker placeholder</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🖥️</span>
+                <span class="change-group-label">Demo &amp; Distribution</span>
+              </div>
+              <ul>
+                <li><strong>demo.careez.org</strong> wired to live API — public-facing interactive demo</li>
+                <li><strong>seniordeli.com/careez</strong> canonical landing page live</li>
+              </ul>
+            </div>
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">📰</span>
+                <span class="change-group-label">softmeal.org — Initial Content</span>
+              </div>
+              <ul>
+                <li>5 founding articles published × 4 locales (EN / 繁中 / 简中 / VI)</li>
+              </ul>
+            </div>
+
+          </div>
+        </article>
+
+        <hr class="release-divider">
+
+        <!-- ─── v0.x ─── -->
+        <article class="release" id="v0-x">
+          <div class="release-header">
+            <span class="release-badge badge-deprecated">Deprecated</span>
+            <div class="release-title-block">
+              <h2><span class="ver">v0.x</span> — Pre-launch CareForge era</h2>
+              <div class="release-date">Pre 2026-05-24</div>
+            </div>
+          </div>
+
+          <div class="change-groups">
+
+            <div class="change-group">
+              <div class="change-group-header">
+                <span class="change-group-icon">🏗️</span>
+                <span class="change-group-label">Foundation</span>
+              </div>
+              <ul>
+                <li><strong>CareForge → CareEZ brand consolidation</strong> — Tree Mark #83 registered; product naming finalised</li>
+                <li><strong>HKEX submission v3.4 HONEST PDF</strong> — canonical IFS application document (archived; do not supersede without board sign-off)</li>
+                <li>Initial API scaffolding and clinical AI architecture under CareForge brand</li>
+                <li>Early softmeal.org and dysphagia.cn domain acquisition and CMS setup</li>
+              </ul>
+            </div>
+
+          </div>
+        </article>
+
+      </div><!-- /.release-list -->
+    </div><!-- /.changelog-layout -->
+
+  </main>
+
+  <!-- ─── Roadmap ─── -->
+  <section class="roadmap-section" id="roadmap">
+    <div class="roadmap-inner">
+      <div class="section-label">What's Next</div>
+      <h2 style="font-size: clamp(28px,4vw,42px); font-weight:900; letter-spacing:-0.025em; margin-bottom:8px;">Roadmap</h2>
+      <p style="font-size:15px; color:var(--gray); max-width:680px; line-height:1.7;">Post-HKEX-award milestones. Subject to funding confirmation and IRB approvals.</p>
+
+      <div class="roadmap-grid">
+
+        <div class="roadmap-card">
+          <div class="roadmap-card-period">Y1 Q1 · Nov 2026 – Jan 2027</div>
+          <h3>Post-HKEX Award Sprint</h3>
+          <ul>
+            <li>Production hardening — rate limits, auth, SLA</li>
+            <li>IDDSI certification cohort 1 — 100 carers</li>
+            <li>Voice biomarker IRB submission (HKU partner)</li>
+            <li>Hospital Authority data integration scoping</li>
+            <li>OpenClaw npm package preparation</li>
+          </ul>
+          <div class="roadmap-cta">
+            <a href="/SPRINT_PLAN_Y1Q1.pdf" target="_blank" rel="noopener">Full sprint plan PDF &#8599;</a>
+          </div>
+        </div>
+
+        <div class="roadmap-card">
+          <div class="roadmap-card-period">Y1 Q2 – Q4 · Feb – Oct 2027</div>
+          <h3>Clinical Validation &amp; Scale</h3>
+          <ul>
+            <li>Voice biomarker data collection — HKU IRB live</li>
+            <li>OpenClaw 6-package npm publish</li>
+            <li>5,000-carer IDDSI certification target</li>
+            <li>Adoption Index — quarterly publication cadence</li>
+            <li>HKCSS 護食標準 co-certification pathway</li>
+          </ul>
+        </div>
+
+        <div class="roadmap-card">
+          <div class="roadmap-card-period">Y2 · 2028</div>
+          <h3>Scale &amp; Acoustic Biomarker</h3>
+          <ul>
+            <li>50% 照護食 adoption rate target (HK RCHE)</li>
+            <li>Acoustic biomarker API deployment — production</li>
+            <li>Adoption Index quarterly publication matures</li>
+            <li>GBA (Greater Bay Area) expansion scoping</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span> &mdash; by Carewells Limited</div>
+      <div class="footer-meta">
+        Carewells Limited &middot; Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
+        <a href="/changelog/">Changelog</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

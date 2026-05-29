@@ -1,0 +1,111 @@
+{
+  "brand": {
+    "navy": {
+      "name": "Navy Deep",
+      "role": "Primary background",
+      "hex": "#0A1428",
+      "rgb": "rgb(10, 20, 40)",
+      "hsl": "hsl(220, 60%, 10%)",
+      "contrast_on_white": "18.1:1",
+      "contrast_on_cyan": "12.4:1"
+    },
+    "navy2": {
+      "name": "Navy Mid",
+      "role": "Secondary background / cards",
+      "hex": "#0E1C3A",
+      "rgb": "rgb(14, 28, 58)",
+      "hsl": "hsl(222, 61%, 14%)",
+      "contrast_on_white": "15.2:1"
+    },
+    "navy3": {
+      "name": "Navy Elevated",
+      "role": "Elevated surfaces / hover states",
+      "hex": "#132046",
+      "rgb": "rgb(19, 32, 70)",
+      "hsl": "hsl(226, 57%, 17%)",
+      "contrast_on_white": "13.1:1"
+    },
+    "cyan": {
+      "name": "Cyan Primary",
+      "role": "Primary accent / CTA / links",
+      "hex": "#00E5FF",
+      "rgb": "rgb(0, 229, 255)",
+      "hsl": "hsl(187, 100%, 50%)",
+      "contrast_on_navy": "12.4:1",
+      "contrast_on_white": "1.3:1",
+      "note": "Use on dark backgrounds only"
+    },
+    "cyan2": {
+      "name": "Cyan Secondary",
+      "role": "Secondary accent / softer highlights",
+      "hex": "#29B6F6",
+      "rgb": "rgb(41, 182, 246)",
+      "hsl": "hsl(199, 91%, 56%)",
+      "contrast_on_navy": "8.9:1"
+    }
+  },
+  "neutrals": {
+    "white": {
+      "name": "White",
+      "hex": "#FFFFFF",
+      "rgb": "rgb(255, 255, 255)",
+      "hsl": "hsl(0, 0%, 100%)"
+    },
+    "gray": {
+      "name": "Gray Light",
+      "role": "Body text on dark / muted content",
+      "hex": "#B0BEC5",
+      "rgb": "rgb(176, 190, 197)",
+      "hsl": "hsl(200, 13%, 73%)",
+      "contrast_on_navy": "7.2:1"
+    },
+    "gray2": {
+      "name": "Gray Mid",
+      "role": "Secondary text / placeholders",
+      "hex": "#78909C",
+      "rgb": "rgb(120, 144, 156)",
+      "hsl": "hsl(200, 13%, 54%)",
+      "contrast_on_navy": "4.1:1"
+    },
+    "gray3": {
+      "name": "Gray Dark",
+      "role": "Borders / dividers on dark",
+      "hex": "#455A64",
+      "rgb": "rgb(69, 90, 100)",
+      "hsl": "hsl(199, 18%, 33%)",
+      "contrast_on_navy": "2.1:1"
+    }
+  },
+  "state": {
+    "success": {
+      "name": "Success Green",
+      "hex": "#4CAF50",
+      "rgb": "rgb(76, 175, 80)",
+      "hsl": "hsl(122, 39%, 49%)"
+    },
+    "warning": {
+      "name": "Warning Yellow",
+      "hex": "#FFD43B",
+      "rgb": "rgb(255, 212, 59)",
+      "hsl": "hsl(47, 100%, 62%)"
+    },
+    "warning2": {
+      "name": "Warning Orange",
+      "hex": "#FFA726",
+      "rgb": "rgb(255, 167, 38)",
+      "hsl": "hsl(36, 100%, 57%)"
+    },
+    "danger": {
+      "name": "Danger Red",
+      "hex": "#EF5350",
+      "rgb": "rgb(239, 83, 80)",
+      "hsl": "hsl(1, 83%, 63%)"
+    }
+  },
+  "_meta": {
+    "source": "Derived from careez.org/index.html CSS variables",
+    "version": "1.0.0",
+    "date": "2026-05-25",
+    "wcag_note": "All primary text combinations meet WCAG 2.1 AA (4.5:1). Cyan accent is for decorative/large-text use on dark backgrounds only."
+  }
+}
