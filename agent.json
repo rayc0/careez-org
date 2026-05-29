@@ -1,10 +1,38 @@
 {
-  "name": "CareEZ",
-  "version": "1.0.0",
-  "description": "Multimodal clinical AI for dysphagia / 照護食 standard adoption",
+  "schema_version": "v1",
+  "name_for_human": "CareEZ Clinical AI",
+  "name_for_model": "careez_clinical_ai",
+  "description_for_human": "Multimodal clinical AI for dysphagia and 照護食 (care food) standard adoption in Hong Kong care settings.",
+  "description_for_model": "CareEZ provides REST APIs for dysphagia-related clinical decision support. Use iddsi-classify to classify food/liquid texture by IDDSI level and 照護食 equivalent. Use voice-aspiration-screen for aspiration risk screening from voice descriptors. Use clinical-qa for clinical Q&A grounded in HKCSS 護食標準 and IDDSI. Use recipe-modify to adapt recipes to a target IDDSI texture level.",
+  "version": "1.1.0",
+  "contact_email": "hello@careez.org",
+  "legal_info_url": "https://careez.org/governance/",
+  "license": "Apache-2.0",
   "endpoints": {
-    "iddsi_classify": "https://www.seniordeli.com/api/iddsi-classify",
-    "voice_aspiration_screen": "https://www.seniordeli.com/api/voice-aspiration-screen"
-  },
-  "license": "Apache-2.0"
+    "iddsi_classify": {
+      "url": "https://www.seniordeli.com/api/iddsi-classify",
+      "method": "POST",
+      "description": "Classifies a food or liquid description by IDDSI level (0–7) and returns the corresponding 照護食/護食標準 equivalent. Input: {\"text\": \"<food or liquid description>\"}.",
+      "content_type": "application/json"
+    },
+    "voice_aspiration_screen": {
+      "url": "https://www.seniordeli.com/api/voice-aspiration-screen",
+      "method": "POST",
+      "description": "Screens aspiration risk from a voice or swallowing-symptom description. Returns a risk level and recommended next steps. Input: {\"description\": \"<symptom or voice quality description>\"}.",
+      "content_type": "application/json",
+      "status": "beta"
+    },
+    "clinical_qa": {
+      "url": "https://www.seniordeli.com/api/clinical-qa",
+      "method": "POST",
+      "description": "Answers clinical questions about dysphagia management, IDDSI levels, HKCSS 護食標準, and safe texture selection for care staff. Input: {\"question\": \"<clinical question>\", \"locale\": \"en|zh-HK|zh-CN\"}.",
+      "content_type": "application/json"
+    },
+    "recipe_modify": {
+      "url": "https://www.seniordeli.com/api/recipe-modify",
+      "method": "POST",
+      "description": "Adapts a recipe to a target IDDSI texture level. Returns modified ingredients, preparation instructions, and thickener dosage if applicable. Input: {\"recipe\": \"<recipe text>\", \"target_iddsi_level\": 4}.",
+      "content_type": "application/json"
+    }
+  }
 }

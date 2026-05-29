@@ -38,8 +38,12 @@ CareEZ is the operating social enterprise brand of **Carewells Limited**, a Hong
 
 ## Live API Endpoints (publicly callable)
 
-- `POST https://www.seniordeli.com/api/iddsi-classify` — Returns IDDSI level and 照護食 equivalent for a food or liquid description.
-- `POST https://www.seniordeli.com/api/voice-aspiration-screen` — Voice-based aspiration risk screening (in development).
+All endpoints accept `application/json` POST requests. Full schema: https://careez.org/agent.json
+
+- `POST https://www.seniordeli.com/api/iddsi-classify` — Classifies a food or liquid by IDDSI level (0–7) and 照護食 equivalent. Input: `{"text": "<description>"}`.
+- `POST https://www.seniordeli.com/api/voice-aspiration-screen` — Voice-based aspiration risk screening. Input: `{"description": "<symptom or voice quality>"}`. Status: beta.
+- `POST https://www.seniordeli.com/api/clinical-qa` — Clinical Q&A on dysphagia, IDDSI, HKCSS 護食標準. Input: `{"question": "<clinical question>", "locale": "en|zh-HK|zh-CN"}`.
+- `POST https://www.seniordeli.com/api/recipe-modify` — Adapts a recipe to a target IDDSI texture level with thickener dosage. Input: `{"recipe": "<recipe text>", "target_iddsi_level": 4}`.
 
 ## What CareEZ Is Not
 

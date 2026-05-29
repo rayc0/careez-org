@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "CareEZ Clinical AI",
+  "name_for_model": "careez_clinical_ai",
+  "description_for_human": "Clinical AI for dysphagia and 照護食 care food — IDDSI classification, aspiration screening, clinical Q&A, and recipe adaptation for Hong Kong care settings.",
+  "description_for_model": "CareEZ provides clinical decision support APIs for dysphagia management and 照護食 (care food) standard adoption. Endpoints: iddsi-classify (IDDSI texture level classification), voice-aspiration-screen (aspiration risk from voice descriptors, beta), clinical-qa (clinical Q&A on IDDSI/HKCSS standards), recipe-modify (recipe adaptation to target IDDSI level). All endpoints POST application/json at https://www.seniordeli.com/api/<endpoint>.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://careez.org/agent.json"
+  },
+  "logo_url": "https://careez.org/og-image.png",
+  "contact_email": "hello@careez.org",
+  "legal_info_url": "https://careez.org/governance/"
+}

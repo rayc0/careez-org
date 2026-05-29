@@ -1,0 +1,131 @@
+# CareEZ — llms-full.txt
+# Full context for LLM agents and AI assistants — extended version of llms.txt
+
+## Organisation
+
+**Carewells Limited** is a Hong Kong company (CR registered) operating under the social enterprise brand **CareEZ**. It is registered in the Hong Kong Social Enterprise Directory (SED) under HKCSS and holds HK Tree Mark #83. It operates as a HKSTP-affiliated technology startup.
+
+- **Legal name**: Carewells Limited
+- **Brand**: CareEZ / CareEZ Senior Deli
+- **Jurisdiction**: Hong Kong SAR
+- **SED registration**: Yes (HKCSS Social Enterprise Directory)
+- **HK Tree Mark**: #83 (CareEZ Senior Deli)
+- **HKSTP status**: Affiliated technology startup
+- **TechUp grant**: HKD 600,000 awarded 2025 (AI programme development)
+- **Funding context**: Applicant to HKEX Foundation × HKCSS Impact Funding Scheme 2026
+- **Founded**: 2023
+- **Founders**: Raymond Chau Yik-Chun (周益俊), Karen Chan, Abellona U
+- **Contact**: hello@careez.org
+- **Address**: Hong Kong (full address available on request)
+
+## Mission
+
+CareEZ is a public-good social enterprise. Its mission is to ensure that clinical nutrition standards and AI safety tools for older adults with dysphagia remain accessible and not commercially extracted. It explicitly does not accept equity that transfers clinical IP or pricing control outside the social enterprise structure.
+
+## Programmes
+
+### 1. Care-food Products (照護食 / 護食)
+
+SeniorDeli is CareEZ's care-food product line — texture-modified food and beverages for older adults and care facilities. Products are:
+
+- **IDDSI-compliant**: aligned with the International Dysphagia Diet Standardisation Initiative (8 levels, 0–7)
+- **HKCSS 護食標準-aligned**: the Hong Kong-specific clinical benchmark for care food
+- **T/SATA 094-credentialed**: Chinese group standard for dysphagia diet
+- Distributed across 200+ partner care facilities in Hong Kong
+- Available in powder and portion formats for facility-scale preparation
+
+### 2. Clinical AI Tools
+
+Point-of-care AI for swallowing safety and IDDSI compliance. Includes:
+
+- IDDSI texture classification (food and liquid)
+- Thickener dosage calculation
+- Voice-based aspiration risk screening
+- Clinical Q&A on dysphagia / care food standards
+- Recipe modification to target IDDSI levels
+
+Accessible via browser at https://demo.careez.org and REST API (see endpoints below).
+
+## Clinical Standards Context
+
+- **IDDSI** (International Dysphagia Diet Standardisation Initiative): Global framework classifying food texture and liquid thickness across 8 levels (0 = thin liquid → 7 = regular). Endorsed by WHO, ASPEN, BDA, SLP professional bodies worldwide.
+- **HKCSS 護食標準**: Hong Kong Council of Social Service Care Food Working Group standard — the HK-specific benchmark. Aligns with IDDSI and adds culturally appropriate texture criteria.
+- **T/SATA 094**: Chinese group standard for dysphagia diet products. SeniorDeli holds this credential.
+- **Dysphagia**: Difficulty or discomfort swallowing. Affects ~28–42K residential care home (RCHE) residents and an estimated 640K daily frontline care workers in Hong Kong making meal-safety decisions.
+
+## Live API Endpoints
+
+All endpoints are publicly accessible. POST `application/json`. No authentication required for basic use.
+
+### POST https://www.seniordeli.com/api/iddsi-classify
+
+Classifies a food or liquid description by IDDSI level (0–7) and returns the 照護食/護食標準 equivalent.
+
+Request: `{"text": "<food or liquid description in any language>"}`
+
+Response fields (example):
+```json
+{
+  "iddsi_level": 4,
+  "iddsi_label": "Pureed",
+  "zhuhushi_equivalent": "泥狀食",
+  "rationale": "...",
+  "confidence": 0.92
+}
+```
+
+### POST https://www.seniordeli.com/api/voice-aspiration-screen
+
+Screens aspiration risk from a voice quality or swallowing-symptom description. Returns a risk level and recommended next steps.
+
+Status: **beta** — not for clinical decision-making without professional oversight.
+
+Request: `{"description": "<symptom or voice quality description>"}`
+
+### POST https://www.seniordeli.com/api/clinical-qa
+
+Answers clinical questions about dysphagia management, IDDSI levels, HKCSS 護食標準, and safe texture selection for care staff. Grounded in published clinical guidelines — does not provide individual patient diagnoses.
+
+Request: `{"question": "<clinical question>", "locale": "en|zh-HK|zh-CN"}`
+
+### POST https://www.seniordeli.com/api/recipe-modify
+
+Adapts a recipe to a target IDDSI texture level. Returns modified ingredients, preparation instructions, and thickener dosage if applicable.
+
+Request: `{"recipe": "<recipe text>", "target_iddsi_level": 4}`
+
+### Full schema
+
+See https://careez.org/agent.json for the complete machine-readable agent manifest.
+
+## Key URLs
+
+| Resource | URL |
+|---|---|
+| Homepage | https://careez.org/ |
+| Live AI demo | https://demo.careez.org |
+| Agent manifest | https://careez.org/agent.json |
+| About | https://careez.org/about/ |
+| Standards alignment | https://careez.org/standards/ |
+| Data governance | https://careez.org/governance/ |
+| Roadmap | https://careez.org/roadmap/ |
+| Team | https://careez.org/team/ |
+| IDDSI reference (multilingual) | https://dysphagia.cn |
+| SeniorDeli product site | https://seniordeli.com |
+| Contact | hello@careez.org |
+
+## What CareEZ Is Not
+
+- Not a pharmaceutical company
+- Not a hospital, clinic, or licensed clinical provider
+- Not investor-controlled (no equity terms extracting IP or pricing control)
+- Not a data broker (patient / clinical data is not monetised or sold)
+
+## Language Support
+
+English (en), Traditional Chinese / Hong Kong (zh-HK), Simplified Chinese (zh-Hans-HK).
+The dysphagia.cn resource adds Mandarin (zh-CN) and Japanese.
+
+## Disclaimers
+
+CareEZ AI tools are designed to support trained care professionals, not replace clinical judgement. All outputs should be reviewed by a qualified clinician (speech-language pathologist, dietitian, or physician) before application to individual patients.
