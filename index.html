@@ -1104,8 +1104,8 @@
             </div>
             <textarea id="txt-desc" placeholder="e.g. steamed egg custard, soft, spoonable" rows="3"></textarea>
             <button class="try-btn" onclick="runTextClassify()">Classify &rarr;</button>
-            <div class="try-spinner" id="spin-text" aria-label="Loading"></div>
-            <div class="try-result" id="res-text"></div>
+            <div class="try-spinner" id="spin-text" role="status" aria-live="polite" aria-label="Loading classification result" aria-hidden="true"></div>
+            <div class="try-result" id="res-text" aria-live="polite" aria-atomic="true" aria-label="IDDSI text classification result"></div>
           </div>
 
           <!-- Card 2: Image Classifier -->
@@ -1130,8 +1130,8 @@
               <img id="dz-preview" style="display:none;max-width:100%;max-height:160px;border-radius:6px;object-fit:cover;" alt="Preview">
             </div>
             <button class="try-btn" id="btn-image" onclick="runImageClassify()" disabled>Classify Image &rarr;</button>
-            <div class="try-spinner" id="spin-image" aria-label="Loading"></div>
-            <div class="try-result" id="res-image"></div>
+            <div class="try-spinner" id="spin-image" role="status" aria-live="polite" aria-label="Loading image classification result" aria-hidden="true"></div>
+            <div class="try-result" id="res-image" aria-live="polite" aria-atomic="true" aria-label="IDDSI image classification result"></div>
           </div>
 
           <!-- Card 3: Voice Aspiration Screen -->
@@ -1170,8 +1170,8 @@
               </label>
               <button class="try-btn" style="margin-top:0;" onclick="runVoiceScreen()">Screen &rarr;</button>
             </div>
-            <div class="try-spinner" id="spin-voice" aria-label="Loading"></div>
-            <div class="try-result" id="res-voice"></div>
+            <div class="try-spinner" id="spin-voice" role="status" aria-live="polite" aria-label="Loading aspiration risk screen result" aria-hidden="true"></div>
+            <div class="try-result" id="res-voice" aria-live="polite" aria-atomic="true" aria-label="Voice aspiration risk screen result"></div>
           </div>
 
         </div><!-- /try-live-grid -->
@@ -1389,6 +1389,7 @@
     function setSpinner(id, on) {
       const el = document.getElementById(id);
       el.style.display = on ? 'block' : 'none';
+      el.setAttribute('aria-hidden', on ? 'false' : 'true');
     }
 
     /* ── helpers ── */

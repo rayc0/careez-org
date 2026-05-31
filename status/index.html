@@ -289,13 +289,13 @@
     <p>Live status of all CareEZ AI endpoints · Auto-refreshes every 30 seconds</p>
   </div>
 
-  <div class="overall-banner" id="overall-banner">
+  <div class="overall-banner" id="overall-banner" aria-live="polite" aria-atomic="true" role="status">
     <div class="dot" id="overall-dot" style="background:var(--gray)"></div>
     <span id="overall-text">Checking all systems…</span>
     <span class="sub" id="overall-sub">—</span>
   </div>
 
-  <div class="cards-grid" id="cards-grid">
+  <div class="cards-grid" id="cards-grid" aria-live="polite" aria-relevant="additions text" role="region" aria-label="API endpoint status cards">
     <!-- Cards injected by JS -->
   </div>
 
@@ -543,7 +543,7 @@ function renderCards() {
     <span>${h.length} checks · ${h.length ? 'Last: ' + fmtTime(last.ts) : 'No data'}</span>
     <button class="btn-test" id="btn-${ep.id}" onclick="testLive('${ep.id}')">Test now</button>
   </div>
-  <div class="live-result" id="live-${ep.id}"></div>
+  <div class="live-result" id="live-${ep.id}" aria-live="polite" aria-atomic="true" role="status" aria-label="${ep.name} live test result"></div>
 </div>`;
   }).join('');
 }
