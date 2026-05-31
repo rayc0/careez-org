@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-31T19:59:25Z",
+  "generated": "2026-05-31T21:02:40Z",
   "overall": "operational",
   "summary": {
     "up": 4,
@@ -12,36 +12,36 @@
       "name": "IDDSI Text Classification",
       "url": "https://www.seniordeli.com/api/iddsi-classify",
       "status": "up",
-      "latency_ms": 780,
+      "latency_ms": 657,
       "http_code": "400",
-      "checked_at": "2026-05-31T19:59:25Z"
+      "checked_at": "2026-05-31T21:02:40Z"
     },
     "image": {
       "id": "image",
       "name": "IDDSI Image Classification",
       "url": "https://www.seniordeli.com/api/iddsi-classify-image",
       "status": "up",
-      "latency_ms": 551,
+      "latency_ms": 960,
       "http_code": "400",
-      "checked_at": "2026-05-31T19:59:25Z"
+      "checked_at": "2026-05-31T21:02:40Z"
     },
     "voice": {
       "id": "voice",
       "name": "Voice Aspiration Screen",
       "url": "https://www.seniordeli.com/api/voice-aspiration-screen",
       "status": "up",
-      "latency_ms": 656,
+      "latency_ms": 584,
       "http_code": "400",
-      "checked_at": "2026-05-31T19:59:25Z"
+      "checked_at": "2026-05-31T21:02:40Z"
     },
     "audio": {
       "id": "audio",
       "name": "IDDSI Audio Classification",
       "url": "https://www.seniordeli.com/api/iddsi-classify-audio",
       "status": "up",
-      "latency_ms": 61,
+      "latency_ms": 626,
       "http_code": "400",
-      "checked_at": "2026-05-31T19:59:25Z"
+      "checked_at": "2026-05-31T21:02:40Z"
     }
   }
 }
