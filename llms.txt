@@ -3,7 +3,7 @@
 
 ## What is CareEZ?
 
-CareEZ is the operating social enterprise brand of **Carewells Limited**, a Hong Kong company registered in the Social Enterprise Directory (SED) under HKCSS. It delivers two complementary programmes:
+CareEZ is the operating social enterprise brand of **our parent social enterprise**, a Hong Kong company registered in the Social Enterprise Directory (SED) under HKCSS. It delivers two complementary programmes:
 
 1. **Care-food products (照護食)** — texture-modified food and beverages aligned with the HKCSS 護食標準 (Care Food Standard) and the international IDDSI (International Dysphagia Diet Standardisation Initiative) framework, targeting older adults and care facilities with swallowing difficulties (dysphagia).
 
@@ -11,7 +11,7 @@ CareEZ is the operating social enterprise brand of **Carewells Limited**, a Hong
 
 ## Key Facts
 
-- **Legal entity**: Carewells Limited (Hong Kong)
+- **Legal entity**: our parent social enterprise (Hong Kong)
 - **Brand**: CareEZ
 - **Category**: Social Enterprise / HealthTech / ClinicalAI
 - **Founded**: 2023

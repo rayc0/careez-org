@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "careez-clinical-ai-api-v1",
     "name": "CareEZ Clinical AI API",
-    "description": "Complete collection for CareEZ public REST endpoints — IDDSI food texture classification (text, image, audio), aspiration risk screening, batch meal validation, and clinical Q&A RAG.\n\nBase URL: `{{base_url}}`\nProduction server: https://www.seniordeli.com\n\n**No authentication required.** All endpoints respond with `Access-Control-Allow-Origin: *`.\n\n⚠️ Clinical Disclaimer: Prototype rule-based classifiers — outputs are decision-support tools only. Clinical decisions require assessment by a qualified Speech-Language Pathologist (SLP).\n\nBuilt by Carewells Limited (Hong Kong SED-registered social enterprise).\nhello@careez.org | https://careez.org",
+    "description": "Complete collection for CareEZ public REST endpoints — IDDSI food texture classification (text, image, audio), aspiration risk screening, batch meal validation, and clinical Q&A RAG.\n\nBase URL: `{{base_url}}`\nProduction server: https://www.seniordeli.com\n\n**No authentication required.** All endpoints respond with `Access-Control-Allow-Origin: *`.\n\n⚠️ Clinical Disclaimer: Prototype rule-based classifiers — outputs are decision-support tools only. Clinical decisions require assessment by a qualified Speech-Language Pathologist (SLP).\n\nBuilt by our parent social enterprise (Hong Kong SED-registered social enterprise).\nhello@careez.org | https://careez.org",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "version": {
       "major": 1,

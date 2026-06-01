@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   description: |
     Public REST endpoints for **CareEZ** — a multimodal clinical AI system for dysphagia
-    management developed by **Carewells Limited** (Hong Kong social enterprise, SED-registered).
+    management developed by **our parent social enterprise** (Hong Kong social enterprise, SED-registered).
 
     All endpoints are production-live on `seniordeli.com` and callable without authentication.
     They power the interactive demo at [demo.careez.org](https://demo.careez.org).
@@ -31,7 +31,7 @@ info:
     ### CORS
     All endpoints respond with `Access-Control-Allow-Origin: *`. No API key required.
   contact:
-    name: Carewells Limited
+    name: our parent social enterprise
     url: https://careez.org
     email: hello@careez.org
   license:

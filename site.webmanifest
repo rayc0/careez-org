@@ -1,7 +1,7 @@
 {
   "name": "CareEZ",
   "short_name": "CareEZ",
-  "description": "Multimodal Clinical AI for Dysphagia | Carewells Limited",
+  "description": "Multimodal Clinical AI for Dysphagia",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0e1c3a",
