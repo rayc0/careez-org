@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — CareEZ</title>
+  <meta name="description" content="CareEZ Terms of Service — governing use of the CareEZ website and AI-assisted swallowing-safety screening tools. Governing law: Hong Kong." />
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <link rel="canonical" href="https://careez.org/terms/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/terms/" />
+  <meta property="og:title" content="Terms of Service — CareEZ" />
+  <meta property="og:description" content="CareEZ Terms of Service. Governing law: Hong Kong. Screening tool — not a medical diagnosis." />
+  <meta property="og:site_name" content="CareEZ" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A1428;
+      --navy2:   #0E1C3A;
+      --navy3:   #132046;
+      --cyan:    #00E5FF;
+      --cyan2:   #29B6F6;
+      --white:   #FFFFFF;
+      --gray:    #B0BEC5;
+      --gray2:   #78909C;
+      --yellow:  #FFD43B;
+      --green:   #4CAF50;
+      --accent-bar: 5px;
+      --max-w:   860px;
+      --r:       6px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Section label ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 22px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 20, 40, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+    /* ─── Page hero ─── */
+    .page-hero {
+      padding: 72px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 70% 40%, rgba(0,229,255,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 70%, rgba(41,182,246,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: var(--max-w); margin: 0 auto; position: relative; }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 20px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+    .hero-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--cyan); }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 680px;
+      margin-bottom: 12px;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--gray2);
+    }
+
+    /* ─── Content area ─── */
+    .content-wrap {
+      padding: 48px 24px 80px;
+    }
+    .content-wrap .container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* ─── Policy cards ─── */
+    .policy-card {
+      background: var(--navy2);
+      border: 1px solid rgba(0, 229, 255, 0.10);
+      border-radius: var(--r);
+      padding: 32px 36px;
+    }
+    .policy-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .policy-card h2 .icon { font-size: 20px; }
+    .policy-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cyan2);
+      margin: 20px 0 8px;
+    }
+    .policy-card p {
+      color: var(--gray);
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .policy-card p:last-child { margin-bottom: 0; }
+    .policy-card ul, .policy-card ol {
+      color: var(--gray);
+      padding-left: 20px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .policy-card li { margin-bottom: 6px; }
+    .policy-card li:last-child { margin-bottom: 0; }
+    .policy-card a { color: var(--cyan2); text-decoration: underline; }
+    .policy-card a:hover { text-decoration: none; }
+
+    /* ─── Disclaimer / safety call-out ─── */
+    .disclaimer-box {
+      background: rgba(255, 212, 59, 0.06);
+      border: 1px solid rgba(255, 212, 59, 0.28);
+      border-left: var(--accent-bar) solid var(--yellow);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 18px 22px;
+      margin: 16px 0 0;
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+    .disclaimer-box strong { color: var(--yellow); }
+
+    /* ─── Emphasis box ─── */
+    .emphasis-box {
+      background: rgba(0, 229, 255, 0.05);
+      border: 1px solid rgba(0, 229, 255, 0.18);
+      border-left: var(--accent-bar) solid var(--cyan);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 16px 20px;
+      margin: 16px 0 0;
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    /* ─── Contact highlight ─── */
+    .contact-highlight {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.20);
+      border-radius: var(--r);
+      padding: 20px 28px;
+      margin-top: 16px;
+    }
+    .contact-highlight .addr {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .contact-highlight .note {
+      font-size: 13px;
+      color: var(--gray2);
+      margin-top: 4px;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--navy2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray2);
+    }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta {
+      font-size: 13px;
+      color: var(--gray2);
+      text-align: right;
+    }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .policy-card { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+
+    /* ─── A11y: underline in-text links ─── */
+    p a, li a { text-decoration: underline; }
+    p a:hover, li a:hover { text-decoration: none; }
+  </style>
+  <!-- ─── Service Worker ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Nav ─── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" aria-label="CareEZ home" href="https://careez.org/" style="text-decoration:none;color:inherit;">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="https://careez.org/#about">About</a></li>
+        <li><a href="https://careez.org/#programmes">Programmes</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/terms/" style="color:var(--cyan);">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ─── Hero ─── -->
+  <div class="page-hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Legal</div>
+      <h1 class="hero-title">Terms of <span>Service</span></h1>
+      <p class="hero-sub">These Terms govern your access to and use of the CareEZ website, AI-assisted screening tools, and associated APIs. Governing law: Hong Kong.</p>
+      <div class="hero-meta">Last updated: 2026-06-09</div>
+    </div>
+  </div>
+
+  <!-- ─── Content ─── -->
+  <div class="content-wrap">
+    <div class="container">
+
+      <!-- 1. Acceptance -->
+      <div class="policy-card">
+        <h2><span class="icon">📋</span> 1. Acceptance of Terms</h2>
+        <p>
+          These Terms of Service ("<strong>Terms</strong>") constitute a legally binding agreement between you ("<strong>User</strong>") and the parent social enterprise operating the CareEZ brand ("<strong>CareEZ</strong>", "<strong>we</strong>", "<strong>us</strong>", or "<strong>our</strong>"), a Hong Kong social enterprise registered under the Social Enterprise Directory (HKCSS).
+        </p>
+        <p>
+          By accessing or using <a href="https://careez.org/">careez.org</a>, <a href="https://demo.careez.org">demo.careez.org</a>, or any associated APIs or services (collectively, the "<strong>Services</strong>"), you agree to be bound by these Terms. If you do not agree, please discontinue use of the Services.
+        </p>
+        <p>
+          If you are using the Services on behalf of an organisation (such as a care facility or healthcare institution), you represent that you have authority to bind that organisation to these Terms.
+        </p>
+      </div>
+
+      <!-- 2. Service Description -->
+      <div class="policy-card">
+        <h2><span class="icon">🏥</span> 2. Service Description</h2>
+        <p>CareEZ provides the following Services:</p>
+        <ul>
+          <li><strong>Informational website:</strong> Content about care-food (照護食), IDDSI standards, and the CareEZ social enterprise.</li>
+          <li><strong>AI-assisted screening tools:</strong> Interactive tools for IDDSI texture classification, thickener dosage calculation, and swallowing-safety symptom screening.</li>
+          <li><strong>Live classification API:</strong> Programmatic endpoints for IDDSI classification, accessible at api.seniordeli.com for evaluation and integration purposes.</li>
+          <li><strong>Demo platform:</strong> A demonstration of the CareEZ care assistant, accessible at demo.careez.org.</li>
+        </ul>
+
+        <div class="disclaimer-box">
+          <strong>Critical Safety Disclaimer — Please Read Carefully</strong><br><br>
+          CareEZ provides AI-assisted <em>swallowing-safety screening tools only</em>. These tools are designed to support care staff and healthcare professionals as a supplementary reference — they are <strong>not a medical device, not a diagnostic instrument, and do not constitute a medical diagnosis or clinical assessment</strong>.<br><br>
+          Outputs from CareEZ tools — including IDDSI texture classifications, aspiration risk screening results, and dosage calculations — are generated by artificial intelligence and <strong>may contain errors</strong>. They must not be used as the sole basis for any clinical, dietary, or care decision affecting an individual.<br><br>
+          <strong>Always consult a qualified healthcare professional</strong> — such as a registered speech-language therapist (言語治療師), registered dietitian, or physician — for individual swallowing assessment, dietary prescription, and clinical management of dysphagia.<br><br>
+          Use of CareEZ tools does not create a clinician-patient relationship. CareEZ does not provide medical advice.
+        </div>
+      </div>
+
+      <!-- 3. Acceptable Use -->
+      <div class="policy-card">
+        <h2><span class="icon">✅</span> 3. Acceptable Use</h2>
+        <p>You agree to use the Services only for lawful purposes and in accordance with these Terms. You agree <strong>not</strong> to:</p>
+        <ul>
+          <li>Use the Services to make or substitute for clinical diagnoses, medical decisions, or prescriptions for individual patients without appropriate professional oversight;</li>
+          <li>Submit personally identifiable patient data (such as patient names, identification numbers, or medical record numbers) to any CareEZ API or tool;</li>
+          <li>Attempt to reverse-engineer, decompile, or extract the underlying AI models or proprietary logic of the Services;</li>
+          <li>Use automated tools, bots, or scrapers to access the Services in a manner that places unreasonable load on our infrastructure;</li>
+          <li>Attempt to circumvent any rate limits, access controls, or security measures;</li>
+          <li>Use the Services for any purpose that violates applicable law, including the laws of Hong Kong;</li>
+          <li>Misrepresent CareEZ outputs as certified clinical assessments, medical device outputs, or as having regulatory approval they do not hold;</li>
+          <li>Redistribute or resell API outputs as a standalone product without our written consent.</li>
+        </ul>
+        <p>We reserve the right to suspend or terminate access to the Services for Users who violate these Terms.</p>
+      </div>
+
+      <!-- 4. Intellectual Property -->
+      <div class="policy-card">
+        <h2><span class="icon">©</span> 4. Intellectual Property</h2>
+        <p>
+          All content on the Services, including but not limited to text, graphics, logos, and software code, is owned by or licensed to CareEZ and is protected by applicable intellectual property laws.
+        </p>
+        <p>
+          Subject to these Terms, we grant you a limited, non-exclusive, non-transferable licence to access and use the Services for their intended purpose. This licence does not include the right to:
+        </p>
+        <ul>
+          <li>Copy, reproduce, or redistribute any material from the Services for commercial purposes without our written consent;</li>
+          <li>Create derivative works based on our proprietary AI models or classification systems;</li>
+          <li>Remove or alter any copyright, trademark, or proprietary notices.</li>
+        </ul>
+        <p>
+          Content that we have designated as open-source or public-good (including the IDDSI reference knowledge base at <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a>) is governed by the applicable open licence stated therein.
+        </p>
+      </div>
+
+      <!-- 5. Disclaimer of Warranties -->
+      <div class="policy-card">
+        <h2><span class="icon">⚠️</span> 5. Disclaimer of Warranties</h2>
+        <p>
+          The Services are provided on an "<strong>as is</strong>" and "<strong>as available</strong>" basis, without warranty of any kind, express or implied. To the fullest extent permitted by applicable law, CareEZ disclaims all warranties, including but not limited to:
+        </p>
+        <ul>
+          <li>Warranties of merchantability, fitness for a particular purpose, and non-infringement;</li>
+          <li>Warranties that the Services will be uninterrupted, error-free, or free of harmful components;</li>
+          <li>Warranties as to the accuracy, completeness, currency, or reliability of any AI-generated output, classification, or recommendation provided through the Services.</li>
+        </ul>
+        <div class="emphasis-box">
+          AI-generated outputs are probabilistic and may be incorrect, incomplete, or outdated. The IDDSI classification, aspiration risk assessment, and dosage calculation results produced by CareEZ tools are generated by machine learning models and have not been validated as medical devices under Hong Kong or international medical device regulations.
+        </div>
+      </div>
+
+      <!-- 6. Limitation of Liability -->
+      <div class="policy-card">
+        <h2><span class="icon">🛡</span> 6. Limitation of Liability</h2>
+        <p>
+          To the fullest extent permitted by Hong Kong law, CareEZ and its directors, officers, employees, agents, and social enterprise governance members shall not be liable for any:
+        </p>
+        <ul>
+          <li>Indirect, incidental, special, consequential, or punitive damages;</li>
+          <li>Loss of profit, revenue, data, goodwill, or business opportunity;</li>
+          <li>Clinical harm, patient injury, or adverse health outcomes arising from reliance on AI-generated outputs without appropriate professional oversight;</li>
+          <li>Any loss or damage arising from interruption or unavailability of the Services.</li>
+        </ul>
+        <p>
+          These limitations apply whether the claim arises in contract, tort (including negligence), statute, or otherwise, and even if CareEZ has been advised of the possibility of such damages.
+        </p>
+        <p>
+          Nothing in these Terms limits or excludes liability that cannot be excluded under Hong Kong law, including liability for fraud or wilful misconduct.
+        </p>
+      </div>
+
+      <!-- 7. Third-Party Links -->
+      <div class="policy-card">
+        <h2><span class="icon">🔗</span> 7. Third-Party Links and Services</h2>
+        <p>
+          The Services may contain links to third-party websites or services, including <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com</a>, <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn</a>, and HKCSS resources. These links are provided for convenience only. CareEZ does not endorse, control, or assume responsibility for the content, privacy practices, or accuracy of third-party sites. Your use of third-party sites is at your own risk and subject to their own terms and privacy policies.
+        </p>
+      </div>
+
+      <!-- 8. Privacy -->
+      <div class="policy-card">
+        <h2><span class="icon">🔒</span> 8. Privacy</h2>
+        <p>
+          Your use of the Services is also governed by our <a href="/privacy/">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the Services, you consent to the collection and use of your personal data as described in the Privacy Policy.
+        </p>
+        <p>
+          We are committed to compliance with the <strong>Personal Data (Privacy) Ordinance (Cap. 486)</strong> of Hong Kong. We do not commercialise patient data and we do not transmit personally identifiable information to AI inference providers.
+        </p>
+      </div>
+
+      <!-- 9. Governing Law and Dispute Resolution -->
+      <div class="policy-card">
+        <h2><span class="icon">⚖️</span> 9. Governing Law and Dispute Resolution</h2>
+        <p>
+          These Terms shall be governed by and construed in accordance with the laws of the <strong>Hong Kong Special Administrative Region</strong>, without regard to its conflict of law principles.
+        </p>
+        <p>
+          Any dispute arising from or in connection with these Terms or the Services shall be subject to the exclusive jurisdiction of the courts of Hong Kong. Before commencing formal proceedings, we encourage you to contact us to seek an informal resolution.
+        </p>
+      </div>
+
+      <!-- 10. Changes to Terms -->
+      <div class="policy-card">
+        <h2><span class="icon">🔄</span> 10. Changes to These Terms</h2>
+        <p>
+          We may revise these Terms from time to time. The "Last updated" date at the top of this page reflects the date of the most recent revision. For material changes, we will post a notice on the website. Continued use of the Services after revised Terms are posted constitutes your acceptance of the updated Terms.
+        </p>
+        <p>
+          If you do not agree to the updated Terms, you must discontinue use of the Services.
+        </p>
+      </div>
+
+      <!-- 11. Contact -->
+      <div class="policy-card">
+        <h2><span class="icon">📬</span> 11. Contact</h2>
+        <p>For questions about these Terms, permitted uses of the Services, or to report a concern, please contact us:</p>
+        <div class="contact-highlight">
+          <div>
+            <div class="addr"><a href="mailto:hello@careez.org">hello@careez.org</a></div>
+            <div class="note">Subject: Terms of Service — CareEZ<br>CareEZ &middot; Hong Kong &middot; SED Registered Social Enterprise</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  </main><!-- /#main-content -->
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span></div>
+      <div class="footer-meta">
+        Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="/privacy/">Privacy</a> &middot;
+        <a href="/terms/" style="color:var(--white);">Terms</a> &middot;
+        <a href="/security/">Security</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script>
+
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — CareEZ</title>
+  <meta name="description" content="CareEZ Privacy Policy — how we collect, use, and protect personal data in compliance with the Hong Kong Personal Data (Privacy) Ordinance (PDPO)." />
+  <!-- ─── Favicon & PWA ─── -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/mstile-150.png">
+  <meta name="msapplication-TileColor" content="#0a1428">
+  <meta name="theme-color" content="#0a1428">
+  <link rel="canonical" href="https://careez.org/privacy/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://careez.org/privacy/" />
+  <meta property="og:title" content="Privacy Policy — CareEZ" />
+  <meta property="og:description" content="CareEZ Privacy Policy — PDPO-compliant. How we collect, use, and protect personal data." />
+  <meta property="og:site_name" content="CareEZ" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A1428;
+      --navy2:   #0E1C3A;
+      --navy3:   #132046;
+      --cyan:    #00E5FF;
+      --cyan2:   #29B6F6;
+      --white:   #FFFFFF;
+      --gray:    #B0BEC5;
+      --gray2:   #78909C;
+      --yellow:  #FFD43B;
+      --green:   #4CAF50;
+      --accent-bar: 5px;
+      --max-w:   860px;
+      --r:       6px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Section label ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 22px;
+      background: var(--cyan);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 20, 40, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-brand span { color: var(--cyan); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+    /* ─── Page hero ─── */
+    .page-hero {
+      padding: 72px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 70% 40%, rgba(0,229,255,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 70%, rgba(41,182,246,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: var(--max-w); margin: 0 auto; position: relative; }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: var(--accent-bar);
+      height: 20px;
+      background: var(--cyan);
+      border-radius: 2px;
+    }
+    .hero-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--cyan); }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 680px;
+      margin-bottom: 12px;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--gray2);
+    }
+
+    /* ─── Content area ─── */
+    .content-wrap {
+      padding: 48px 24px 80px;
+    }
+    .content-wrap .container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* ─── Policy cards ─── */
+    .policy-card {
+      background: var(--navy2);
+      border: 1px solid rgba(0, 229, 255, 0.10);
+      border-radius: var(--r);
+      padding: 32px 36px;
+    }
+    .policy-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .policy-card h2 .icon { font-size: 20px; }
+    .policy-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cyan2);
+      margin: 20px 0 8px;
+    }
+    .policy-card p {
+      color: var(--gray);
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .policy-card p:last-child { margin-bottom: 0; }
+    .policy-card ul, .policy-card ol {
+      color: var(--gray);
+      padding-left: 20px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .policy-card li { margin-bottom: 6px; }
+    .policy-card li:last-child { margin-bottom: 0; }
+    .policy-card a { color: var(--cyan2); text-decoration: underline; }
+    .policy-card a:hover { text-decoration: none; }
+
+    /* ─── Highlight / emphasis box ─── */
+    .emphasis-box {
+      background: rgba(0, 229, 255, 0.05);
+      border: 1px solid rgba(0, 229, 255, 0.18);
+      border-left: var(--accent-bar) solid var(--cyan);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 16px 20px;
+      margin: 16px 0 0;
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    /* ─── Contact highlight ─── */
+    .contact-highlight {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.20);
+      border-radius: var(--r);
+      padding: 20px 28px;
+      margin-top: 16px;
+    }
+    .contact-highlight .addr {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .contact-highlight .note {
+      font-size: 13px;
+      color: var(--gray2);
+      margin-top: 4px;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: var(--navy2);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray2);
+    }
+    .footer-brand span { color: var(--cyan); }
+    .footer-meta {
+      font-size: 13px;
+      color: var(--gray2);
+      text-align: right;
+    }
+    .footer-meta a { color: var(--gray2); }
+    .footer-meta a:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .policy-card { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-meta { text-align: left; }
+    }
+
+    /* ─── A11y: underline in-text links ─── */
+    p a, li a { text-decoration: underline; }
+    p a:hover, li a:hover { text-decoration: none; }
+  </style>
+  <!-- ─── Service Worker ─── -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+    }
+  </script>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Nav ─── -->
+  <nav aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" aria-label="CareEZ home" href="https://careez.org/" style="text-decoration:none;color:inherit;">Care<span aria-hidden="true">EZ</span></a>
+      <ul class="nav-links">
+        <li><a href="https://careez.org/#about">About</a></li>
+        <li><a href="https://careez.org/#programmes">Programmes</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/privacy/" style="color:var(--cyan);">Privacy</a></li>
+        <li><a href="/terms/">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ─── Hero ─── -->
+  <div class="page-hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Legal</div>
+      <h1 class="hero-title">Privacy <span>Policy</span></h1>
+      <p class="hero-sub">How CareEZ collects, uses, and protects personal data — in compliance with the Hong Kong Personal Data (Privacy) Ordinance (Cap. 486).</p>
+      <div class="hero-meta">Last updated: 2026-06-09</div>
+    </div>
+  </div>
+
+  <!-- ─── Content ─── -->
+  <div class="content-wrap">
+    <div class="container">
+
+      <!-- 1. Introduction -->
+      <div class="policy-card">
+        <h2><span class="icon">📋</span> 1. Introduction and Scope</h2>
+        <p>
+          This Privacy Policy applies to CareEZ, the public-good brand operated by our parent social enterprise registered in Hong Kong under the Social Enterprise Directory (HKCSS). References to <strong>"CareEZ", "we", "us",</strong> or <strong>"our"</strong> in this Policy refer to that entity.
+        </p>
+        <p>
+          We operate the website at <a href="https://careez.org/">careez.org</a>, the live demo platform at <a href="https://demo.careez.org">demo.careez.org</a>, and associated APIs and services. This Policy explains what personal data we collect, why we collect it, how it is used, who it may be shared with, and your rights under Hong Kong law.
+        </p>
+        <p>
+          By using our website or services, you acknowledge that you have read and understood this Privacy Policy.
+        </p>
+        <div class="emphasis-box">
+          <strong>Important — Screening Tool, Not a Medical Device:</strong> CareEZ provides AI-assisted swallowing-safety <em>screening</em> tools only. These tools are not medical devices and do not constitute a medical diagnosis. No clinical decisions should be made solely on the basis of CareEZ outputs. Always consult a qualified healthcare professional, such as a speech-language therapist or registered dietitian, for individual assessment and treatment.
+        </div>
+      </div>
+
+      <!-- 2. Data Collected -->
+      <div class="policy-card">
+        <h2><span class="icon">📦</span> 2. Personal Data We Collect</h2>
+        <p>We collect personal data only to the extent necessary to provide our services. The categories of data we may collect are:</p>
+
+        <h3>2.1 Data You Provide Directly</h3>
+        <ul>
+          <li><strong>Contact enquiries:</strong> Name, email address, organisation, and message content when you submit a contact form or send us an email.</li>
+          <li><strong>Pilot / trial applications:</strong> Name, role, organisation name, facility type, and contact information submitted via the trial application form.</li>
+        </ul>
+
+        <h3>2.2 Data Collected Automatically</h3>
+        <ul>
+          <li><strong>Usage data:</strong> Pages visited, time and duration of visit, referring URL, browser type, device type, and operating system — collected via Cloudflare Web Analytics (privacy-preserving; no individual tracking cookies are set).</li>
+          <li><strong>API request data:</strong> Input text descriptions, food images, or symptom selections submitted to our live classification API endpoints are processed transiently to return a response. These inputs are <strong>not stored</strong> beyond the request lifecycle and are not associated with any individual user account.</li>
+          <li><strong>Log data:</strong> Standard server-side request logs (IP address, request path, timestamp, HTTP status code) retained for security and operations purposes.</li>
+        </ul>
+
+        <h3>2.3 Data We Do Not Collect</h3>
+        <ul>
+          <li>We do not collect protected health information (PHI) identifiable to any named individual.</li>
+          <li>We do not build individual user profiles from API usage.</li>
+          <li>We do not use third-party advertising trackers or cross-site tracking technologies.</li>
+        </ul>
+      </div>
+
+      <!-- 3. Purpose of Collection -->
+      <div class="policy-card">
+        <h2><span class="icon">🎯</span> 3. Purpose of Collection and Use</h2>
+        <p>In accordance with Data Protection Principle 1 of the PDPO, personal data is collected for specified, explicit, and lawful purposes. We use the data we collect for the following purposes:</p>
+        <ul>
+          <li>To respond to enquiries, partnership requests, and clinical deployment applications;</li>
+          <li>To deliver and improve our AI-assisted screening tools and classification API;</li>
+          <li>To maintain the security, integrity, and performance of our services;</li>
+          <li>To comply with applicable laws and regulatory requirements;</li>
+          <li>To send service-related communications (not marketing) to users who have contacted us or applied for a pilot.</li>
+        </ul>
+        <p>We will not use personal data for purposes incompatible with those stated above without obtaining your prior consent.</p>
+      </div>
+
+      <!-- 4. PDPO Compliance -->
+      <div class="policy-card">
+        <h2><span class="icon">🏛</span> 4. PDPO Compliance (Hong Kong)</h2>
+        <p>
+          Our parent social enterprise is subject to the <strong>Personal Data (Privacy) Ordinance (Cap. 486)</strong> of Hong Kong. We comply with the six Data Protection Principles (DPPs) set out in Schedule 1 of the PDPO:
+        </p>
+        <ul>
+          <li><strong>DPP 1 — Purpose and collection:</strong> Data is collected only for lawful purposes that are directly related to our services, and only to the extent necessary.</li>
+          <li><strong>DPP 2 — Accuracy and retention:</strong> Reasonable steps are taken to ensure data is accurate and not held longer than necessary.</li>
+          <li><strong>DPP 3 — Use of data:</strong> Personal data is used only for the purpose for which it was collected, unless we have obtained your consent.</li>
+          <li><strong>DPP 4 — Security:</strong> We apply appropriate technical and organisational measures to protect data against unauthorised or accidental access, processing, loss, or destruction.</li>
+          <li><strong>DPP 5 — Openness:</strong> We make available this Policy and information about our data handling practices.</li>
+          <li><strong>DPP 6 — Access and correction:</strong> Data subjects have the right to access and correct their personal data held by us (see Section 9 below).</li>
+        </ul>
+      </div>
+
+      <!-- 5. Retention -->
+      <div class="policy-card">
+        <h2><span class="icon">🗓</span> 5. Data Retention</h2>
+        <p>We retain personal data only for as long as necessary to fulfil the purposes for which it was collected, or as required by law:</p>
+        <ul>
+          <li><strong>Contact enquiry records:</strong> Retained for up to 2 years from the date of the enquiry, then securely deleted.</li>
+          <li><strong>API request inputs (text, images, symptom selections):</strong> Not retained — processed in memory during the request and discarded immediately after the response is returned.</li>
+          <li><strong>Server logs:</strong> Retained for up to 90 days for security and operations purposes, then deleted or anonymised.</li>
+          <li><strong>Analytics data:</strong> Aggregated and anonymised; no individual-level retention.</li>
+        </ul>
+        <p>When data is no longer required, it is securely deleted or anonymised in a manner that prevents reconstruction.</p>
+      </div>
+
+      <!-- 6. Third-party processors -->
+      <div class="policy-card">
+        <h2><span class="icon">🔗</span> 6. Third-Party Processors and International Transfers</h2>
+        <p>We use a limited number of third-party service providers to operate our services. Where personal data is processed by a third party on our behalf, we take reasonable steps to ensure they provide equivalent protections:</p>
+        <ul>
+          <li><strong>Cloudflare, Inc. (USA):</strong> Provides website hosting (Cloudflare Pages), content delivery network (CDN), DNS, and privacy-preserving web analytics. Data may be processed on Cloudflare infrastructure globally. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</li>
+          <li><strong>AI inference providers:</strong> Our classification API uses large language model (LLM) inference. Input data submitted to API endpoints (food descriptions, symptom descriptions, food images) is transmitted to AI model providers for inference. These providers operate under their own data processing agreements. We do not transmit personally identifiable information to AI providers; inputs should not contain individual patient names or identification numbers.</li>
+        </ul>
+        <p>
+          Some of these processors may be located outside Hong Kong. Where personal data is transferred internationally, we take reasonable steps to ensure that the recipient provides protections that are substantially similar to the PDPO requirements.
+        </p>
+        <div class="emphasis-box">
+          We do not sell, rent, or exchange personal data with any third party for marketing purposes. We do not allow third-party advertising networks to place trackers on our services.
+        </div>
+      </div>
+
+      <!-- 7. Cookies -->
+      <div class="policy-card">
+        <h2><span class="icon">🍪</span> 7. Cookies and Tracking Technologies</h2>
+        <p>Our website does not use first-party session or persistent cookies for tracking or profiling. Cloudflare Web Analytics, our analytics provider, uses a privacy-preserving approach that does not set individual tracking cookies or fingerprint users across sites.</p>
+        <p>Cloudflare may set technical cookies (e.g. <code style="color:var(--cyan2);">__cf_bm</code>) that are strictly necessary for bot management and security. These are not used for advertising or cross-site tracking.</p>
+        <p>If you access third-party links from our site (e.g. seniordeli.com, dysphagia.cn), those sites operate under their own cookie and privacy policies.</p>
+      </div>
+
+      <!-- 8. Security -->
+      <div class="policy-card">
+        <h2><span class="icon">🔒</span> 8. Security Measures</h2>
+        <p>We implement appropriate technical and organisational measures to protect personal data, including:</p>
+        <ul>
+          <li>TLS encryption for all data in transit (HTTPS enforced via Cloudflare);</li>
+          <li>Restricted access controls for systems holding personal data;</li>
+          <li>No persistent storage of API inputs beyond the request lifecycle;</li>
+          <li>A published responsible disclosure policy at <a href="/security/">careez.org/security/</a>.</li>
+        </ul>
+        <p>No system is completely immune from security risks. In the event of a data breach affecting personal data, we will notify affected individuals and the Office of the Privacy Commissioner for Personal Data (PCPD) in accordance with applicable law.</p>
+      </div>
+
+      <!-- 9. Your Rights -->
+      <div class="policy-card">
+        <h2><span class="icon">✅</span> 9. Your Rights Under the PDPO</h2>
+        <p>Under the PDPO, Hong Kong data subjects have the right to:</p>
+        <ul>
+          <li><strong>Access:</strong> Request a copy of personal data we hold about you (Section 18, PDPO).</li>
+          <li><strong>Correction:</strong> Request correction of inaccurate personal data (Section 22, PDPO).</li>
+          <li><strong>Objection:</strong> Object to the use of your personal data for direct marketing (Section 35G, PDPO). We do not currently engage in direct marketing.</li>
+          <li><strong>Erasure / deletion:</strong> Request deletion of data we hold about you, where we have no lawful basis for retaining it.</li>
+        </ul>
+        <p>To exercise any of these rights, please contact our Data Protection Officer using the contact details in Section 11 below. We will respond within 40 days as required by the PDPO.</p>
+        <p>If you have concerns about our data handling, you may also contact the <strong>Office of the Privacy Commissioner for Personal Data (PCPD)</strong>: <a href="https://www.pcpd.org.hk/" target="_blank" rel="noopener">www.pcpd.org.hk</a>.</p>
+      </div>
+
+      <!-- 10. Children -->
+      <div class="policy-card">
+        <h2><span class="icon">👶</span> 10. Children's Privacy</h2>
+        <p>Our services are directed at care facilities, healthcare professionals, and social enterprise partners. We do not knowingly collect personal data from individuals under the age of 18. If you believe we have inadvertently collected such data, please contact us and we will delete it promptly.</p>
+      </div>
+
+      <!-- 11. Contact -->
+      <div class="policy-card">
+        <h2><span class="icon">📬</span> 11. Contact and Data Protection Officer</h2>
+        <p>For privacy enquiries, data access/correction requests, or to raise a concern about our data handling practices, please contact our Data Protection Officer:</p>
+        <div class="contact-highlight">
+          <div>
+            <div class="addr"><a href="mailto:hello@careez.org">hello@careez.org</a></div>
+            <div class="note">Subject: Privacy / PDPO Request — CareEZ<br>We aim to acknowledge requests within 5 working days and respond fully within 40 days.</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Correspondence may also be directed to our registered address in Hong Kong. Please contact us by email in the first instance for the current address.</p>
+      </div>
+
+      <!-- 12. Changes -->
+      <div class="policy-card">
+        <h2><span class="icon">🔄</span> 12. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, services, or applicable law. The "Last updated" date at the top of this page indicates when the Policy was last revised. Material changes will be notified via a notice on our website.</p>
+        <p>Continued use of our services after the revised Policy is posted constitutes acceptance of the updated terms.</p>
+      </div>
+
+    </div>
+  </div>
+
+  </main><!-- /#main-content -->
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Care<span>EZ</span></div>
+      <div class="footer-meta">
+        Hong Kong &middot; SED Registered<br>
+        <a href="mailto:hello@careez.org">hello@careez.org</a> &middot;
+        <a href="https://seniordeli.com" target="_blank" rel="noopener">seniordeli.com &#8599;</a> &middot;
+        <a href="/privacy/" style="color:var(--white);">Privacy</a> &middot;
+        <a href="/terms/">Terms</a> &middot;
+        <a href="/security/">Security</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "auto"}'></script>
+
+</body>
+</html>

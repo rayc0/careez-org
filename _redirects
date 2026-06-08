@@ -11,3 +11,6 @@
 /zh-CN/       /   301
 /zh-Hans      /   301
 /zh-Hans/     /   301
+
+# Legacy host redirect — careforge.softmeal.org → canonical domain
+https://careforge.softmeal.org/*  https://careez.org/:splat  301
