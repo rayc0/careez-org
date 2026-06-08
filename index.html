@@ -51,7 +51,7 @@
     "description": "CareEZ is the public-good brand of a Hong Kong social enterprise (SED-registered). It develops care-food products and clinical AI tools for dysphagia management, aligned with HKCSS 護食標準 and the international IDDSI framework.",
     "foundingDate": "2023",
     "founder": [
-      { "@type": "Person", "name": "Raymond Chau" },
+      { "@type": "Person", "@id": "https://ycchau.com/#person", "name": "Raymond Chau", "alternateName": "周益俊" },
       { "@type": "Person", "name": "Karen Chan" },
       { "@type": "Person", "name": "Abellona U" }
     ],
@@ -83,10 +83,17 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "CareEZ",
-    "applicationCategory": "HealthApplication",
+    "applicationCategory": "MedicalSoftware",
     "operatingSystem": "Web",
     "url": "https://demo.careez.org",
-    "description": "Multimodal clinical AI for dysphagia and 照護食 standard adoption. Classifies food and liquid IDDSI texture levels, performs thickener dosage calculations, and screens aspiration risk via voice analysis.",
+    "description": "Multimodal clinical AI for dysphagia and 照護食 standard adoption. AI-assisted screening tool — not a diagnostic medical device. Classifies food and liquid IDDSI texture levels, performs thickener dosage calculations, and screens aspiration risk via voice analysis. All outputs require review by a qualified Speech-Language Pathologist.",
+    "featureList": [
+      "Snap-to-IDDSI classification",
+      "Voice-biomarker screening",
+      "Thickener dosage calculation",
+      "HKCSS 護食標準 compliance checking",
+      "Multilingual (English, Traditional Chinese)"
+    ],
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -98,13 +105,6 @@
       "name": "CareEZ",
       "url": "https://careez.org/"
     },
-    "featureList": [
-      "IDDSI texture classification for food and liquids",
-      "Thickener dosage calculation",
-      "Voice-based aspiration risk screening",
-      "HKCSS 護食標準 compliance checking",
-      "Multilingual (English, Traditional Chinese)"
-    ],
     "inLanguage": ["en", "zh-Hant"],
     "releaseNotes": "Live API at api.seniordeli.com. IDDSI classification endpoint publicly callable."
   }
@@ -121,7 +121,12 @@
     "about": {
       "@type": "MedicalCondition",
       "name": "Dysphagia",
-      "alternateName": "Swallowing difficulty",
+      "alternateName": ["吞嚥困難", "吞咽困难", "Swallowing disorder"],
+      "code": {
+        "@type": "MedicalCode",
+        "code": "R13.10",
+        "codingSystem": "ICD-10-CM"
+      },
       "relevantSpecialty": {
         "@type": "MedicalSpecialty",
         "name": "Otolaryngology"

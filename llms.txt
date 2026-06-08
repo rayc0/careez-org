@@ -2,6 +2,19 @@
 
 > Hong Kong social enterprise building care-food (照護食) and multimodal clinical AI for dysphagia swallowing-safety screening — IDDSI-certified, HKCSS 護食標準 aligned. CareEZ is a triage support tool, not a diagnostic medical device; all outputs require review by a qualified Speech-Language Pathologist.
 
+## Core Modules
+
+- **Snap-to-IDDSI vision classifier** — camera/image input → IDDSI level (0–7) classification and 照護食 equivalent; AI-assisted screening, not diagnostic. See [API docs](https://careez.org/api-docs/).
+- **Voice-biomarker screening** — voice-quality input → aspiration risk triage flag; research-staged, not a diagnostic test. Requires SLP confirmation before clinical action.
+
+## Evidence / Governance
+
+- [Governance](https://careez.org/governance/) — Co-stewardship: HKU Swallowing Research Laboratory (clinical oversight) + Full Linkage Community Care Association (s.88 data steward)
+- [Standards](https://careez.org/standards/) — IDDSI framework, HKCSS 護食標準, T/SATA 094-2025 co-drafting participation
+- [Changelog](https://careez.org/changelog/) — Accuracy data, known limitations, release notes (Snap-to-IDDSI baseline: 50% exact-level, clinical-safety-bias toward over-referral)
+- [Research](https://careez.org/research/voice-biomarker-protocol/) — Voice biomarker protocol (research-staged)
+- [Open Source](https://careez.org/opensource/) — Apache-2.0 licensed components
+
 ## Core Resources
 
 - [Homepage](https://careez.org/) — What CareEZ is, programme overview, live API, public-asset commitment
