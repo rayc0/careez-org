@@ -139,6 +139,36 @@
     }
   }
   </script>
+
+  <!-- ─── JSON-LD: FAQPage stub (2 key Q&As — full FAQ at /faq/) ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "url": "https://careez.org/",
+    "name": "CareEZ — Key Questions",
+    "isPartOf": { "@type": "WebSite", "url": "https://careez.org/" },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is CareEZ a medical device?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. CareEZ is a triage support tool, not a diagnostic medical device. It is not cleared or registered as a medical device in Hong Kong, the EU, or the United States. Every output includes a disclaimer directing users to consult a qualified Speech-Language Pathologist (SLP) before acting on any recommendation. CareEZ is designed to extend, not replace, professional clinical judgment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is CareEZ free for carers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, always. Tier 0 (individual carer access via web or WhatsApp) is permanently free, with no usage cap, no registration required, and no advertising. The commercial sustainability model relies on Tier 2+ institutional subscriptions and the SeniorDeli product line — not on monetising the carers who need the tool most. See careez.org/pricing/ for the full tier breakdown."
+        }
+      }
+    ]
+  }
+  </script>
+
   <style>
     /* ─── Reset & Base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

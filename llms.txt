@@ -1,5 +1,32 @@
-# CareEZ — llms.txt
-# Per llmstxt.org specification — context for LLM crawlers and AI assistants
+# CareEZ
+
+> Hong Kong social enterprise building care-food (照護食) and multimodal clinical AI for dysphagia swallowing-safety screening — IDDSI-certified, HKCSS 護食標準 aligned. CareEZ is a triage support tool, not a diagnostic medical device; all outputs require review by a qualified Speech-Language Pathologist.
+
+## Core Resources
+
+- [Homepage](https://careez.org/) — What CareEZ is, programme overview, live API, public-asset commitment
+- [Live Demo](https://demo.careez.org) — Interactive IDDSI texture classification and dysphagia screening tools
+- [FAQ](https://careez.org/faq/) — Clinical safety, accuracy, data governance, pricing, language support, and pilot onboarding
+- [Pricing](https://careez.org/pricing/) — Tier 0 (free, permanent, no cap for carers) through Tier 2+ institutional subscriptions
+- [API Documentation](https://careez.org/api-docs/) — REST endpoints for IDDSI classification, aspiration risk triage, clinical Q&A, and recipe modification
+- [About](https://careez.org/about/) — Founders, governance structure, and social enterprise mandate
+- [Team](https://careez.org/team/) — Core team and clinical advisors
+- [Roadmap](https://careez.org/roadmap/) — Planned features and research milestones
+- [Changelog](https://careez.org/changelog/) — Accuracy improvements, known limitations, and release notes
+- [Governance](https://careez.org/governance/) — Co-stewardship model: HKU Swallowing Research Laboratory + Full Linkage Community Care Association
+- [Open Source](https://careez.org/opensource/) — Open-source commitments and contributing guidelines
+- [Partners](https://careez.org/partners/) — Institutional partners and care facility collaborators
+- [Standards](https://careez.org/standards/) — IDDSI, HKCSS 護食標準, and T/SATA 094 alignment details
+- [Press](https://careez.org/press/) — Media resources and announcements
+- [Contact](https://careez.org/contact/) — hello@careez.org
+- [Privacy Policy](https://careez.org/privacy/) — Data handling, PHI policy (stateless by default), PDPO compliance
+- [Terms of Service](https://careez.org/terms/)
+- [Security](https://careez.org/security/) — Security disclosure policy
+- [Trial / Pilot](https://careez.org/trial/) — Apply to join the institutional pilot programme
+
+## Clinical Safety Disclaimer
+
+CareEZ is a triage support tool, **not a diagnostic medical device**. It is not cleared or registered as a medical device in Hong Kong, the EU, or the United States. Every output includes an explicit disclaimer directing users to consult a qualified Speech-Language Pathologist (SLP) before acting on any recommendation. CareEZ is designed to extend — not replace — professional clinical judgment. The system is engineered with a clinical-safety bias: when uncertain, it over-refers rather than under-refers.
 
 ## What is CareEZ?
 
