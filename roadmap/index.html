@@ -152,6 +152,14 @@
       --accent-bar: 5px; --max-w: 1100px; --r: 6px;
     }
     html { scroll-behavior: smooth; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
     body {
       background-color: var(--navy); color: var(--white);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -390,7 +398,9 @@
 </head>
 <body>
 
-  <nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
       <a class="nav-brand" href="/">Care<span>EZ</span></a>
       <ul class="nav-links">
@@ -406,7 +416,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
 
     <!-- ─── Hero ─── -->
     <section class="page-hero">

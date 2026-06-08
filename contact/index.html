@@ -22,6 +22,10 @@
   <meta property="og:title" content="Contact — CareEZ" />
   <meta property="og:description" content="Reach CareEZ for press, pilot RCHE programmes, partnerships, or security disclosures. Hong Kong social enterprise developing AI swallowing-safety solutions." />
   <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — CareEZ" />
+  <meta name="twitter:description" content="Reach CareEZ for press, pilot RCHE programmes, partnerships, or security disclosures. Hong Kong social enterprise developing AI swallowing-safety solutions." />
+  <meta name="twitter:image" content="https://careez.org/og-image.png" />
   <meta property="og:locale" content="en_HK" />
   <meta property="og:site_name" content="CareEZ" />
 
@@ -65,6 +69,14 @@
       --accent-bar: 5px; --max-w: 1100px; --r: 6px;
     }
     html { scroll-behavior: smooth; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
     body {
       background-color: var(--navy); color: var(--white);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -280,7 +292,9 @@
 </head>
 <body>
 
-  <nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
       <a class="nav-brand" href="/">Care<span>EZ</span></a>
       <ul class="nav-links">
@@ -296,7 +310,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
 
     <!-- ─── Hero ─── -->
     <section class="page-hero">
@@ -326,7 +340,7 @@
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
               hello@careez.org
             </a>
-            <p class="routing-note">&#9888;&#65039; press@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <!-- OPERATOR NOTE (internal, do not publish): <p class="routing-note">&#9888;&#65039; press@careez.org pending CF Email Routing — route to hello@careez.org for now.</p> -->
             <p>For interviews, include your outlet name, deadline, and preferred language (EN/繁/简).</p>
             <div class="contact-card-links">
               <a href="/press/">&#8594; Full press kit &amp; boilerplate</a>
@@ -342,7 +356,7 @@
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
               hello@careez.org
             </a>
-            <p class="routing-note">&#9888;&#65039; pilot@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <!-- OPERATOR NOTE (internal, do not publish): <p class="routing-note">&#9888;&#65039; pilot@careez.org pending CF Email Routing — route to hello@careez.org for now.</p> -->
             <p>Tier-A pilots: 3 active slots available in Y1 Q1. Priority to accredited RCHEs and HKCSS members.</p>
             <div class="contact-card-links">
               <a href="/trial/">&#8594; View pilot application</a>
@@ -357,7 +371,7 @@
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
               hello@careez.org
             </a>
-            <p class="routing-note">&#9888;&#65039; partner@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <!-- OPERATOR NOTE (internal, do not publish): <p class="routing-note">&#9888;&#65039; partner@careez.org pending CF Email Routing — route to hello@careez.org for now.</p> -->
             <p>Open to additional clinical advisors, institutional partners, and MOU discussions.</p>
             <div class="contact-card-links">
               <a href="/partners/">&#8594; View current MOUs</a>
@@ -372,7 +386,7 @@
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
               hello@careez.org
             </a>
-            <p class="routing-note">&#9888;&#65039; security@careez.org pending CF Email Routing — route to hello@careez.org for now.</p>
+            <!-- OPERATOR NOTE (internal, do not publish): <p class="routing-note">&#9888;&#65039; security@careez.org pending CF Email Routing — route to hello@careez.org for now.</p> -->
             <p>48-hour acknowledgment. 7-day triage. We follow responsible disclosure practices.</p>
             <div class="contact-card-links">
               <a href="/security/">&#8594; Full security policy</a>

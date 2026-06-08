@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /_SUBMISSION_BUNDLE/
 
 # AI crawlers — explicitly permitted
 User-agent: GPTBot

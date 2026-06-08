@@ -1388,6 +1388,9 @@
     @media (max-width: 500px) {
       .try-symptoms-grid { grid-template-columns: 1fr; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   </style>
 
   <script>
@@ -1708,7 +1711,7 @@
         <a href="https://dysphagia.cn" target="_blank" rel="noopener">dysphagia.cn &#8599;</a> &middot;
         <a href="/privacy/">Privacy</a> &middot;
         <a href="/terms/">Terms</a> &middot;
-        <a href="/security">Security</a> &middot;
+        <a href="/security/">Security</a> &middot;
         <a href="/changelog/">Changelog</a> &middot;
         <a href="/compare/">Compare</a>
       </div>

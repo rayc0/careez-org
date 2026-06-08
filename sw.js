@@ -1,5 +1,5 @@
-// CareEZ Service Worker — v1.1 — 2026-05-25
-const CACHE_VERSION = 'careez-v1.1-2026-05-25';
+// CareEZ Service Worker — v1.2 — 2026-06-09
+const CACHE_VERSION = 'careez-v1.2-2026-06-09';
 
 const SHELL_ASSETS = [
   '/',
@@ -39,6 +39,20 @@ const SHELL_ASSETS = [
   '/security/index.html',
   '/trial/',
   '/trial/index.html',
+  '/faq/',
+  '/faq/index.html',
+  '/pricing/',
+  '/pricing/index.html',
+  '/opensource/',
+  '/opensource/index.html',
+  '/partners/',
+  '/partners/index.html',
+  '/roadmap/',
+  '/roadmap/index.html',
+  '/contact/',
+  '/contact/index.html',
+  '/research/voice-biomarker-protocol/',
+  '/research/voice-biomarker-protocol/index.html',
 ];
 
 // ─── Install: pre-cache shell ───────────────────────────────────────────────

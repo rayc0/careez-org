@@ -21,6 +21,10 @@
   <meta property="og:title" content="FAQ — CareEZ Clinical AI for Dysphagia &amp; 照護食" />
   <meta property="og:description" content="Clinical safety, language support, governance, pricing, technical SLA, and pilot onboarding — every common question about CareEZ answered." />
   <meta property="og:image" content="https://careez.org/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FAQ — CareEZ Clinical AI for Dysphagia &amp; 照護食" />
+  <meta name="twitter:description" content="Clinical safety, language support, governance, pricing, technical SLA, and pilot onboarding — every common question about CareEZ answered." />
+  <meta name="twitter:image" content="https://careez.org/og-image.png" />
   <meta property="og:locale" content="en_HK" />
   <meta property="og:site_name" content="CareEZ" />
 
@@ -190,6 +194,14 @@
       --accent-bar: 5px; --max-w: 1100px; --r: 6px;
     }
     html { scroll-behavior: smooth; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 0;
+      background: var(--cyan); color: var(--navy);
+      font-weight: 700; padding: 8px 16px;
+      z-index: 9999; border-radius: 0 0 4px 0; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
     body {
       background-color: var(--navy); color: var(--white);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -330,7 +342,9 @@
 </head>
 <body>
 
-  <nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
       <a class="nav-brand" href="/">Care<span>EZ</span></a>
       <ul class="nav-links">
@@ -347,7 +361,7 @@
   </nav>
 
   <!-- Page Hero -->
-  <section class="page-hero">
+  <section class="page-hero" id="main-content">
     <div class="page-hero-inner">
       <div class="section-label">FAQ</div>
       <h1>Common questions about <span>CareEZ</span></h1>
