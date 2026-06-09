@@ -39,6 +39,21 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: hidden; }
+
+    /* ─── Accessibility: skip link ─── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: var(--cyan);
+      color: var(--navy);
+      font-weight: 700;
+      padding: 8px 16px;
+      z-index: 9999;
+      border-radius: 0 0 4px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--navy);
@@ -533,7 +548,7 @@ function renderCards() {
     </div>
     <span class="status-badge ${badgeClass(s)}">
       <span class="dot ${dotClass(s)}"></span>
-      ${statusLabel(s)}
+      <span class="status-label">${statusLabel(s)}</span>
     </span>
   </div>
   <div class="card-url">${ep.url}</div>
@@ -574,7 +589,7 @@ function updateCard(ep) {
 
   card.querySelector('.status-badge').className = `status-badge ${badgeClass(s)}`;
   card.querySelector('.status-badge .dot').className = `dot ${dotClass(s)}`;
-  card.querySelector('.status-badge').childNodes[card.querySelector('.status-badge').childNodes.length-1].textContent = '\n      ' + statusLabel(s) + '\n    ';
+  card.querySelector('.status-badge .status-label').textContent = statusLabel(s);
 
   const metrics = card.querySelectorAll('.metric-value');
   metrics[0].textContent = latencyDisplay(last?.latency);

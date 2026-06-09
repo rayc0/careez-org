@@ -1155,7 +1155,7 @@
                 <div class="try-card-sub">Describe a food or liquid — get the IDDSI level</div>
               </div>
             </div>
-            <textarea id="txt-desc" placeholder="e.g. steamed egg custard, soft, spoonable" rows="3"></textarea>
+            <textarea id="txt-desc" placeholder="e.g. steamed egg custard, soft, spoonable" rows="3" aria-label="Food or liquid description for IDDSI classification"></textarea>
             <button class="try-btn" onclick="runTextClassify()">Classify &rarr;</button>
             <div class="try-spinner" id="spin-text" role="status" aria-live="polite" aria-label="Loading classification result" aria-hidden="true"></div>
             <div class="try-result" id="res-text" aria-live="polite" aria-atomic="true" aria-label="IDDSI text classification result"></div>
@@ -1175,7 +1175,10 @@
               ondragleave="this.classList.remove('drag-over')"
               ondrop="handleDrop(event)">
               <input type="file" id="img-file" accept="image/*" onchange="handleFileSelect(event)" style="display:none">
-              <div id="dz-label" onclick="document.getElementById('img-file').click()">
+              <div id="dz-label" role="button" tabindex="0"
+                onclick="document.getElementById('img-file').click()"
+                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('img-file').click();}"
+                aria-label="Click or activate to upload a food image">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--cyan2);margin-bottom:8px" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 <div style="font-size:13px;color:var(--gray);">Click or drag &amp; drop an image</div>
                 <div style="font-size:11px;color:var(--gray2);margin-top:4px;">JPG, PNG, WebP &mdash; max 5 MB</div>
@@ -1449,6 +1452,18 @@
     }
 
     /* ── helpers ── */
+
+    // Escape user/API-supplied strings before inserting into innerHTML.
+    function esc(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function levelColor(lvl) {
       const n = parseInt(lvl);
       if (isNaN(n)) return 'var(--cyan)';
@@ -1463,10 +1478,11 @@
       const labelZh = data.label_zh_hk ?? data.label_zh ?? '';
       const rationale = data.rationale ?? data.reasoning ?? data.explanation ?? '';
       const color = levelColor(level);
+      // esc() sanitises API-supplied strings before innerHTML insertion.
       setResult(container,
-        `<div class="res-level" style="color:${color}">IDDSI Level ${level}</div>` +
-        `<div class="res-label">${labelEn}${labelZh ? ' &middot; ' + labelZh : ''}</div>` +
-        `<div class="res-body">${rationale}</div>`
+        `<div class="res-level" style="color:${esc(color)}">IDDSI Level ${esc(String(level))}</div>` +
+        `<div class="res-label">${esc(labelEn)}${labelZh ? ' &middot; ' + esc(labelZh) : ''}</div>` +
+        `<div class="res-body">${esc(rationale)}</div>`
       );
     }
 
@@ -1479,10 +1495,12 @@
       else if (tier.includes('med')) { tierClass = 'tier-medium'; tierLabel = 'Medium Risk'; }
       else if (tier.includes('low')) { tierClass = 'tier-low';    tierLabel = 'Low Risk'; }
       else { tierClass = 'tier-medium'; tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1); }
+      // esc() sanitises API-supplied strings before innerHTML insertion.
+      // tierClass and tierLabel are derived from a safe allow-list above.
       setResult(container,
         `<span class="res-tier ${tierClass}">${tierLabel}</span>` +
-        `<div class="res-label" style="margin-top:6px;">${action}</div>` +
-        `<div class="res-body">${rationale}</div>`
+        `<div class="res-label" style="margin-top:6px;">${esc(action)}</div>` +
+        `<div class="res-body">${esc(rationale)}</div>`
       );
     }
 
@@ -1534,7 +1552,8 @@
     window.handleFileSelect = function(e) { previewImage(e.target.files[0]); };
     window.handleDrop = function(e) {
       e.preventDefault();
-      previewImage(e.dataTransfer.files[0]);
+      const files = e.dataTransfer && e.dataTransfer.files;
+      if (files && files.length) previewImage(files[0]);
     };
 
     window.runImageClassify = async function() {
