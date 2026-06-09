@@ -1,5 +1,5 @@
 # Block internal grant-submission bundle from public access (de-identification)
-/_SUBMISSION_BUNDLE/*   /   302
+/_SUBMISSION_BUNDLE/*   /   301
 
 # Locale-prefix redirects — single canonical at /
 # Prevents "Alternate page with proper canonical tag" for bare locale paths
