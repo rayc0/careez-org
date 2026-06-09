@@ -25,18 +25,20 @@
     img { width: 72px; height: 72px; border-radius: 16px; }
     h1 { font-size: 1.6rem; font-weight: 700; }
     p  { font-size: 1rem; color: #8fa4cc; max-width: 34ch; line-height: 1.6; }
-    a  {
+    button {
       display: inline-block;
       margin-top: 0.5rem;
       padding: 0.65rem 1.6rem;
       background: #2563eb;
       color: #fff;
+      border: none;
       border-radius: 8px;
-      text-decoration: none;
+      cursor: pointer;
       font-weight: 600;
       font-size: 0.95rem;
+      font-family: inherit;
     }
-    a:hover { background: #1d4ed8; }
+    button:hover { background: #1d4ed8; }
   </style>
 </head>
 <body>
@@ -44,7 +46,8 @@
     <img src="/android-chrome-192.png" alt="CareEZ logo">
     <h1>You're offline</h1>
     <p>No internet connection detected. Please check your network and try again.</p>
-    <a href="/">Try again</a>
+    <!-- Use location.reload() so the SW re-attempts the network rather than serving a stale cache hit -->
+    <button type="button" onclick="window.location.reload()">Try again</button>
   </main>
 </body>
 </html>

@@ -1,8 +1,10 @@
 {
+  "id": "/",
   "name": "CareEZ",
   "short_name": "CareEZ",
   "description": "Multimodal Clinical AI for Dysphagia",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0e1c3a",
   "theme_color": "#0a1428",
@@ -25,13 +27,20 @@
     {
       "src": "/android-chrome-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "lang": "en-HK",
